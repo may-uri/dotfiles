@@ -1,0 +1,2 @@
+set -U fish_greeting "(づ｡•́‿•̀｡)⊃━❊❊❊❊❊❊❊❊❊❊❊❊"
+alias home="cd /Users/oo/Documents/my\ code/"

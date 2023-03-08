@@ -2,3 +2,6 @@ sudo xset r rate 200
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
 xinput --set-prop 13 'libinput Accel Speed' -1
 dconf-editor
+
+
+unclutter // hide cursor

@@ -143,10 +143,12 @@ label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
 type = internal/date
 interval = 1
 
+#date = %a %b %d %H:%M
 date = %H:%M
-date-alt = %Y-%m-%d %H:%M:%S
-
+#date-alt = %Y-%m-%d %H:%M:%S
+date-alt = %A %B %d %H:%M:%S
 label = %date%
+#label = %date%
 #label-foreground = ${colors.primary}
 
 [settings]

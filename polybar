@@ -107,7 +107,9 @@ label-layout = %layout%
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-foreground = ${colors.background}
-label-indicator-background = ${colors.secondary}
+#default
+#label-indicator-background = ${colors.secondary}
+label-indicator-background = #fbf1c7
 
 [module/memory]
 type = internal/memory

@@ -222,3 +222,13 @@ client.background #ffffff
 
 #screenshoots clipboard selection
 bindsym $mod+p exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
+
+## exEc always SMMHH ###
+
+exec_always setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle
+exec_always xinput --set-prop 13 'libinput Accel Speed' -0.9
+
+#exec_always killall polybar
+exec_always polybar
+exec_always xset r rate 200

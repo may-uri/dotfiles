@@ -1,0 +1,5 @@
+## to exe xset without sudo ##
+## etc/sudoers conf ##
+## sudo xset r rate 200 ##
+
+username ALL=(ALL) NOPASSWD: /usr/bin/xset

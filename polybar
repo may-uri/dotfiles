@@ -114,10 +114,10 @@ label-indicator-background = #fbf1c7
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "ram "
+format-prefix = "is used "
 #format-prefix-foreground = ${colors.primary}
 #label = %percentage_used:2%%
-label = %gb_used%
+label = %used%
 
 
 [module/cpu]

@@ -6,10 +6,9 @@
   "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
   "editor.folding": false, // removes the folding feature
   "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
-  "editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
+//  "editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
   "editor.glyphMargin": false, // removes the space used mainly for debugging indicators
-    "workbench.colorTheme": "Gruvbox Dark Soft",
-    "editor.fontFamily": "JetBrainsMono Nerd Font",
+   
     "code-runner.clearPreviousOutput": true,
     
     
@@ -19,7 +18,7 @@
   "workbench.editor.tabCloseButton": "off", // removes cross icon from tabs
   "workbench.statusBar.visible": false, // removes the status bar
   "workbench.colorCustomizations": { // object that allows you to customize your color theme: https://code.visualstudio.com/docs/getstarted/theme-color-reference 
-    "tab.activeBorder": "#0000" // removes border to highlight active tabs (the colors formats are: #RGB, #RGBA, #RRGGBB or #RRGGBBAA){
+    "tab.activeBorder": "#0000"},// removes border to highlight active tabs (the colors formats are: #RGB, #RGBA, #RRGGBB or #RRGGBBAA){
 
 
         "javascript": "node",
@@ -78,13 +77,10 @@
     "code-runner.runInTerminal": true,
     "explorer.confirmDelete": false,
     "editor.fontSize": 18,
-    "terminal.external.linuxExec": "alacritty",
     "telemetry.telemetryLevel": "off",
     "window.menuBarVisibility": "toggle",
     "files.autoSave": "afterDelay",
     "editor.formatOnSave": true,
-    "chatgpt.gpt3.apiKey": "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",
-    "chatgpt.telemetry.disable": true,
     "extensions.autoCheckUpdates": false,
     "extensions.autoUpdate": false
 }

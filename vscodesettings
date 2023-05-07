@@ -41,7 +41,7 @@
     "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
     "zig": "zig run",
-    "cpp": "cd $dir && clang++ $fileName -Werror -Wall -Wextra --std=c++17 -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "cpp": "clang++ $fileName -Werror -Wall -Wextra --std=c++17 && ./a.exe",
     "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
     "php": "php",
     "python": "python -u",

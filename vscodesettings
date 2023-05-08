@@ -21,7 +21,6 @@
   "files.autoSave": "onFocusChange",
   "explorer.confirmDelete": false,
   "editor.minimap.side": "left",
-  "workbench.layoutControl.enabled": false,
   "workbench.iconTheme": "material-icon-theme",
   "explorer.confirmDragAndDrop": false,
   "powershell.promptToUpdatePowerShell": false,
@@ -92,7 +91,6 @@
   },
   "code-runner.runInTerminal": true,
   "code-runner.saveAllFilesBeforeRun": true,
-  "workbench.colorTheme": "Correia Gruvbox Theme",
   "terminal.integrated.fontFamily": "BlexMono NF",
   "[python]": {
     "editor.formatOnType": true
@@ -133,11 +131,11 @@
         "-i"
       ]
     },
-    "Debian (WSL)": {
-      "path": "C:\\WINDOWS\\System32\\wsl.exe",
+    "sh": {
+      "path": "Z:\\soft\\Git\\bin\\sh.exe",
       "args": [
-        "-d",
-        "Debian"
+        "--login",
+        "-i"
       ]
     }
   },
@@ -151,6 +149,12 @@
   },
   "breadcrumbs.enabled": false,
   "editor.renderControlCharacters": false,
-  "workbench.activityBar.visible": false,
+  "window.titleBarStyle": "custom",
+  "workbench.layoutControl.enabled": false,
+  "workbench.statusBar.visible": false,
+  "terminal.integrated.defaultProfile.windows": "sh",
+  "workbench.colorTheme": "Urara",
+  "terminal.integrated.gpuAcceleration": "off",
   "window.menuBarVisibility": "compact",
+  "workbench.activityBar.visible": false,
 }

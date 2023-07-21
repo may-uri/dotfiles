@@ -1,4 +1,12 @@
-//set -U fish_greeting "(づ｡•́‿•̀｡)⊃━❊❊❊❊❊❊❊❊❊❊❊❊"
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
 
 
-alias home="cd /Users/oo/Documents/my\ code/"
+set PATH $PATH /home/oo/.local/bin
+# set -U fish_greeting "(づ｡•́‿•̀｡)⊃━❊❊❊❊❊❊❊❊❊❊❊❊"
+set -U fish_greeting ""
+# alias style ="exec ~/.config/polybar/blocks/scripts/style-switch.sh"
+
+set PATH $PATH ~/.spoof-dpi/bin
+alias menu "exec /home/oo/powermenu.sh"

@@ -1,0 +1,6 @@
+set -U fish_greeting ""
+alias tar="tar -xzvf"
+alias rm="rm -rf"
+# alias tar="tar -xzf"
+   set -x PATH "/home/genie" $PATH
+set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)

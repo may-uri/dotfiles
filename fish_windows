@@ -4,3 +4,9 @@ alias rm="rm -rf"
 # alias tar="tar -xzf"
    set -x PATH "/home/genie" $PATH
 set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
+alias explorer "explorer.exe"
+# to commit&push mine markdown files
+alias rr 'git commit learni\ notes.md readme.md -m "refactor" && git push'
+# to sync changes html in vscode and browser
+
+alias sx 'browser-sync start --server --files "*.html"'

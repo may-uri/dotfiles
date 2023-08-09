@@ -10,3 +10,11 @@ alias rr 'git commit learni\ notes.md readme.md -m "refactor" && git push'
 # to sync changes html in vscode and browser
 
 alias sx 'browser-sync start --server --files "*.html"'
+
+# to start index.html from wsl
+function hh
+    set browser_path "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+    set index_path "D:\\git\\javascript\\sandbox\\index.html"
+
+    powershell.exe -Command "Start-Process -FilePath '$browser_path' -ArgumentList '$index_path'"
+end

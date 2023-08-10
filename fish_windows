@@ -18,3 +18,6 @@ function hh
 
     powershell.exe -Command "Start-Process -FilePath '$browser_path' -ArgumentList '$index_path'"
 end
+if set -q WSLENV
+    set -gx PATH $HOME/bin/win-bash-xclip-xsel $PATH
+end

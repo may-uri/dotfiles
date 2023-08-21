@@ -42,7 +42,7 @@ set mouse =a
 set updatetime=300
 set colorcolumn=79
 set noswapfile
-set cursorline
+" set cursorline
 "set relativenumber
 colorscheme tender 
 " colo gruvbox
@@ -62,8 +62,9 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 
 
-" nj to open init config
-command! NN tabnew ~/.config/nvim/init.vim
+" NN to open init config
+" command! NN tabnew ~/.config/nvim/init.vim
+nnoremap NN :tabnew ~/.config/nvim/init.vim<CR>
 
 "inoremap <silent><expr> <TAB> coc#pum#visible() ? "\<C-n>" :  coc#refresh()
 
@@ -114,11 +115,10 @@ let g:NERDToggleCheckAllLines = 1
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 
-
-
-
 "run currect file in nodejs
 nnoremap <A-e> :!node %<CR>
+
+
 
 " Set Prettier configuration for JavaScript
 let g:prettier#autoformat = 1
@@ -151,4 +151,5 @@ let g:netrw_banner = 0
 " make lsp on top
 " autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'editor', 'row': 0, 'col': 0})
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 9999)
-oremap <c-z> <nop>
+
+

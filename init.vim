@@ -9,12 +9,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
    Plug 'nvim-lua/plenary.nvim'
-   " colorsheme:
-Plug 'jacoborus/tender.vim'
-" learn vim
-Plug 'ThePrimeagen/vim-be-good'
+Plug 'jacoborus/tender.vim' " colorscheme learn vim
+Plug 'ThePrimeagen/vim-be-good' " learn vim 
 " Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround' " plugin provides mappings to easily delete, change and add such surroundings in pairs.
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -26,9 +24,13 @@ Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
 
-Plug 'folke/neodev.nvim'
+Plug 'preservim/nerdtree' " nerd tree to view files in currect directory
+
+Plug 'ryanoasis/vim-devicons' " to add icons in nerd tree
+Plug 'tpope/vim-commentary' " toggle commenting lines
+" Plug 'folke/neodev.nvim' " not sure
 call plug#end()
 
 
@@ -39,6 +41,7 @@ filetype plugin on
 set number relativenumber
 set noswapfile
 set mouse =a
+set shiftwidth=2
 set updatetime=300
 set colorcolumn=79
 set noswapfile
@@ -62,7 +65,7 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 
 
-" NN to open init config
+ " NN to open init config
 " command! NN tabnew ~/.config/nvim/init.vim
 nnoremap NN :tabnew ~/.config/nvim/init.vim<CR>
 
@@ -107,9 +110,9 @@ let g:NERDCreateDefaultMappings = 1
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 "nnoremap <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>
-nnoremap <A-/> :call nerdcommenter#Comment(0, "toggle")<CR>
+nnoremap <A-/> :Commentary<CR>
 "vnoremap <A-/> :<C-u>call nerdcommenter#Comment(0, "toggle")<CR>
-vnoremap <A-/> :<C-u>call nerdcommenter#Comment(visualmode(), 0)<CR>
+vnoremap  <A-/> :Commentary<CR>
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
 " Allow commenting and inverting empty lines (useful when commenting a region)
@@ -152,4 +155,6 @@ let g:netrw_banner = 0
 " autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'editor', 'row': 0, 'col': 0})
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 9999)
 
+nnoremap <A-b> :NERDTreeToggle<CR>
+" 1 to end of line
 

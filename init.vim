@@ -27,7 +27,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'preservim/nerdcommenter'
 
 Plug 'preservim/nerdtree' " nerd tree to view files in currect directory
-
+Plug 'tpope/vim-fugitive' " git in nvim
 Plug 'ryanoasis/vim-devicons' " to add icons in nerd tree
 Plug 'tpope/vim-commentary' " toggle commenting lines
 " Plug 'folke/neodev.nvim' " not sure
@@ -98,7 +98,8 @@ endif
 "" Add `:Format` command to format current buffer
 command! -nargs=0 Format :call CocActionAsync('format')
 "save to ctrl+s
-nnoremap <C-S> :Format<CR>:w<CR>
+nnoremap <C-S> :w<CR>
+" nnoremap <C-S> :Format<CR>:w<CR>
 inoremap <C-S> <c-o>:w<cr>
  "close without save to ctrl+q
 nnoremap <C-Q> :q!<CR>
@@ -157,4 +158,5 @@ let g:netrw_banner = 0
 
 nnoremap <A-b> :NERDTreeToggle<CR>
 " 1 to end of line
+nnoremap 1 $
 

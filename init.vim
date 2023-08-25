@@ -13,19 +13,26 @@ Plug 'jacoborus/tender.vim' " colorscheme learn vim
 Plug 'ThePrimeagen/vim-be-good' " learn vim 
 " Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tpope/vim-surround' " plugin provides mappings to easily delete, change and add such surroundings in pairs.
-
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'williamboman/mason.nvim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
 
-Plug 'TornaxO7/auto-cosco.vim', {'branch' : 'stable'}
+Plug 'TornaxO7/auto-cosco.vim', {'branch' : 'stable'} " auto semicolon
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 " these two plugins will add highlighting and indenting to JSX and TSX files.
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'yuezk/vim-js' "syntax javascript
+Plug 'HerringtonDarkholme/yats.vim' " Yet Another TypeScript Syntax
 Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'preservim/nerdcommenter'
 
+Plug 'wakatime/vim-wakatime' " track spent time in vim :> 
 Plug 'preservim/nerdtree' " nerd tree to view files in currect directory
 Plug 'tpope/vim-fugitive' " git in nvim
 Plug 'ryanoasis/vim-devicons' " to add icons in nerd tree
@@ -54,11 +61,12 @@ colorscheme tender
 " no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config
+" UNCOMMENT
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
+" UNCOMMENT
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(0) :
       \ CheckBackspace() ? "\<TAB>" :
@@ -73,18 +81,19 @@ nnoremap NN :tabnew ~/.config/nvim/init.vim<CR>
 
 
 
-
+" UNCOMMENT
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
+" UNCOMMENT
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
 			      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+" UNCOMMENT
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Use <c-space> to trigger completion
-
+" UNCOMMENT
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
@@ -96,6 +105,7 @@ endif
 
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 "" Add `:Format` command to format current buffer
+" UNCOMMENT
 command! -nargs=0 Format :call CocActionAsync('format')
 "save to ctrl+s
 nnoremap <C-S> :w<CR>
@@ -125,6 +135,7 @@ nnoremap <A-e> :!node %<CR>
 
 
 " Set Prettier configuration for JavaScript
+" UNCOMMENT
 let g:prettier#autoformat = 1
 let g:prettier#config#filetype_map = {
       \ "javascript": {
@@ -159,4 +170,7 @@ let g:netrw_banner = 0
 nnoremap <A-b> :NERDTreeToggle<CR>
 " 1 to end of line
 nnoremap 1 $
+ " add use strict in new javascript files
+autocmd BufNewFile *.js call append(0, "'use strict';")
+
 

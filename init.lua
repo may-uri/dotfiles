@@ -79,6 +79,8 @@ require('lazy').setup({
   'jacoborus/tender.vim',
   'rebelot/kanagawa.nvim',
   'morhetz/gruvbox',
+  'wakatime/vim-wakatime',
+   'lfilho/cosco.vim',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -97,6 +99,8 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
+
+
 {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -207,6 +211,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+    
     },
     build = ':TSUpdate',
   },
@@ -590,3 +595,11 @@ vim.api.nvim_set_keymap("v", "<A-/>", ":Commentary<CR>", { noremap = true })
 vim.cmd("colorscheme gruvbox")
 
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
+vim.cmd([[
+  autocmd BufWritePost *.js silent! normal mzgg=G`z
+]])
+vim.cmd([[autocmd BufNewFile *.js call append(0, "'use strict';")]])
+
+
+
+vim.g.auto_comma_or_semicolon = 1

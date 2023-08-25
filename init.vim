@@ -13,13 +13,7 @@ Plug 'jacoborus/tender.vim' " colorscheme learn vim
 Plug 'ThePrimeagen/vim-be-good' " learn vim 
 " Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.
 Plug 'tpope/vim-surround' " plugin provides mappings to easily delete, change and add such surroundings in pairs.
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'williamboman/mason.nvim'
+
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
@@ -52,6 +46,29 @@ set shiftwidth=2
 set updatetime=300
 set colorcolumn=79
 set noswapfile
+" Sync clipboard between OS and Neovim.
+" Remove this option if you want your OS clipboard to remain independent.
+" See `:help 'clipboard'`
+set clipboard=unnamedplus
+
+" Set highlight on search
+set hlsearch
+
+" Save undo history
+set undofile
+
+" Case-insensitive searching UNLESS \C or capital in search
+set ignorecase
+set smartcase
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noselect
+
+" NOTE: You should make sure your terminal supports this
+set termguicolors
+
+
+
 " set cursorline
 "set relativenumber
 colorscheme tender 
@@ -73,7 +90,7 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 
 
- " NN to open init config
+" NN to open init config
 " command! NN tabnew ~/.config/nvim/init.vim
 nnoremap NN :tabnew ~/.config/nvim/init.vim<CR>
 
@@ -173,4 +190,18 @@ nnoremap 1 $
  " add use strict in new javascript files
 autocmd BufNewFile *.js call append(0, "'use strict';")
 
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=700})
+augroup END
+
+
+
+lua << EOF
+require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true,
+  },
+})
+EOF
 

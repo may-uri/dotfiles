@@ -27,11 +27,16 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'preservim/nerdcommenter'
 
 Plug 'wakatime/vim-wakatime' " track spent time in vim :> 
-Plug 'preservim/nerdtree' " nerd tree to view files in currect directory
 Plug 'tpope/vim-fugitive' " git in nvim
-Plug 'ryanoasis/vim-devicons' " to add icons in nerd tree
 Plug 'tpope/vim-commentary' " toggle commenting lines
 " Plug 'folke/neodev.nvim' " not sure
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jdhao/better-escape.vim'
+
 call plug#end()
 
 
@@ -68,10 +73,12 @@ set completeopt=menuone,noselect
 set termguicolors
 
 
-
+let mapleader = "\<Space>"
 " set cursorline
 "set relativenumber
-colorscheme tender 
+colorscheme tender
+" colorscheme gruvbox
+
 " colo gruvbox
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -132,19 +139,12 @@ inoremap <C-S> <c-o>:w<cr>
 nnoremap <C-Q> :q!<CR>
 " copy with ctrl+c
 vnoremap <C-c> "+y
-" >>>>>>>> NERD COMMENTER <<<<<<<<<< "
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+
 "nnoremap <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>
 nnoremap <A-/> :Commentary<CR>
 "vnoremap <A-/> :<C-u>call nerdcommenter#Comment(0, "toggle")<CR>
 vnoremap  <A-/> :Commentary<CR>
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
+
 
 "run currect file in nodejs
 nnoremap <A-e> :!node %<CR>
@@ -184,8 +184,8 @@ let g:netrw_banner = 0
 " autocmd User CocOpenFloat call nvim_win_set_config(g:coc_last_float_win, {'relative': 'editor', 'row': 0, 'col': 0})
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 9999)
 
-nnoremap <A-b> :NERDTreeToggle<CR>
-" 1 to end of line
+nnoremap <A-b> :Neotree toggle<CR>
+" Neotree toggle" 1 to end of line
 nnoremap 1 $
  " add use strict in new javascript files
 autocmd BufNewFile *.js call append(0, "'use strict';")
@@ -205,3 +205,25 @@ require('nvim-treesitter.configs').setup({
 })
 EOF
 
+" Applying code actions to the selected code block
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" use jj to escape insert mode.
+let g:better_escape_shortcut = 'jj'

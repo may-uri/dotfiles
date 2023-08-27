@@ -31,6 +31,10 @@ Plug 'tpope/vim-fugitive' " git in nvim
 Plug 'tpope/vim-commentary' " toggle commenting lines
 " Plug 'folke/neodev.nvim' " not sure
 Plug 'morhetz/gruvbox'
+
+Plug 'andrewferrier/wrapping.nvim'
+
+
 Plug 'joshdick/onedark.vim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -51,10 +55,15 @@ set shiftwidth=2
 set updatetime=300
 set colorcolumn=79
 set noswapfile
+" yow (toggle wrap mode)
+" set wrap
 " Sync clipboard between OS and Neovim.
 " Remove this option if you want your OS clipboard to remain independent.
 " See `:help 'clipboard'`
 set clipboard=unnamedplus
+" set nohlsearch
+" noh - no highlight
+map <esc> :noh <CR>
 
 " Set highlight on search
 set hlsearch
@@ -76,7 +85,7 @@ set termguicolors
 let mapleader = "\<Space>"
 " set cursorline
 "set relativenumber
-colorscheme tender
+colorscheme habamax
 " colorscheme gruvbox
 
 " colo gruvbox
@@ -142,15 +151,40 @@ vnoremap <C-c> "+y
 
 "nnoremap <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>
 nnoremap <A-/> :Commentary<CR>
+nnoremap <leader>/ :Commentary<CR>
 "vnoremap <A-/> :<C-u>call nerdcommenter#Comment(0, "toggle")<CR>
 vnoremap  <A-/> :Commentary<CR>
+vnoremap <leader>/ :Commentary<CR>
 
 
 "run currect file in nodejs
 nnoremap <A-e> :!node %<CR>
-
-
-
+nnoremap <leader>e :!node %<CR>
+" Add the hijack_netrw_behavior option using Lua
+lua << EOF
+require("neo-tree").setup({
+  filesystem = {
+    filtered_items = {
+      visible = false,
+      hide_dotfiles = true,
+      hide_gitignored = true,
+      hide_hidden = true,
+      hide_by_name = {},
+      hide_by_pattern = {},
+      always_show = {},
+      never_show = {},
+      never_show_by_pattern = {},
+    },
+    follow_current_file = {
+      enabled = false,
+      leave_dirs_open = false,
+    },
+    group_empty_dirs = false,
+    hijack_netrw_behavior = "open_current",
+    use_libuv_file_watcher = false,
+  },
+})
+EOF
 " Set Prettier configuration for JavaScript
 " UNCOMMENT
 let g:prettier#autoformat = 1
@@ -177,7 +211,7 @@ EOF
 imap jj <Esc>
 "
 let g:netrw_banner = 0
-
+let g:loaded_netrwPlugin = 1
 
 
 " make lsp on top
@@ -185,6 +219,7 @@ let g:netrw_banner = 0
 " autocmd User CocOpenFloat call nvim_win_set_width(g:coc_last_float_win, 9999)
 
 nnoremap <A-b> :Neotree toggle<CR>
+nnoremap <leader>f :Neotree toggle<CR>
 " Neotree toggle" 1 to end of line
 nnoremap 1 $
  " add use strict in new javascript files
@@ -277,3 +312,6 @@ require('gitsigns').setup {
 }
 EOF
 
+lua << EOF
+require("wrapping").setup()
+EOF

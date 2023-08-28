@@ -78,14 +78,10 @@ set smartcase
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noselect
 
-" NOTE: You should make sure your terminal supports this
-set termguicolors
-
-
 let mapleader = "\<Space>"
 " set cursorline
 "set relativenumber
-colorscheme habamax
+colorscheme tender
 " colorscheme gruvbox
 
 " colo gruvbox
@@ -148,7 +144,8 @@ inoremap <C-S> <c-o>:w<cr>
 nnoremap <C-Q> :q!<CR>
 " copy with ctrl+c
 vnoremap <C-c> "+y
-
+" select all with ctrl+a
+nnoremap <C-a> ggVG
 "nnoremap <C-/> :call nerdcommenter#Comment(0, "toggle")<CR>
 nnoremap <A-/> :Commentary<CR>
 nnoremap <leader>/ :Commentary<CR>
@@ -273,7 +270,7 @@ lua << EOF
 require('gitsigns').setup {
   signs = {
     add          = { text = '│' },
-    change       = { text = '│' },
+    change       = { text = '┆' },
     delete       = { text = '_' },
     topdelete    = { text = '‾' },
     changedelete = { text = '~' },
@@ -292,7 +289,7 @@ require('gitsigns').setup {
     virt_text = true,
     virt_text_pos = 'eol',
     delay = 1000,
-    ignore_whitespace = false,
+    ignore_whitespace = true,
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
   sign_priority = 6,
@@ -303,8 +300,8 @@ require('gitsigns').setup {
     border = 'single',
     style = 'minimal',
     relative = 'cursor',
-    row = 0,
-    col = 1
+    row = 3,
+    col = 2
   },
   yadm = {
     enable = false

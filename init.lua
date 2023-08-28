@@ -233,7 +233,6 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-    
     },
     build = ':TSUpdate',
   },
@@ -566,7 +565,8 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
+--
+-- mine config
 vim.cmd("filetype plugin on")
 vim.o.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
 vim.wo.number = true
@@ -588,7 +588,7 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true })
 
 -- Run current file in Node.js
 vim.api.nvim_set_keymap("n", "<A-e>", ":!node %<CR>", { noremap = true })
-
+vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
 -- Map F1 key to Telescope find by file
 vim.api.nvim_set_keymap("n", "<F1>", ":Telescope find_files<CR>", { noremap = true })
 
@@ -600,7 +600,7 @@ vim.api.nvim_set_keymap("n", "<C-z>", "u", { noremap = true })
 
 -- Toggle NERDTree
 vim.api.nvim_set_keymap("n", "<A-b>", ":Neotree toggle<CR>", { noremap = true })
-
+vim.api.nvim_set_keymap("n", "<leader>f", ":Neotree toggle<CR>", { noremap = true })
 -- Go to end of line with "1"
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
 
@@ -613,6 +613,9 @@ vim.g.netrw_banner = 0
 -- Toggle commentary with Alt+/
 vim.api.nvim_set_keymap("n", "<A-/>", ":Commentary<CR>", { noremap = true })
 vim.api.nvim_set_keymap("v", "<A-/>", ":Commentary<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>/", ":Commentary<CR>", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>/", ":Commentary<CR>", { noremap = true })
+
 
 vim.cmd("colorscheme tender")
 
@@ -658,7 +661,6 @@ require("neo-tree").setup({
               conflict  = "",
             }
           },
-         
   },
 })
 -- ctrl+a to select all

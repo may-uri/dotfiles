@@ -316,3 +316,4 @@ EOF
 lua << EOF
 require("wrapping").setup()
 EOF
+" test

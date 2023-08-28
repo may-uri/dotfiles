@@ -31,6 +31,7 @@ Plug 'tpope/vim-fugitive' " git in nvim
 Plug 'tpope/vim-commentary' " toggle commenting lines
 " Plug 'folke/neodev.nvim' " not sure
 Plug 'morhetz/gruvbox'
+Plug 'projekt0n/github-nvim-theme'
 Plug 'nvim-tree/nvim-web-devicons' " OPTIONAL: for file icons
 Plug 'romgrk/barbar.nvim'
 

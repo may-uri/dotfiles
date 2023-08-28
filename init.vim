@@ -31,13 +31,15 @@ Plug 'tpope/vim-fugitive' " git in nvim
 Plug 'tpope/vim-commentary' " toggle commenting lines
 " Plug 'folke/neodev.nvim' " not sure
 Plug 'morhetz/gruvbox'
+Plug 'nvim-tree/nvim-web-devicons' " OPTIONAL: for file icons
+Plug 'romgrk/barbar.nvim'
 
 Plug 'andrewferrier/wrapping.nvim'
 
 
 Plug 'joshdick/onedark.vim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
+
 Plug 'MunifTanjim/nui.nvim'
 Plug 'jdhao/better-escape.vim'
 Plug 'lewis6991/gitsigns.nvim' 
@@ -141,7 +143,9 @@ nnoremap <C-S> :w<CR>
 " nnoremap <C-S> :Format<CR>:w<CR>
 inoremap <C-S> <c-o>:w<cr>
  "close without save to ctrl+q
-nnoremap <C-Q> :q!<CR>
+" nnoremap <C-Q> :bd!<CR>
+" nnoremap <C-Q> :q!<CR>
+nnoremap <C-Q> :bd! <Bar> q!<CR>
 " copy with ctrl+c
 vnoremap <C-c> "+y
 " select all with ctrl+a

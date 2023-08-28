@@ -79,8 +79,29 @@ require('lazy').setup({
   'jacoborus/tender.vim',
   'rebelot/kanagawa.nvim',
   'morhetz/gruvbox',
+  'MunifTanjim/prettier.nvim',
   'wakatime/vim-wakatime',
-   'lfilho/cosco.vim',
+  'jose-elias-alvarez/null-ls.nvim',
+  {'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      animation = false,
+      insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
+  {
+        "andrewferrier/wrapping.nvim",
+        config = function()
+            require("wrapping").setup()
+        end
+    },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -134,11 +155,12 @@ require('lazy').setup({
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        add          = { text = '┆' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = 'x' },
+    untracked    = { text = '┆' },
       },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
@@ -556,11 +578,11 @@ vim.o.updatetime = 300
 vim.wo.colorcolumn = "79"
 
 -- Save with Ctrl+S
-vim.api.nvim_set_keymap("n", "<C-S>", ":w<CR>", { noremap = true })
-
+-- vim.api.nvim_set_keymap("n", "<C-S>", ":w<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-S>", ":Prettier<CR>:lua vim.defer_fn(function() vim.cmd('w') end, 200)<CR>", { noremap = true })
 -- Close without saving with Ctrl+Q
-vim.api.nvim_set_keymap("n", "<C-Q>", ":q!<CR>", { noremap = true })
-
+-- vim.api.nvim_set_keymap("n", "<C-Q>", ":q!<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-Q>', ':bd! <Bar> q!<CR>', { noremap = true, silent = true })
 -- Copy with Ctrl+C
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true })
 
@@ -592,7 +614,7 @@ vim.g.netrw_banner = 0
 vim.api.nvim_set_keymap("n", "<A-/>", ":Commentary<CR>", { noremap = true })
 vim.api.nvim_set_keymap("v", "<A-/>", ":Commentary<CR>", { noremap = true })
 
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme tender")
 
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
 vim.cmd([[
@@ -600,6 +622,148 @@ vim.cmd([[
 ]])
 vim.cmd([[autocmd BufNewFile *.js call append(0, "'use strict';")]])
 
+require("neo-tree").setup({
+  filesystem = {
+    filtered_items = {
+      visible = false,
+      hide_dotfiles = true,
+      hide_gitignored = true,
+      hide_hidden = true,
+      hide_by_name = {},
+      hide_by_pattern = {},
+      always_show = {},
+      never_show = {},
+      never_show_by_pattern = {},
+       enable_git_status = false,
+    },
+    follow_current_file = {
+      enabled = true,
+      leave_dirs_open = false,
+    },
+    group_empty_dirs = false,
+    hijack_netrw_behavior = "open_current",
+    use_libuv_file_watcher = false,
+          git_status = {
+            symbols = {
+              -- Change type
+              added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+              modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+              deleted   = "✖",-- this can only be used in the git_status source
+              renamed   = "󰁕",-- this can only be used in the git_status source
+              -- Status type
+              untracked = "",
+              ignored   = "",
+              unstaged  = "󰄱",
+              staged    = "",
+              conflict  = "",
+            }
+          },
+         
+  },
+})
+-- ctrl+a to select all
+vim.api.nvim_set_keymap('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
+local null_ls = require("null-ls")
 
+local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
+local event = "BufWritePre" -- or "BufWritePost"
+local async = event == "BufWritePost"
 
-vim.g.auto_comma_or_semicolon = 1
+null_ls.setup({
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.keymap.set("n", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+
+      -- format on save
+      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+      vim.api.nvim_create_autocmd(event, {
+        buffer = bufnr,
+        group = group,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr, async = async })
+        end,
+        desc = "[lsp] format on save",
+      })
+    end
+
+    if client.supports_method("textDocument/rangeFormatting") then
+      vim.keymap.set("x", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+    end
+  end,
+})
+local prettier = require("prettier")
+
+prettier.setup({
+  bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  },
+})
+prettier.setup({
+  cli_options = {
+    arrow_parens = "always",
+    bracket_spacing = true,
+    bracket_same_line = false,
+    embedded_language_formatting = "auto",
+    end_of_line = "lf",
+    html_whitespace_sensitivity = "css",
+    -- jsx_bracket_same_line = false,
+    jsx_single_quote = false,
+    print_width = 80,
+    prose_wrap = "preserve",
+    quote_props = "as-needed",
+    semi = true,
+    single_attribute_per_line = false,
+    single_quote = false,
+    tab_width = 2,
+    trailing_comma = "es5",
+    use_tabs = false,
+    vue_indent_script_and_style = false,
+  },
+})
+require'barbar'.setup {
+  -- WARN: do not copy everything below into your config!
+  --       It is just an example of what configuration options there are.
+  --       The defaults are suitable for most people.
+
+  -- Enable/disable animations
+  animation = false,
+
+  -- Enable/disable auto-hiding the tab bar when there is a single buffer
+  auto_hide = false,
+
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = true,
+  -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
+  -- Valid options are 'left' (the default), 'previous', and 'right'
+  focus_on_close = 'left',
+
+    -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
+    preset = 'powerline',
+filetype = {
+      -- Sets the icon's highlight group.
+      -- If false, will use nvim-web-devicons colors
+      custom_colors = false,
+
+      -- Requires `nvim-web-devicons` if `true`
+      enabled = true,
+    },
+    separator = {left = '▎', right = ''},
+
+    -- If true, add an additional separator at the end of the buffer list
+    separator_at_end = true,}

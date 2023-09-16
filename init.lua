@@ -39,8 +39,8 @@ vim.api.nvim_set_keymap("n", "<F2>", ":Telescope live_grep<CR>", { noremap = tru
 vim.api.nvim_set_keymap("n", "<C-z>", "u", { noremap = true })
 
 -- Run current file in Node.js
-vim.api.nvim_set_keymap("n", "<A-e>", ":!node %<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<A-e>", ":!bun %<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>e", ":!bun %<CR>", { noremap = true })
 -- Go to end of line with "1"
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
 -- Disable netrw banner

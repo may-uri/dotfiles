@@ -29,7 +29,7 @@ local options = astronvim.user_opts("options", {
     preserveindent = true, -- preserve indent structure as much as possible
     pumheight = 10, -- height of the pop up menu
     relativenumber = true, -- show relative numberline
-    scrolloff = 8, -- number of lines to keep above and below the cursor
+    scrolloff = 0, -- number of lines to keep above and below the cursor
     shiftwidth = 2, -- number of space inserted for indentation
     showmode = false, -- disable showing modes in command line
     showtabline = 2, -- always display tabline
@@ -62,7 +62,7 @@ local options = astronvim.user_opts("options", {
     inlay_hints_enabled = false, -- enable or disable LSP inlay hints on startup (Neovim v0.10 only)
     lsp_handlers_enabled = true, -- enable or disable default vim.lsp.handlers (hover and signature help)
     semantic_tokens_enabled = true, -- enable or disable LSP semantic tokens on startup
-    ui_notifications_enabled = true, -- disable notifications (TODO: rename to  notifications_enabled in AstroNvim v4)
+    ui_notifications_enabled = false, -- disable notifications (TODO: rename to  notifications_enabled in AstroNvim v4)
     git_worktrees = nil, -- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
   },
   t = vim.t.bufs and vim.t.bufs or { bufs = vim.api.nvim_list_bufs() }, -- initialize buffers for the current tab

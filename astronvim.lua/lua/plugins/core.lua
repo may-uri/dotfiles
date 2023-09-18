@@ -48,15 +48,15 @@ return {
     },
     config = require "plugins.configs.nvim-autopairs",
   },
-  -- {
-  --   "folke/which-key.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     icons = { group = vim.g.icons_enabled and "" or "+", separator = "" },
-  --     disable = { filetypes = { "TelescopePrompt" } },
-  --   },
-  --   config = require "plugins.configs.which-key",
-  -- },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      icons = { group = vim.g.icons_enabled and "" or "+", separator = "" },
+      disable = { filetypes = { "TelescopePrompt" } },
+    },
+    config = require "plugins.configs.which-key",
+  },
   {
     "kevinhwang91/nvim-ufo",
     event = { "User AstroFile", "InsertEnter" },

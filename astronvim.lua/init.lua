@@ -35,12 +35,12 @@ vim.api.nvim_set_keymap("n", "<F1>", ":Telescope find_files<CR>", { noremap = tr
 -- Map F2 key to Telescope find by grep
 vim.api.nvim_set_keymap("n", "<F2>", ":Telescope live_grep<CR>", { noremap = true })
 
--- Disable Ctrl+Z
+-- Disable Ctrl+Z 
 vim.api.nvim_set_keymap("n", "<C-z>", "u", { noremap = true })
 
--- Run current file in Node.js
-vim.api.nvim_set_keymap("n", "<A-e>", ":!node %<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
+-- Run current file in neovim 
+vim.api.nvim_set_keymap("n", "<A-e>", ":!bun run %<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>e", ":!bun run %<CR>", { noremap = true })
 -- Go to end of line with "1"
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
 -- Disable netrw banner
@@ -57,7 +57,14 @@ vim.wo.colorcolumn = "79"
  -- space + s to multi cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Disable swap and backup files
---
 vim.opt.swapfile = false
 vim.opt.backup = false
-require('nvim-ts-autotag').setup()
+-- require('nvim-ts-autotag').setup()
+-- neoscroll scroll mappin
+vim.keymap.set('n', '<ScrollWheelUp>', '<C-y>')
+vim.keymap.set('n', '<ScrollWheelDown>', '<C-e>')
+vim.keymap.set('i', '<ScrollWheelUp>', '<C-y>')
+vim.keymap.set('i', '<ScrollWheelDown>', '<C-e>')
+vim.keymap.set('v', '<ScrollWheelUp>', '<C-y>')
+vim.keymap.set('v', '<ScrollWheelDown>', '<C-e>')
+vim.cmd('TSEnable highlight')

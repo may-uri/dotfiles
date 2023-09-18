@@ -25,7 +25,7 @@ return {
   build = ":TSUpdate",
   opts = function()
     return {
-      autotag = { enable = true },
+      -- autotag = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
       highlight = {
         enable = true,
@@ -92,5 +92,6 @@ return {
       },
     }
   end,
-  config = require "plugins.configs.nvim-treesitter",
+      
+  -- config = require "plugins.configs.nvim-treesitter",
 }

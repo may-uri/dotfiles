@@ -52,8 +52,8 @@ return {
     init = function() require("astronvim.utils").load_plugin_with_func("nvim-notify", vim, "notify") end,
     opts = {
       render ="minimal",
-      timeout = 5,
-      fps = 20,
+      timeout = 0,
+      fps = 60,
     
       on_open = function(win)
         vim.api.nvim_win_set_config(win, { zindex = 175 })

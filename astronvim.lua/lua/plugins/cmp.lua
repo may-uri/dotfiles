@@ -82,8 +82,8 @@ return {
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           ["<C-y>"] = cmp.config.disable,
          -- ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() }
-          ["<CR>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-          -- ["<CR>"] = cmp.mapping.confirm { select = false },
+          -- ["<CR>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+          ["<CR>"] = cmp.mapping.confirm { select = true },
            ["<Tab>"] = cmp.mapping.confirm { select = true },
           ["<C-9>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

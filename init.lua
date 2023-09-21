@@ -67,4 +67,6 @@ vim.keymap.set('i', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('i', '<ScrollWheelDown>', '<C-e>')
 vim.keymap.set('v', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('v', '<ScrollWheelDown>', '<C-e>')
-vim.cmd('TSEnable highlight')
+-- if vim.bo.filetype ~= 'html' and vim.bo.filetype ~= 'css' and vim.bo.filetype ~= 'js' then
+
+-- end

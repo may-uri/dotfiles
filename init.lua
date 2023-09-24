@@ -48,12 +48,12 @@ vim.g.netrw_banner = 0
 -- Open init.lua 
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
 -- ctrl+a to select all
-vim.api.nvim_set_keymap('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-a>', '<cmd> %y+ <CR><CR>', { noremap = true, silent = true })
 
 require("wrapping").setup()
 
 vim.o.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
-vim.wo.colorcolumn = "79"
+-- vim.wo.colorcolumn = "79"
  -- space + s to multi cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Disable swap and backup files

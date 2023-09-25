@@ -48,7 +48,7 @@ vim.g.netrw_banner = 0
 -- Open init.lua 
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
 -- ctrl+shift+a to copy all
-vim.api.nvim_set_keymap('n', '<C-S-a>', '<cmd> %y+ <CR><CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd> %y+ <CR><CR>', { noremap = true, silent = true })
 -- ctrl+a to select all
 vim.api.nvim_set_keymap('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
 require("wrapping").setup()

@@ -59,7 +59,6 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Disable swap and backup files
 vim.opt.swapfile = false
 vim.opt.backup = false
--- require('nvim-ts-autotag').setup()
 -- neoscroll scroll mappin
 vim.keymap.set('n', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('n', '<ScrollWheelDown>', '<C-e>')

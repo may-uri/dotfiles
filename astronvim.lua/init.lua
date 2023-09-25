@@ -48,12 +48,12 @@ vim.g.netrw_banner = 0
 -- Open init.lua 
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
 -- ctrl+a to select all
-vim.api.nvim_set_keymap('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-a>', '<cmd> %y+ <CR><CR>', { noremap = true, silent = true })
 
 require("wrapping").setup()
 
 vim.o.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
-vim.wo.colorcolumn = "79"
+-- vim.wo.colorcolumn = "79"
  -- space + s to multi cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Disable swap and backup files
@@ -67,4 +67,10 @@ vim.keymap.set('i', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('i', '<ScrollWheelDown>', '<C-e>')
 vim.keymap.set('v', '<ScrollWheelUp>', '<C-y>')
 vim.keymap.set('v', '<ScrollWheelDown>', '<C-e>')
+-- Add this code to your init.lua file
+vim.api.nvim_set_keymap('n', '<M-b>', ':Neotree toggle float<CR>', { noremap = true, silent = true })
+
 vim.cmd('TSEnable highlight')
+-- if vim.bo.filetype ~= 'html' and vim.bo.filetype ~= 'css' and vim.bo.filetype ~= 'js' then
+
+-- end

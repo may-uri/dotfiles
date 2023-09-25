@@ -1,6 +1,7 @@
 set -U fish_greeting ""
 alias tar="tar -xzvf"
 alias rm="rm -rf"
+alias cp="cp -rf"
 # alias tar="tar -xzf"
    set -x PATH "/home/genie" $PATH 
    set -gx PATH $HOME/.yarn/bin $PATH
@@ -14,9 +15,9 @@ alias rr 'git commit learni\ notes.md readme.md -m "refactor" && git push'
 
 alias sx 'browser-sync start --server --files "*.html"'
 # to start index.html from wsl
-function hh
-    set browser_path "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
-    set index_path "D:\\git\\javascript\\sandbox\\index.html"
+# function hh
+#     set browser_path "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+#     set index_path "D:\\git\\javascript\\sandbox\\index.html"
 
     powershell.exe -Command "Start-Process -FilePath '$browser_path' -ArgumentList '$index_path'"
 end
@@ -31,8 +32,11 @@ end
       set -x EDITOR nvim
       alias l "lazygit"
       alias gt "git status"
+set -x PATH $PATH ~/.bun/bin
 
 
+# alias dot 'cp /home/genie/.config/nvim/init.vim /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.vim -m "refactor" && git push'
+#alias dot 'cp /home/genie/.config/nvim/init.lua /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.lua -m "refactor" && git push'
+alias dot 'cp -r /home/genie/.config/nvim/* /mnt/d/git/dotfiles/astronvim.lua/; cd /mnt/d/git/dotfiles/; git commit astronvim.lua/* -m "refactor" && git push'
 
-alias sync-dotfiles 'cp /home/genie/.config/nvim/init.vim /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.vim -m "refactor" && git push'
 

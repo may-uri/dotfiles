@@ -27,10 +27,10 @@ return {
       local lspkind_status_ok, lspkind = pcall(require, "lspkind")
       local utils = require "astronvim.utils"
       if not snip_status_ok then return end
-      local border_opts = {
-        border = "rounded",
-        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-      }
+      -- local border_opts = {
+      --   border = "rounded",
+      --   winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+      -- }
 
       local function has_words_before()
         local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))

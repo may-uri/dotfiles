@@ -35,17 +35,17 @@ vim.api.nvim_set_keymap("n", "<F1>", ":Telescope find_files<CR>", { noremap = tr
 -- Map F2 key to Telescope find by grep
 vim.api.nvim_set_keymap("n", "<F2>", ":Telescope live_grep<CR>", { noremap = true })
 
--- Disable Ctrl+Z 
+-- Disable Ctrl+Z
 vim.api.nvim_set_keymap("n", "<C-z>", "u", { noremap = true })
 
--- Run current file in neovim 
-vim.api.nvim_set_keymap("n", "<A-e>", ":!bun run %<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>e", ":!bun run %<CR>", { noremap = true })
+-- Run current file in neovim
+vim.api.nvim_set_keymap("n", "<A-e>", ":!node %<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
 -- Go to end of line with "1"
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
 -- Disable netrw banner
 vim.g.netrw_banner = 0
--- Open init.lua 
+-- Open init.lua
 vim.api.nvim_set_keymap('n', 'NN', ':tabnew $MYVIMRC<CR>', { noremap = true })
 -- ctrl+shift+a to copy all
 vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd> %y+ <CR><CR>', { noremap = true, silent = true })
@@ -53,9 +53,10 @@ vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd> %y+ <CR><CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<C-a>', 'ggVG', { noremap = true, silent = true })
 require("wrapping").setup()
 
-vim.o.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+vim.o.langmap =
+"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
 -- vim.wo.colorcolumn = "79"
- -- space + s to multi cursor
+-- space + s to multi cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- Disable swap and backup files
 vim.opt.swapfile = false
@@ -73,3 +74,4 @@ vim.cmd('TSEnable highlight')
 -- if vim.bo.filetype ~= 'html' and vim.bo.filetype ~= 'css' and vim.bo.filetype ~= 'js' then
 
 -- end
+-- vim.api.nvim_create_augroup("Heirline", { clear = true })

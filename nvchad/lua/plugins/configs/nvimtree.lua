@@ -3,9 +3,9 @@ local options = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
-  disable_netrw = true,
-  hijack_netrw = true,
-  hijack_cursor = true,
+  -- disable_netrw = false,
+  -- hijack_netrw = true,
+  -- hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
   sync_root_with_cwd = true,
   update_focused_file = {

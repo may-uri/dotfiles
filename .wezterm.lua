@@ -8,7 +8,6 @@ config.font = wezterm.font { family = 'IosevkaTerm Nerd Font Mono' }
 config.audible_bell = 'Disabled'
 
 -- COLORS_SCHEME
-
 -- config.color_scheme = 'Everforest Dark (Gogh)'
 -- config.color_scheme = 'hardhacker'
 -- config.color_scheme = 'Kasugano (terminal.sexy)'
@@ -22,13 +21,13 @@ config.audible_bell = 'Disabled'
 -- config.color_scheme = 'Mariana'
 -- config.color_scheme = 'Mocha (base16)'
 -- config.color_scheme = 'Zenburn (Gogh)'
-config.color_scheme = 'Black Metal (Immortal) (base16)'
+-- config.color_scheme = 'Black Metal (Immortal) (base16)'
 -- config.color_scheme = 'Canvased Pastel (terminal.sexy)'
 -- config.color_scheme = 'Catch Me If You Can (terminal.sexy)'
 -- config.color_scheme = 'DanQing (base16)'
 -- config.color_scheme = 'Dark Violet (base16)'
 -- config.color_scheme = 'Dawn (terminal.sexy)'
--- config.color_scheme = 'Embers (dark) (terminal.sexy)'
+config.color_scheme = 'Embers (dark) (terminal.sexy)'
 -- config.color_scheme = 'Fahrenheit'
 -- config.color_scheme = 'Fideloper'
 -- config.color_scheme = 'Geohot (Gogh)'
@@ -48,7 +47,10 @@ config.keys = {
   { action = wezterm.action.Hide, mods = 'ALT', key = 'Enter' },
   { action = wezterm.action.PasteFrom 'Clipboard', mods = 'CTRL', key = 'v' },
   { action = wezterm.action.PasteFrom 'PrimarySelection', mods = 'CTRL', key = 'v' },
+  { action = wezterm.action.PasteFrom 'Clipboard', mods = 'CTRL', key = 'м' },
+  { action = wezterm.action.PasteFrom 'PrimarySelection', mods = 'CTRL', key = 'м' },
   { key = 'w', mods = 'ALT', action = wezterm.action.CloseCurrentTab { confirm = false } },
+  { key = 'ц', mods = 'ALT', action = wezterm.action.CloseCurrentTab { confirm = false } },
   { action = wezterm.action.ResetFontSize, mods = 'CTRL', key = '0' },
   { action = wezterm.action.ToggleFullScreen, key = 'F11' },
 }

@@ -20,6 +20,7 @@ return {
         "getscriptPlugin",
         "gzip",
         "logipat",
+        "nvim-tree",
         -- "netrw",
         -- "netrwPlugin",
         -- "netrwSettings",

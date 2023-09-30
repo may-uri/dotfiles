@@ -25,6 +25,7 @@ vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
 -- Disable netrw banner
 vim.g.netrw_banner = 0
+
 -- Open init.lua
 vim.api.nvim_set_keymap("n", "NN", ":tabnew $MYVIMRC<CR>", { noremap = true })
 -- ctrl+shift+a to copy all

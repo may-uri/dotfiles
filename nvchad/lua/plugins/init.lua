@@ -20,6 +20,7 @@ local default_plugins = {
 
   {
     "NvChad/nvterm",
+    enabled = false,
     init = function()
       require("core.utils").load_mappings "nvterm"
     end,
@@ -214,6 +215,7 @@ local default_plugins = {
   -- file managing , picker etc
   {
     "nvim-tree/nvim-tree.lua",
+    enabled=false,
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     init = function()
       require("core.utils").load_mappings "nvimtree"

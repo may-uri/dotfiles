@@ -1,3 +1,5 @@
+-- E:\terminal\WezTerm\wezterm-gui.exe --config default_cwd='\\\\wsl$\\mi\\home\\genie' start -- wsl -d Debian --cd ~
+
 local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = {}

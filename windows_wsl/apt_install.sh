@@ -4,7 +4,7 @@
 # Update and upgrade
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y git tmux curl fish ripgrep nodejs jq tar gcc unzip npm
+sudo apt install -y git tmux curl fish ripgrep nodejs jq tar gcc unzip npm fd-find
 
 # URL of the latest release tar file
 url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"

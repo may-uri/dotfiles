@@ -14,7 +14,7 @@ end
 
 
 
-
+alias fd="fdfind"
 alias tar="tar -xzvf"
 alias rm="rm -rf"
 alias cp="cp -rf"

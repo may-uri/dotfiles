@@ -1,6 +1,6 @@
 # set -U fish_greeting ""
 function fish_greeting
-    set -l quotes (jq -r '.quotes[].quote' my.json)
+    set -l quotes (jq -r '.quotes[].quote' quote.json)
     set -l random_index (shuf -i 1-(count $quotes) -n 1)
     set -l random_quote (echo $quotes[$random_index])
 

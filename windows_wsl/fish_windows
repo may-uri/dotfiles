@@ -1,0 +1,52 @@
+# set -U fish_greeting ""
+function fish_greeting
+    set -l quotes (jq -r '.quotes[].quote' quote.json)
+    set -l random_index (shuf -i 1-(count $quotes) -n 1)
+    set -l random_quote (echo $quotes[$random_index])
+
+    # Add the border to the random quote
+    set -l border " -------------------------"
+    set -l bordered_quote (echo $border)
+    echo $random_quote
+    echo $bordered_quote
+end
+
+
+
+
+
+alias tar="tar -xzvf"
+alias rm="rm -rf"
+alias cp="cp -rf"
+# alias tar="tar -xzf"
+      set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   set -x PATH "/home/genie" $PATH 
+   set -gx PATH $HOME/.yarn/bin $PATH
+set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
+alias explorer "explorer.exe"
+alias n "nvim"
+# alias nv "nvim.exe"
+# to commit&push mine markdown files
+alias rr 'git commit learni\ notes.md readme.md -m "refactor" && git push'
+# to sync changes html in vscode and browser
+
+alias sx 'browser-sync start --server --files "*.html"'
+if set -q WSLENV
+    set -gx PATH $HOME/bin/win-bash-xclip-xsel $PATH
+end
+
+# nvim path
+
+   set -x PATH $PATH /home/genie/.local/bin/bin
+      set -x ESLINT_CONFIG_PATH ~/.eslint
+      set -x EDITOR nvim
+      alias l "lazygit"
+      alias gt "git status"
+set -x PATH $PATH ~/.bun/bin
+
+
+# alias dot 'cp /home/genie/.config/nvim/init.vim /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.vim -m "refactor" && git push'
+# alias dot 'cp /home/genie/.config/nvim/init.lua /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.lua -m "refactor" && git push'
+alias dot 'cp -r /home/genie/.config/nvim/* /mnt/d/git/dotfiles/astronvim.lua/; cd /mnt/d/git/dotfiles/; git commit astronvim.lua/* -m "refactor" && git push'
+
+

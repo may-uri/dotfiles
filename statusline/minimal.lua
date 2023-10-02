@@ -87,19 +87,19 @@ M.mode = function()
 end
 
 M.fileInfo = function()
-  local icon = "󰈚"
+  local icon = ""
   local filename = (fn.expand "%" == "" and "Empty") or fn.expand "%:t"
 
-  if filename ~= "Empty" then
-    local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+  -- if filename ~= "Empty" then
+  --   local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+  --
+  --   if devicons_present then
+  --     local ft_icon = devicons.get_icon(filename)
+  --     icon = (ft_icon ~= nil and ft_icon) or icon
+  --   end
+  -- end
 
-    if devicons_present then
-      local ft_icon = devicons.get_icon(filename)
-      icon = (ft_icon ~= nil and ft_icon) or icon
-    end
-  end
-
-  return gen_block(icon, filename, "%#St_file_sep#", "%#St_file_bg#", "%#St_file_txt#")
+  return gen_block(icon, filename, "", "", "%#St_file_txt#")
   -- return gen_block(icon, filename, "%#St_file_sep#", "%#St_file_bg#", "%#St_file_txt#")
 end
 
@@ -110,9 +110,12 @@ M.git = function()
 
   local git_status = vim.b.gitsigns_status_dict
 
-  local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
-  local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
-  local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
+  local added = (git_status.added and git_status.added ~= 0) and (" +" .. git_status.added) or ""
+  -- local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
+  local changed = (git_status.changed and git_status.changed ~= 0) and (" ~" .. git_status.changed) or ""
+  -- local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
+  local removed = (git_status.removed and git_status.removed ~= 0) and (" -" .. git_status.removed) or ""
+  -- local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
   local branch_name = " " .. git_status.head
 
   return "%#St_gitIcons#" .. branch_name .. added .. changed .. removed
@@ -173,8 +176,9 @@ M.LSP_status = function()
   if rawget(vim, "lsp") then
     for _, client in ipairs(vim.lsp.get_active_clients()) do
       if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
-        return (vim.o.columns > 100 and gen_block("", client.name, "%#St_lsp_sep#", "%#St_lsp_bg#", "%#St_lsp_txt#"))
-          or "  LSP "
+        return (vim.o.columns > 100 and gen_block("", client.name, "", "", "%#St_lsp_txt#"))
+        -- return (vim.o.columns > 100 and gen_block("", client.name, "%#St_lsp_sep#", "%#St_lsp_bg#", "%#St_lsp_txt#"))
+          or " LSP "
       end
     end
   end

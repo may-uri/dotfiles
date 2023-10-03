@@ -47,6 +47,7 @@ local default_plugins = {
 
   {
     "nvim-tree/nvim-web-devicons",
+    -- enabled=false,
     opts = function()
       return { override = require "nvchad.icons.devicons" }
     end,
@@ -254,7 +255,8 @@ local default_plugins = {
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", '"', "'", "`", "c", "v", "g" },
+    keys = { "<leader>", "<c-r>", '"', "'", "`", "c",},
+    -- keys = { "<leader>", "<c-r>", '"', "'", "`", "c", "v", "g" },
     init = function()
       require("core.utils").load_mappings "whichkey"
     end,

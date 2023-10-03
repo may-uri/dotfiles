@@ -4,14 +4,13 @@ local M = {}
 
 -- my config
 -- Save with Ctrl+S
--- vim.api.nvim_set_keymap("n", "<C-S>", ":w<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-S>", ":w<CR>", { noremap = true })
 -- Close without saving with Ctrl+Q
 vim.api.nvim_set_keymap("n", "<C-Q>", ":q!<CR>", { noremap = true })
 -- Copy with Ctrl+C
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true })
 -- Map F1 key to Telescope find by file
-vim.api.nvim_set_keymap("n", "<F1>", ":Telescope find_files<CR>", { noremap = true })
-
+-- vim.api.nvim_set_keymap("n", "<F1>", ":Telescope find_files<CR>", { noremap = true })
 -- Map F2 key to Telescope find by grep
 vim.api.nvim_set_keymap("n", "<F2>", ":Telescope live_grep<CR>", { noremap = true })
 
@@ -23,6 +22,7 @@ vim.api.nvim_set_keymap("n", "<A-e>", ":!node %<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>e", ":!node %<CR>", { noremap = true })
 -- Go to end of line with "1"
 vim.api.nvim_set_keymap("n", "1", "$", { noremap = true })
+vim.api.nvim_set_keymap("v", "1", "$", { noremap = true })
 -- Disable netrw banner
 vim.g.netrw_banner = 0
 
@@ -42,6 +42,8 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.o.clipboard = "unnamedplus"
+
 M.general = {
   i = {
     -- go to  beginning and end
@@ -84,14 +86,14 @@ M.general = {
 
     -- new buffer
     -- ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
-    ["<leader>b"] = { "<cmd> Telescope buffers <CR>", "telescope buffers" },
+    -- ["<leader>b"] = { "<cmd> Telescope buffers <CR>", "telescope buffers" },
     ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
 
-    -- ["<leader>fm"] = {
-    ["<C-S>"] = {
+    ["<leader>fm"] = {
+    -- ["<C-S>"] = {
       function()
         vim.lsp.buf.format { async = true }
-        vim.cmd "w"
+        -- vim.cmd "w"
       end,
       "LSP formatting",
     },
@@ -318,13 +320,14 @@ M.telescope = {
 
   n = {
     -- find
-    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+    -- ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
+    -- ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+    ["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
     ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+    ["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
-    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+    ["<leader>ff"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
     -- git
     ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },

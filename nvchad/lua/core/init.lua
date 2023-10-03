@@ -22,10 +22,19 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
+-- mine
+opt.swapfile = false
+opt.backup = false
+opt.relativenumber = true
+opt.number = true
+opt.langmap =
+  "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
+-- Disable netrw banner
+g.netrw_banner = 0
 
 -- Numbers
 opt.number = true

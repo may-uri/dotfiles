@@ -35,7 +35,6 @@ opt.smartcase = true
 opt.mouse = "a"
 -- Disable netrw banner
 g.netrw_banner = 0
-
 -- Numbers
 opt.number = true
 opt.numberwidth = 2
@@ -48,7 +47,7 @@ opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.timeoutlen = 400
+opt.timeoutlen = 500
 opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns

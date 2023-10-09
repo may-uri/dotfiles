@@ -1,11 +1,9 @@
 ---@type MappingsTable
 local M = {}
-function ToggleStatusLine()
-  if vim.o.laststatus == 0 then
-    vim.cmd('set laststatus=2')
-  else
-    vim.cmd('set laststatus=0')
-  end
+function StatusLine()
+		vim.cmd("set laststatus=2")
+		vim.opt.showmode = true
+		vim.o.statusline = "%f %m %r"
 end
 M.general = {
 	n = {
@@ -14,7 +12,7 @@ M.general = {
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 		["<leader>rr"] = { ":SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
 		["<leader>ww"] = { ":set wrap!CR>", "[T]oggle [W]rap", opts = { nowait = true } },
-		["<leader>ts"] = { ":lua ToggleStatusLine()<CR>", "[T]oggle [S]tatus [L]ine", opts = { nowait = true } },
+		["<leader>ts"] = { ":lua StatusLine()<CR>", "[T]oggle [S]tatus [L]ine", opts = { nowait = true } },
 		["<leader>s"] = {
 			[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 			"[S]ubstitute",

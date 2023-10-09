@@ -5,3 +5,5 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
+vim.g.syntastic_javascript_checkers = { 'eslint' }
+vim.g.syntastic_javascript_eslint_exec = 'eslint_d'

@@ -30,7 +30,6 @@ local plugins = {
 
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
-
 	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
 	{
 		"nvim-treesitter/nvim-treesitter",

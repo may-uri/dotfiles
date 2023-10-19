@@ -22,7 +22,7 @@ M.ui = {
 	cmp = {
 		icons = false,
 		lspkind_text = true,
-		style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+		style = "atom", -- default/flat_light/flat_dark/atom/atom_colored
 		border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
 		selected_item_bg = "colored", -- colored / simple
 	},
@@ -31,7 +31,7 @@ M.ui = {
 
 	------------------------------- nvchad_ui modules -----------------------------
 	statusline = {
-		theme = "vscode", -- default/vscode/vscode_colored/minimal
+		theme = "default", -- default/vscode/vscode_colored/minimal
 		-- default/round/block/arrow separators work only for default statusline theme
 		-- round and block will work for minimal theme only
 		separator_style = "block",

@@ -16,7 +16,7 @@ M.general = {
 	},
 
 	n = {
-		["<Esc>"] = { ":noh <CR>", "Clear highlights" },
+		["<Esc>"] = { ":nohl <CR>", "Clear highlights" },
 		-- switch between windows
 		["<C-h>"] = { "<C-w>h", "Window left" },
 		["<C-l>"] = { "<C-w>l", "Window right" },
@@ -31,7 +31,7 @@ M.general = {
 
 		-- line numbers
 		["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
-		["<leader>rn"] = { "<cmd> set rnu! <CR>", "Toggle relative number" },
+		["<leader>rn"] = { "<cmd> set rnu! nu! <CR>", "Toggle relative and number" },
 
 		-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 		-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/

@@ -1,9 +1,13 @@
 ---@type MappingsTable
 local M = {}
-function StatusLine()
-		vim.cmd("set laststatus=2")
-		vim.opt.showmode = true
-		vim.o.statusline = "%f %m %r"
+function Zen()
+	vim.cmd("set laststatus=2")
+	vim.opt.showmode = true
+	vim.o.statusline = "%f %m %r"
+  -- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
+	vim.o.showtabline = 0
+	vim.opt.number = false
+	vim.opt.relativenumber = false
 end
 M.general = {
 	n = {
@@ -11,8 +15,9 @@ M.general = {
 		["<leader>o"] = { ":Telescope oldfiles<CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 		["<leader>rr"] = { ":SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
-		["<leader>ww"] = { ":set wrap!CR>", "[T]oggle [W]rap", opts = { nowait = true } },
-		["<leader>ts"] = { ":lua StatusLine()<CR>", "[T]oggle [S]tatus [L]ine", opts = { nowait = true } },
+		["<leader>ww"] = { ":set wrap!<CR>", "[T]oggle [W]rap", opts = { nowait = true } },
+		["<leader>tw"] = { ":Twilight<CR>", "[T]oggle [T]wilight", opts = { nowait = true } },
+		["<leader>z"] = { ":lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
 		["<leader>s"] = {
 			[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 			"[S]ubstitute",
@@ -39,7 +44,7 @@ M.general = {
 		["<leader>rr"] = { ":SnipRun<CR>", "[S]nip [R]un", opts = { nowait = true } },
 		[">"] = { ">gv", "indent" },
 		["ge"] = { "G", "[L]ast [Line]", opts = { nowait = true } },
-		["1"] = { "$", "go to end of line", opts = { nowait = true } },
+		["1"] = { "$h", "go to end of line", opts = { nowait = true } },
 	},
 }
 

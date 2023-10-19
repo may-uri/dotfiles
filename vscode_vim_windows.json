@@ -1,6 +1,6 @@
 {
-  "editor.fontFamily": "IosevkaTerm Nerd Font",
-  "editor.fontSize": 20,
+  "editor.fontFamily": "iosevkaterm nerd font",
+  "editor.fontSize": 21,
   "window.title": "${activeEditorShort}",
   "editor.renderWhitespace": "none", // removes whitespace chars
   "editor.renderLineHighlight": "none", // removes line highlight
@@ -11,7 +11,7 @@
   //"editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
   "editor.glyphMargin": false, // removes the space used mainly for debugging indicators
   //"workbench.colorTheme": "Gruvbox Dark Soft",
-  "workbench.editor.showIcons": false, // removes icon from opened files in tabs
+  "workbench.editor.showIcons": true, // removes icon from opened files in tabs
   "workbench.editor.tabCloseButton": "off", // removes the status bar
   "editor.minimap.autohide": true,
   "editor.formatOnSave": true,
@@ -35,7 +35,7 @@
   "editor.unicodeHighlight.includeStrings": false,
   "git.enableSmartCommit": true,
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.localEchoLatencyThreshold": -1,
+  "terminal.integrated.localEchoLatencyThreshold": 0,
   "editor.inlayHints.padding": true,
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "files.associations": {
@@ -51,7 +51,7 @@
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "workbench.tree.renderIndentGuides": "none",
-  "explorer.openEditors.visible": 1,
+  "explorer.openEditors.visible": 2,
   "explorer.decorations.colors": false,
   // Smooth Cursors
   "editor.cursorBlinking": "solid",
@@ -64,54 +64,23 @@
   // something
   "scm.diffDecorations": "gutter",
   "scm.diffDecorationsGutterVisibility": "hover",
-  "scm.diffDecorationsGutterWidth": 1,
+  "scm.diffDecorationsGutterWidth": 2,
   "problems.defaultViewMode": "table",
   "codeium.enableCodeLens": false,
   "terminal.integrated.fontFamily": "IosevkaTerm Nerd Font",
-  "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
-    },
-    "Command Prompt": {
-      "path": [
-        "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
-      ],
-      "args": [],
-      "icon": "terminal-cmd"
-    },
-    "Git Bash": {
-      "source": "Git Bash"
-    },
-    "Windows PowerShell": {
-      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-    },
-    "Debian (WSL)": {
-      "path": "C:\\Windows\\System32\\wsl.exe",
-      "args": [
-        "-d",
-        "Debian"
-      ]
-    }
-  },
-  "terminal.integrated.defaultProfile.windows": "Debian (WSL)",
   "terminal.integrated.enableImages": false,
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "terminal.integrated.fontWeightBold": "normal",
-  "window.titleBarStyle": "custom",
-  "terminal.integrated.cursorStyle": "line",
+  "window.titleBarStyle": "native",
   "javascript.format.semicolons": "insert",
   "typescript.format.semicolons": "remove",
-  "files.autoSave": "afterDelay",
-  "editor.rulers": [
-    {
-      "column": 60,
-      "color": "#3c3836"
-    }
-  ],
-  "terminal.integrated.fontSize": 12,
-  "workbench.colorTheme": "Vim Dark Medium",
+  // "editor.rulers": [
+  //   {
+  //     "column": 61,
+  //     "color": "#4c3836"
+  //   }
+  // ],
+  "terminal.integrated.fontSize": 20,
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "compact",
   "codeium.enableConfig": {
@@ -125,7 +94,7 @@
     "<C-c>": true,
   },
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
+    "asvetliakov.vscode-neovim": 1
   },
   "vim.overrideCopy": false,
   "vim.useSystemClipboard": true,
@@ -181,4 +150,46 @@
   "vim.sneakUseIgnorecaseAndSmartcase": true,
   "vim.sneakReplacesF": true,
   "vim.autoSwitchInputMethod.enable": true,
+  "vim.cursorStylePerMode.visualblock": "block",
+  "vim.cursorStylePerMode.visualline": "block",
+  "vim.cursorStylePerMode.visual": "block",
+  "vim.cursorStylePerMode.normal": "block",
+  "window.commandCenter": false,
+  "apc.electron": {
+    "titleBarStyle": "hidden",
+    "frame": false,
+  },
+  "apc.parts.font.family": {
+    "extension-editor": "Helvetica", // Required: Expected font installation on machine and Application restart
+    "tabs": "iosevkaterm nerd font",
+  },
+  "workbench.colorTheme": "Vim Deep Dark",
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "workbench.editor.enablePreview": false,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyleInactive": "block",
+  "apc.header": {
+    "height": 30,
+    "fontSize": 14
+  },
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "vscode-neovim.highlightGroups.highlights": {
+    "IncSearch": {
+      "backgroundColor": "theme.editor.findMatchBackground",
+      // "borderColor": "theme.editor.findMatchBorder"
+      "borderColor": "theme.editor.findMatchBackground"
+    },
+    "Search": {
+      "backgroundColor": "theme.editor.findMatchHighlightBackground",
+      // "borderColor": "theme.editor.findMatchHighlightBorder"
+      "borderColor": "theme.editor.findMatchBorder"
+    },
+    "Visual": {
+      "backgroundColor": "theme.editor.selectionBackground"
+    }
+  },
+  "vscode-neovim.mouseSelectionDebounceTime": 200,
+  "vscode-neovim.statusLineSeparator": "   ",
 }

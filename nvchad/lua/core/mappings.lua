@@ -287,8 +287,8 @@ M.telescope = {
 	n = {
 		-- find
 		-- ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-		-- ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
-		["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+		["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+		-- ["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
 		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },

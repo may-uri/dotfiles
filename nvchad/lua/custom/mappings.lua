@@ -4,16 +4,18 @@ function Zen()
 	vim.cmd("set laststatus=2")
 	vim.opt.showmode = true
 	vim.o.statusline = "%f %m %r"
-  -- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
+	-- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
 	vim.o.showtabline = 0
 	vim.opt.number = false
 	vim.opt.relativenumber = false
 end
+-- vim.lsp.buf.format({ async = true })
 M.general = {
 	n = {
 		["<leader>k"] = { ":Telescope keymaps<CR>", "[T]elescope [K]eymaps", opts = { nowait = true } },
 		["<leader>o"] = { ":Telescope oldfiles<CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
+		["<leader>do"] = { ":!python3 done.py %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 		["<leader>rr"] = { ":SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
 		["<leader>ww"] = { ":set wrap!<CR>", "[T]oggle [W]rap", opts = { nowait = true } },
 		["<leader>tw"] = { ":Twilight<CR>", "[T]oggle [T]wilight", opts = { nowait = true } },
@@ -32,6 +34,7 @@ M.general = {
 		["<C-z>"] = { "u", "[U]ndo", opts = { nowait = true } },
 		["<C-a>"] = { "ggVG", "[S]elect [A]ll", opts = { nowait = true } },
 
+		["<F1>"] = { "<cmd> Telescope find_files <CR>", "Live grep" },
 		["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["ge"] = { "G", "[L]ast [Line]", opts = { nowait = true } },
 		["NN"] = { ":tabnew $MYVIMRC<CR>", "Open init.lua", opts = { nowait = true } },

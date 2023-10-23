@@ -27,8 +27,8 @@ local plugins = {
 		"williamboman/mason.nvim",
 		opts = overrides.mason,
 	},
-	{ "wakatime/vim-wakatime", event = "BufRead" },
-	{ "michaelb/sniprun", event = "BufRead" },
+	{ "wakatime/vim-wakatime", event = "VeryLazy" },
+	{ "michaelb/sniprun", event = "VeryLazy" },
 	{
 		"folke/twilight.nvim",
 		event = "BufRead",
@@ -71,7 +71,7 @@ local plugins = {
 	},
 
 	-- Install a plugin
-	{ "mg979/vim-visual-multi", event = "BufRead" },
+	{ "mg979/vim-visual-multi", event = "VeryLazy" },
 	{
 		"folke/flash.nvim",
 		event = "BufRead",

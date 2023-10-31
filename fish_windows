@@ -1,27 +1,56 @@
 # set -U fish_greeting ""
+# function fish_greeting
+#     set -l quotes (jq -r '.quotes[].quote' $HOME/notes/quote.json)
+#     set -l random_index (shuf -i 1-(count $quotes) -n 1)
+#     set -l random_quote (echo $quotes[$random_index])
+#
+#     # Add the border to the random quote
+#     set -l border " -------------------------"
+#     set -l bordered_quote (echo $border)
+#     echo $random_quote
+#     echo $bordered_quote
+# end
 function fish_greeting
-    set -l quotes (jq -r '.quotes[].quote' quote.json)
-    set -l random_index (shuf -i 1-(count $quotes) -n 1)
-    set -l random_quote (echo $quotes[$random_index])
+    if test -e $HOME/todo.md
+        set -l todo_items (cat $HOME/todo.md)
+        set -l count 0
+        echo -e "\e[32mTODO:\e[0m"
 
-    # Add the border to the random quote
-    set -l border " -------------------------"
-    set -l bordered_quote (echo $border)
-    echo $random_quote
-    echo $bordered_quote
+        for todo_item in $todo_items
+            # set -l count (math $count + 1)
+            # echo "$count) $todo_item"
+            echo "$todo_item"
+        end
+    else
+        echo "No todo list found. Add todo.md in your home directory to start"
+    end
 end
 
 
 
+function start_bot
+    cd /mnt/d/git/chatgpt-telegram-bot
+    # Create a virtual environment
+    python3 -m venv venv
 
+    # Activate the virtual environment
+    source venv/bin/activate.fish
 
+    # Run the main.py script
+    python3 bot/main.py
+end
+alias tg=start_bot
+alias py="python3"
+alias fd="fdfind"
 alias tar="tar -xzvf"
 alias rm="rm -rf"
 alias cp="cp -rf"
 # alias tar="tar -xzf"
+   set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
+   set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
    set -x PATH "/home/genie" $PATH 
    set -gx PATH $HOME/.yarn/bin $PATH
-set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
+   set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
 alias explorer "explorer.exe"
 alias n "nvim"
 # alias nv "nvim.exe"
@@ -48,4 +77,8 @@ set -x PATH $PATH ~/.bun/bin
 # alias dot 'cp /home/genie/.config/nvim/init.lua /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.lua -m "refactor" && git push'
 alias dot 'cp -r /home/genie/.config/nvim/* /mnt/d/git/dotfiles/astronvim.lua/; cd /mnt/d/git/dotfiles/; git commit astronvim.lua/* -m "refactor" && git push'
 
+# to make autocomplete by tab (sometimes bad)
+function fish_user_key_bindings
+    bind \t 'commandline -f accept-autosuggestion'
+end
 

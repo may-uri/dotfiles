@@ -12,11 +12,12 @@ end
 -- vim.lsp.buf.format({ async = true })
 M.general = {
 	n = {
-		["<leader>k"] = { ":Telescope keymaps<CR>", "[T]elescope [K]eymaps", opts = { nowait = true } },
-		["<leader>o"] = { ":Telescope oldfiles<CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
+		["<leader>k"] = { ":Telescope keymaps theme=get_ivy<CR>", "[T]elescope [K]eymaps", opts = { nowait = true } },
+		["<leader>o"] = { ":Telescope oldfiles theme=get_ivy <CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 		["<leader>do"] = { ":!python3 done.py %<CR>", "[R]un [N]ode", opts = { nowait = true } },
-		["<leader>rr"] = { ":SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
+		["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
+		["<leader>lg"] = { "<cmd>LazyGit<CR>", "[L]azy [G]it", opts = { nowait = true } },
 		["<leader>ww"] = { ":set wrap!<CR>", "[T]oggle [W]rap", opts = { nowait = true } },
 		["<leader>tw"] = { ":Twilight<CR>", "[T]oggle [T]wilight", opts = { nowait = true } },
 		["<leader>z"] = { ":lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
@@ -26,7 +27,7 @@ M.general = {
 			silent = true,
 			noremap = true,
 		},
-		["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
+		-- ["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
 		["<A-e>"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },
@@ -36,9 +37,8 @@ M.general = {
 
 		["<F1>"] = { "<cmd> Telescope find_files <CR>", "Live grep" },
 		["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-		["ge"] = { "G", "[L]ast [Line]", opts = { nowait = true } },
 		["NN"] = { ":tabnew $MYVIMRC<CR>", "Open init.lua", opts = { nowait = true } },
-		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+		-- [";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["1"] = { "$", "go to end of line", opts = { nowait = true } },
 	},
 	v = {

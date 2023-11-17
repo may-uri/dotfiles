@@ -29,6 +29,8 @@ local plugins = {
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
+	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
+	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/twilight.nvim",
 		event = "BufRead",
@@ -40,10 +42,10 @@ local plugins = {
 			-- refer to the configuration section below
 		},
 	},
-	{ "ThePrimeagen/vim-be-good", event = "BufRead" },
+	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
 	{
 		"folke/todo-comments.nvim",
-		event = "BufRead",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			signs = false,

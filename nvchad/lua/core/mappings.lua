@@ -16,7 +16,7 @@ M.general = {
 	},
 
 	n = {
-		["<Esc>"] = { ":nohl <CR>", "Clear highlights" },
+		["<Esc>"] = { "<cmd>nohl <CR>", "Clear highlights" },
 		-- switch between windows
 		["<C-h>"] = { "<C-w>h", "Window left" },
 		["<C-l>"] = { "<C-w>l", "Window right" },
@@ -286,15 +286,18 @@ M.telescope = {
 
 	n = {
 		-- find
-		-- ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-		["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
+		["<leader>ff"] = { "<cmd> Telescope find_files theme=get_ivy<CR>", "Find files" },
+		["<leader>fa"] = {
+			"<cmd> Telescope find_files follow=true theme=get_ivy no_ignore=true hidden=true <CR>",
+			"Find all",
+		},
 		-- ["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
 		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-		["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
+		["<leader>fw"] = { "<cmd> Telescope live_grep theme=get_ivy<CR>", "Live grep" },
 		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
-		["<leader>ff"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+		["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find theme=get_ivy<CR>", "Find in current buffer" },
 
 		-- git
 		["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
@@ -306,7 +309,7 @@ M.telescope = {
 		-- theme switcher
 		["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
 
-		["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
+		["<leader>ma"] = { "<cmd> Telescope marks theme=get_ivy<CR>", "telescope bookmarks" },
 	},
 }
 

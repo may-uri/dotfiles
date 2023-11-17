@@ -21,9 +21,33 @@ vim.cmd([[
     autocmd BufNewFile *.js silent! 0r !echo "\"use strict\""
   augroup END
 ]])
+-- Automatically add '<!-- prettier-ignore --> ' to the first line of new html files
+vim.api.nvim_exec(
+	[[
+  augroup add_prettier_ignore
+    autocmd!
+    autocmd BufNewFile *.html call append(0, "<!-- prettier-ignore -->")
+  augroup END
+]],
+	false
+)
+
+-- format on save
 vim.cmd([[
   augroup FormatOnSave
     autocmd!
-    autocmd BufWritePre *.lua,*.js lua vim.lsp.buf.format({ async = true })
+    autocmd BufWritePre *.css,*.html,*.py,*.lua,*.js lua vim.lsp.buf.format({ async = true })
   augroup end
 ]])
+-- zen mode
+vim.cmd("autocmd VimEnter * lua Zen()")
+-- make doctype uppercase
+-- vim.api.nvim_exec(
+-- 	[[
+-- augroup doctype_autocmd
+--   autocmd!
+--   autocmd BufWritePre *.html silent! %s/<!doctype html>/<!DOCTYPE html>/
+-- augroup END
+-- ]],
+-- 	false
+-- )

@@ -51,3 +51,4 @@ vim.cmd("autocmd VimEnter * lua Zen()")
 -- ]],
 -- 	false
 -- )
+vim.highlight.priorities.semantic_tokens = 95

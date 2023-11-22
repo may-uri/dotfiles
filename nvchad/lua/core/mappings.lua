@@ -24,7 +24,7 @@ M.general = {
 		["<C-k>"] = { "<C-w>k", "Window up" },
 
 		-- save
-		["<C-s>"] = { "<cmd> w <CR>", "Save file" },
+		["<C-s>"] = { "<cmd> update<CR>", "Save file" },
 
 		-- Copy all
 		-- ["<C-c>"] = { "<cmd> %y+ <CR>", "Copy whole file" },
@@ -174,7 +174,7 @@ M.lspconfig = {
 			"LSP implementation",
 		},
 
-		["<leader>ls"] = {
+		["<leader>ss"] = {
 			function()
 				vim.lsp.buf.signature_help()
 			end,
@@ -295,8 +295,8 @@ M.telescope = {
 		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["<leader>fw"] = { "<cmd> Telescope live_grep theme=get_ivy<CR>", "Live grep" },
 		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
-		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
-		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
+		["<leader>h"] = { "<cmd> Telescope help_tags theme=get_ivy<CR>", "Help page" },
+		["<leader>fo"] = { "<cmd> Telescope oldfiles theme=get_ivy<CR>", "Find oldfiles" },
 		["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find theme=get_ivy<CR>", "Find in current buffer" },
 
 		-- git

@@ -21,13 +21,7 @@ M.general = {
 		["<leader>ww"] = { ":set wrap!<CR>", "[T]oggle [W]rap", opts = { nowait = true } },
 		["<leader>tw"] = { ":Twilight<CR>", "[T]oggle [T]wilight", opts = { nowait = true } },
 		["<leader>z"] = { ":lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
-		["<leader>s"] = {
-			[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-			"[S]ubstitute",
-			silent = true,
-			noremap = true,
-		},
-		-- ["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
+		["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
 		["<A-e>"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },

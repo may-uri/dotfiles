@@ -10,75 +10,90 @@
 #     echo $random_quote
 #     echo $bordered_quote
 # end
-function fish_greeting
-    if test -e $HOME/todo.md
-        set -l todo_items (cat $HOME/todo.md)
-        set -l count 0
-        echo -e "\e[32mTODO:\e[0m"
 
+function fish_greeting
+    if test -e $HOME/todotoday.md
+        set -l todos 9 # number of todo's displayed
+        set -l todo_items (awk '!/<!--/ && !/-->/ && !/\[x\]/ && !/^[[:space:]]*$/' $HOME/todotoday.md | head -n $todos)
+
+        echo -e "\e[32mTODO $(date '+%d-%b-%Y'):\e[0m"
         for todo_item in $todo_items
-            # set -l count (math $count + 1)
-            # echo "$count) $todo_item"
             echo "$todo_item"
         end
     else
-        echo "No todo list found. Add todo.md in your home directory to start"
+        echo "No todo list found. Add todotoday.md in your home directory to start"
+
     end
 end
 
-
-
 function start_bot
     cd /mnt/d/git/chatgpt-telegram-bot
-    # Create a virtual environment
     python3 -m venv venv
-
-    # Activate the virtual environment
     source venv/bin/activate.fish
-
-    # Run the main.py script
     python3 bot/main.py
 end
+
+# ==== ALIAS ====
+alias mk="mkdir"
+alias t="todo.sh"
 alias tg=start_bot
 alias py="python3"
 alias fd="fdfind"
 alias tar="tar -xzvf"
 alias rm="rm -rf"
 alias cp="cp -rf"
+alias todo="fish_greeting"
+alias l "lazygit"
+alias gt "git status"
+alias dot 'cp -r /home/genie/.config/nvim/* /mnt/d/git/dotfiles/astronvim.lua/; cd /mnt/d/git/dotfiles/; git commit astronvim.lua/* -m "refactor" && git push'
 # alias tar="tar -xzf"
-   set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
-   set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
-   set -x PATH "/home/genie" $PATH 
-   set -gx PATH $HOME/.yarn/bin $PATH
-   set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
 alias explorer "explorer.exe"
 alias n "nvim"
-# alias nv "nvim.exe"
-# to commit&push mine markdown files
 alias rr 'git commit learni\ notes.md readme.md -m "refactor" && git push'
-# to sync changes html in vscode and browser
-
 alias sx 'browser-sync start --server --files "*.html"'
 if set -q WSLENV
     set -gx PATH $HOME/bin/win-bash-xclip-xsel $PATH
 end
 
-# nvim path
-
+# ===PATH===
+   set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
+   set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   set -x PATH "/home/genie" $PATH 
+   set -gx PATH $HOME/.yarn/bin $PATH
+   set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
    set -x PATH $PATH /home/genie/.local/bin/bin
       set -x ESLINT_CONFIG_PATH ~/.eslint
       set -x EDITOR nvim
-      alias l "lazygit"
-      alias gt "git status"
 set -x PATH $PATH ~/.bun/bin
 
+# ===tab to select autosuggestion===
+# function fish_user_key_bindings
+#     bind \t 'commandline -f accept-autosuggestion'
+# end
 
-# alias dot 'cp /home/genie/.config/nvim/init.vim /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.vim -m "refactor" && git push'
-# alias dot 'cp /home/genie/.config/nvim/init.lua /mnt/d/git/dotfiles/; cd /mnt/d/git/dotfiles/; git commit init.lua -m "refactor" && git push'
-alias dot 'cp -r /home/genie/.config/nvim/* /mnt/d/git/dotfiles/astronvim.lua/; cd /mnt/d/git/dotfiles/; git commit astronvim.lua/* -m "refactor" && git push'
+# ===theme for fish prompt===
+set -g theme_display_git no
+set -g theme_display_git_dirty no
+set -g theme_display_git_untracked no
+set -g theme_display_git_ahead_verbose yes
+set -g theme_display_git_dirty_verbose yes
+set -g theme_display_git_stashed_verbose yes
+set -g theme_display_git_default_branch yes
+set -g theme_git_default_branches master main
+set -g theme_git_worktree_support yes
+set -g theme_use_abbreviated_branch_name yes
+set -g theme_display_node yes
+set -g theme_display_user ssh
+set -g theme_display_vi no
+set -g theme_display_date no
+set -g theme_display_cmd_duration yes
+set -g theme_title_display_process yes
+set -g theme_title_display_path yes
+set -g theme_avoid_ambiguous_glyphs yes
+set -g theme_powerline_fonts yes
+set -g theme_nerd_fonts yes
+set -g theme_show_exit_status yes
+set -g theme_display_jobs_verbose yes
+set -g fish_term256 1
 
-# to make autocomplete by tab (sometimes bad)
-function fish_user_key_bindings
-    bind \t 'commandline -f accept-autosuggestion'
-end
 

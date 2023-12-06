@@ -30,6 +30,34 @@ local plugins = {
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
 	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
+	{
+
+		"Exafunction/codeium.vim",
+		-- enabled = false,
+		event = "BufEnter",
+		config = function()
+			-- Change '<C-g>' here to any keycode you like.
+			vim.keymap.set("i", "<C-g>", function()
+				return vim.fn["codeium#Accept"]()
+			end, { expr = true })
+			vim.keymap.set("i", "<F4>", function()
+				return vim.fn["codeium#CycleCompletions"](1)
+			end, { expr = true })
+			vim.keymap.set("i", "<c-,>", function()
+				return vim.fn["codeium#CycleCompletions"](-1)
+			end, { expr = true })
+			vim.keymap.set("i", "<c-x>", function()
+				return vim.fn["codeium#Clear"]()
+			end, { expr = true })
+		end,
+	},
+	-- {
+	-- 	"Exafunction/codeium.nvim",
+	-- 	-- event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/twilight.nvim",

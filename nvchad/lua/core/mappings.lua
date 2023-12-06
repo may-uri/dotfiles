@@ -88,20 +88,20 @@ M.tabufline = {
 
 	n = {
 		-- cycle through buffers
-		["gt"] = {
-			-- ["<tab>"] = {
-			function()
-				require("nvchad.tabufline").tabuflineNext()
-			end,
-			"Goto next buffer",
-		},
-		["<tab>"] = {
-			-- ["<tab>"] = {
-			function()
-				require("nvchad.tabufline").tabuflineNext()
-			end,
-			"Goto next buffer",
-		},
+		-- ["gt"] = {
+		-- 	-- ["<tab>"] = {
+		-- 	function()
+		-- 		require("nvchad.tabufline").tabuflineNext()
+		-- 	end,
+		-- 	"Goto next buffer",
+		-- },
+		-- ["<tab>"] = {
+		-- 	-- ["<tab>"] = {
+		-- 	function()
+		-- 		require("nvchad.tabufline").tabuflineNext()
+		-- 	end,
+		-- 	"Goto next buffer",
+		-- },
 
 		["<S-tab>"] = {
 			function()
@@ -111,12 +111,12 @@ M.tabufline = {
 		},
 
 		-- close buffer + hide terminal buffer
-		["<leader>x"] = {
-			function()
-				require("nvchad.tabufline").close_buffer()
-			end,
-			"Close buffer",
-		},
+		-- ["<leader>x"] = {
+		-- 	function()
+		-- 		require("nvchad.tabufline").close_buffer()
+		-- 	end,
+		-- 	"Close buffer",
+		-- },
 	},
 }
 M.comment = {

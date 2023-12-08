@@ -30,6 +30,7 @@ local plugins = {
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
 	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
+	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
 	{
 
 		"Exafunction/codeium.vim",

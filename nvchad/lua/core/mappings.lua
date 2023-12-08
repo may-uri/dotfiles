@@ -57,7 +57,8 @@ M.general = {
 		},
 		["<leader>tt"] = {
 			function()
-				require("base46").toggle_transparency()
+				-- require("base46").toggle_transparency()
+				vim.cmd("TransparentEnable")
 			end,
 			"toggle transparency",
 		},

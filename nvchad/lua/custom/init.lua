@@ -52,3 +52,12 @@ vim.cmd("autocmd VimEnter * lua Zen()")
 -- 	false
 -- )
 vim.highlight.priorities.semantic_tokens = 95
+-- Set transparency for the status line
+vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
+vim.cmd([[ hi StatusLineNC guibg=NONE ctermbg=NONE ]])
+
+-- Set transparency for the active and inactive status line
+vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+
+-- Set transparency for the active and inactive status line
+vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])

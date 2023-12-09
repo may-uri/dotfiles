@@ -58,7 +58,9 @@ end
 # ===PATH===
    set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
    set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   set -gx PATH "/home/genie/.local/share/nvim/mason/bin" $PATH
    set -x PATH "/home/genie" $PATH 
+   set -x PATH "/home/genie/.deno/bin/" $PATH 
    set -gx PATH $HOME/.yarn/bin $PATH
    set -x LS_COLORS (printf "%s:ow=" $LS_COLORS)
    set -x PATH $PATH /home/genie/.local/bin/bin

@@ -30,3 +30,8 @@ lspconfig.tsserver.setup({
 		},
 	},
 })
+-- Setup required for ufo
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}

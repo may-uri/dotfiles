@@ -3,37 +3,90 @@ local wezterm = require("wezterm")
 local config = {}
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
--- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font", weight = 'Regular' })
-config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
+config.font_rules = {
+	{
+		intensity = "Normal",
+		font = wezterm.font({
+			family = "Iosevka Comfy",
+			weight = "Regular",
+		}),
+	},
+}
+-- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font", weight = "Regular" })
+-- config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
+-- config.font = wezterm.font({ family = "Iosevka Comfy" })
+-- config.font = wezterm.font_with_fallback({
+-- 	"Iosevka Comfy",
+-- 	weight = "Regular",
+-- 	{ family = "Symbols Nerd Font Mono", scale = 0.75 },
+-- })
+-- config.font = wezterm.font({ family = "Iosevka Comfy Motion" })
+-- config.font = wezterm.font({ family = "Iosevka Comfy Wide Extended" })
+-- config.font = wezterm.font({ family = "Iosevka Comfy Wide Motion Duo Extended" })
+-- config.font = wezterm.font({ family = "Iosevka Comfy Wide Motion Extended" })
+-- config.font = wezterm.font({ family = "BlexMono Nerd Font" })
 -- config.font = wezterm.font({ family = "CaskaydiaCove NF" })
+-- config.window_background_opacity =  0.9
 -- config.window_background_opacity =  0.9
 
 config.audible_bell = "Disabled"
 -- COLORS_SCHEME
--- config.color_scheme = 'Everforest Dark (Gogh)'
 -- config.color_scheme = "hardhacker"
--- config.color_scheme = "Kasugano (terminal.sexy)"
--- config.color_scheme = "Gruvbox dark, pale (base16)"
+-- config.color_scheme = "3024 (base16)"-- good black background
+-- config.color_scheme = '3024 Night (Gogh)'-- good black background
+-- config.color_scheme = "Adventure" -- good black background
+-- config.color_scheme = "ayu"
+-- config.color_scheme = "Tomorrow Night Burns" -- black with red
+-- config.color_scheme = "Tomorrow Night Bright" -- bright black
+-- config.color_scheme = "tender (base16)" -- Gruvbox alt
+-- config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "Summerfruit Dark (base16)" -- pastel
+config.color_scheme = "Atlas (base16)" -- solarized warm dark
+-- config.color_scheme = "Solarized Dark - Patched" -- solarized dark
+-- config.color_scheme = "Solarized Dark Higher Contrast" -- solarized dark
+-- config.color_scheme = "Spacemacs (base16)" -- dark with red
+-- config.color_scheme = "synthwave" -- black with neon
+-- config.color_scheme = "Square" -- pastel
+-- config.color_scheme = "Sandcastle (base16)" -- good pastel
+-- config.color_scheme = "Sea Shells (Gogh)" -- pastel dark
+-- config.color_scheme = "Seafoam Pastel" -- pastel green
+-- config.color_scheme = "Seti UI (base16)" -- good pastel dark
+-- config.color_scheme = "Sex Colors (terminal.sexy)" -- black
+-- config.color_scheme = "Silk Dark (base16)" -- light solarized
+-- config.color_scheme = "Slate" -- dark pastel with neon
+-- config.color_scheme = "SleepyHollow" -- dark pastel with orange
+-- config.color_scheme = "Smyck" -- good pastel with lightblue
 -- config.color_scheme = "Gruvbox dark, soft (base16)"
--- config.color_scheme = 'Gruvbox Material (Gogh)'
 -- config.color_scheme = "GitHub Dark"
--- config.color_scheme = "Google (dark) (terminal.sexy)"
--- config.color_scheme = "Kanagawa (Gogh)"
--- config.color_scheme = "Ashes (dark) (terminal.sexy)"
 -- config.color_scheme = "Mariana"
 -- config.color_scheme = "Mocha (base16)"
--- config.color_scheme = "Zenburn (Gogh)"
 -- config.color_scheme = "Black Metal (Immortal) (base16)"
--- config.color_scheme = "Canvased Pastel (terminal.sexy)"
--- config.color_scheme = "Catch Me If You Can (terminal.sexy)"
-config.color_scheme = "DanQing (base16)"
+-- config.color_scheme = "DanQing (base16)"
 -- config.color_scheme = "Dark Violet (base16)"
--- config.color_scheme = "Dawn (terminal.sexy)"
--- config.color_scheme = "Embers (dark) (terminal.sexy)"
 -- config.color_scheme = "Fahrenheit"
 -- config.color_scheme = "Fideloper"
--- config.color_scheme = "Geohot (Gogh)"
--- config.color_scheme = "Grayscale (dark) (terminal.sexy)"
+-- config.color_scheme = "Material Palenight (base16)"
+-- config.color_scheme = "Monokai Remastered"
+-- config.color_scheme = "Afterglow"
+-- config.color_scheme = "Gruber (base16)" -- good pastel but tmux is toxic green
+-- config.color_scheme = "Google Dark (base16)"
+-- config.color_scheme = "Gigavolt (base16)" -- good blue pastel theme
+-- config.color_scheme = "Kimber (base16)" -- good pastel
+-- config.color_scheme = 'Violet Dark'
+-- config.color_scheme = 'Vice Dark (base16)' -- almost cyberpunk theme :>
+-- config.color_scheme = "Vaughn" --  interesting blue theme
+-- config.color_scheme = "Twilight" -- good monochrome
+-- config.color_scheme = "Atelier Cave (base16)"
+-- config.color_scheme = "Ashes (base16)" -- fav pink theme
+-- config.color_scheme = "Catppuccin Frappe"
+-- config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Ocean (base16)"
+-- config.color_scheme = "OneDark (base16)"
+-- config.color_scheme = "Overnight Slumber" -- now enabled
+-- config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = "Apprentice (base16)"
+-- config.color_scheme = "iceberg-dark"
+-- config.color_scheme = "lovelace"
 -- COLORS_SCHEME
 
 config.exit_behavior = "Close"
@@ -91,26 +144,28 @@ config.wsl_domains = wezterm.default_wsl_domains()
 --   regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
 --   format = 'https://www.github.com/$1/$3',
 -- })
-wezterm.on('user-var-changed', function(window, pane, name, value)
-    local overrides = window:get_config_overrides() or {}
-    if name == "ZEN_MODE" then
-        local incremental = value:find("+")
-        local number_value = tonumber(value)
-        if incremental ~= nil then
-            while (number_value > 0) do
-                window:perform_action(wezterm.action.IncreaseFontSize, pane)
-                number_value = number_value - 1
-            end
-            overrides.enable_tab_bar = false
-        elseif number_value < 0 then
-            window:perform_action(wezterm.action.ResetFontSize, pane)
-            overrides.font_size = nil
-            overrides.enable_tab_bar = true
-        else
-            overrides.font_size = number_value
-            overrides.enable_tab_bar = false
-        end
-    end
-    window:set_config_overrides(overrides)
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	local overrides = window:get_config_overrides() or {}
+	if name == "ZEN_MODE" then
+		local incremental = value:find("+")
+		local number_value = tonumber(value)
+		if incremental ~= nil then
+			while number_value > 0 do
+				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+				number_value = number_value - 1
+			end
+			overrides.enable_tab_bar = false
+		elseif number_value < 0 then
+			window:perform_action(wezterm.action.ResetFontSize, pane)
+			overrides.font_size = nil
+			overrides.enable_tab_bar = true
+		else
+			overrides.font_size = number_value
+			overrides.enable_tab_bar = false
+		end
+	end
+	window:set_config_overrides(overrides)
 end)
+config.default_cursor_style = "SteadyBlock"
 return config
+

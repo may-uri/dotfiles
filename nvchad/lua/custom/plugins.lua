@@ -21,43 +21,65 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
-{
-  'kevinhwang91/nvim-ufo',
-  dependencies = {
-    'kevinhwang91/promise-async'
-  },
-  event = "BufRead",
-  keys = {
-    { "zR", function() require('ufo').openAllFolds() end, desc = "Open all folds" },
-    { "zM", function() require('ufo').closeAllFolds() end, desc = "Close all folds" },
-    { "zZ", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Peek folded lines under cursor" },
-  },
-  opts = {
-    open_fold_hl_timeout = 0,
-    fold_virt_text_handler = function(text, lnum, endLnum, width)
-      local suffix = "  "
-      local lines  = ('[%d lines] '):format(endLnum - lnum)
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+		},
+		event = "BufRead",
+		keys = {
+			{
+				"zR",
+				function()
+					require("ufo").openAllFolds()
+				end,
+				desc = "Open all folds",
+			},
+			{
+				"zM",
+				function()
+					require("ufo").closeAllFolds()
+				end,
+				desc = "Close all folds",
+			},
+			{
+				"zZ",
+				function()
+					require("ufo").peekFoldedLinesUnderCursor()
+				end,
+				desc = "Peek folded lines under cursor",
+			},
+		},
+		opts = {
+			open_fold_hl_timeout = 0,
+			fold_virt_text_handler = function(text, lnum, endLnum, width)
+				-- local suffix = "⨊"
+				-- local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
+				local totalLines = vim.api.nvim_buf_line_count(0) - 1
+				local foldedLines = endLnum - lnum
+				local suffix = (" ⤶ %d lines %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+				local lines = ("[%d lines] "):format(endLnum - lnum)
 
-      local cur_width = 0
-      for _, section in ipairs(text) do
-        cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
-      end
+				local cur_width = 0
+				for _, section in ipairs(text) do
+					cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
+				end
 
-      suffix = suffix .. (' '):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
+				suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
 
-      table.insert(text, { suffix, 'Comment' })
-      table.insert(text, { lines, 'Todo' })
-      return text
-    end,
-    preview = {
-      win_config = {
-        border = {"┏", "━", "┓", "┃", "┛", "━", "┗", "┃"},
-        winblend     = 0,
-        winhighlight = "Normal:LazyNormal",
-      }
-    }
-  }
-},
+				table.insert(text, { suffix, "Comment" })
+				table.insert(text, { lines, "Todo" })
+				return text
+			end,
+			preview = {
+				win_config = {
+					border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+					winblend = 0,
+					winhighlight = "Normal:LazyNormal",
+				},
+			},
+		},
+	},
 
 	-- override plugin configs
 	{
@@ -97,10 +119,9 @@ local plugins = {
 	-- 	end,
 	-- },
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
-	{ "kevinhwang91/nvim-ufo", event = "VeryLazy",
-  dependencies = {
-    'kevinhwang91/promise-async'
-  }},
+	{ "kevinhwang91/nvim-ufo", event = "VeryLazy", dependencies = {
+		"kevinhwang91/promise-async",
+	} },
 	{
 		"folke/twilight.nvim",
 		event = "BufRead",
@@ -174,3 +195,4 @@ local plugins = {
 }
 
 return plugins
+

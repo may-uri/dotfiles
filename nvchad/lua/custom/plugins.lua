@@ -27,23 +27,25 @@ local plugins = {
 			"kevinhwang91/promise-async",
 		},
 		event = "BufRead",
+		-- event = "VeryLazy",
+		-- event = "UIEnter",
 		keys = {
 			{
-				"zR",
+				"zr",
 				function()
 					require("ufo").openAllFolds()
 				end,
 				desc = "Open all folds",
 			},
 			{
-				"zM",
+				"zm",
 				function()
 					require("ufo").closeAllFolds()
 				end,
 				desc = "Close all folds",
 			},
 			{
-				"zZ",
+				"zp",
 				function()
 					require("ufo").peekFoldedLinesUnderCursor()
 				end,
@@ -54,10 +56,10 @@ local plugins = {
 			open_fold_hl_timeout = 0,
 			fold_virt_text_handler = function(text, lnum, endLnum, width)
 				-- local suffix = "⨊"
-				-- local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
-				local totalLines = vim.api.nvim_buf_line_count(0) - 1
-				local foldedLines = endLnum - lnum
-				local suffix = (" ⤶ %d lines %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+				local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
+				-- local totalLines = vim.api.nvim_buf_line_count(0) - 1
+				-- local foldedLines = endLnum - lnum
+				-- local suffix = (" ⤶ %d lines %d%%"):format(foldedLines, foldedLines / totalLines * 100)
 				local lines = ("[%d lines] "):format(endLnum - lnum)
 
 				local cur_width = 0
@@ -71,9 +73,13 @@ local plugins = {
 				table.insert(text, { lines, "Todo" })
 				return text
 			end,
+			provider_selector = function(_, _, _)
+				return { "treesitter" }
+			end,
 			preview = {
 				win_config = {
 					border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+					-- border = { "", "", "", "", "", "", "", "" },
 					winblend = 0,
 					winhighlight = "Normal:LazyNormal",
 				},
@@ -86,6 +92,40 @@ local plugins = {
 		"williamboman/mason.nvim",
 		opts = overrides.mason,
 	},
+	{
+		"shellRaining/hlchunk.nvim",
+		enabled = false,
+		event = { "UIEnter" },
+		config = function()
+			require("hlchunk").setup({
+				indent = {
+					chars = { "│", "¦", "┆", "┊" }, -- more code can be found in https://unicodeplus.com/
+
+					-- style = {
+					-- 	"#806d9c",
+					-- },
+				},
+				blank = {
+					enable = false,
+				},
+			})
+		end,
+	},
+	{
+		"nacro90/numb.nvim",
+		enabled = true,
+		event = { "VeryLazy" },
+		config = function()
+			require("numb").setup({
+				show_numbers = true, -- Enable 'number' for the window while peeking
+				show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+				hide_relativenumbers = true, -- Enable turning off 'relativenumber' for the window while peeking
+				number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+				centered_peeking = true, -- Peeked line will be centered relative to window
+			})
+		end,
+	},
+
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
 	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
@@ -195,4 +235,3 @@ local plugins = {
 }
 
 return plugins
-

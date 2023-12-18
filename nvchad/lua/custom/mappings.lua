@@ -6,7 +6,7 @@ function Zen()
 	vim.o.statusline = "%f %m %r"
 	-- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
 	vim.o.showtabline = 0
-	vim.opt.number = false
+	vim.opt.number = true
 	vim.opt.relativenumber = false
 end
 function DisableStatusLine()
@@ -29,22 +29,32 @@ end
 M.general = {
 	n = {
 		["<leader>k"] = { ":Telescope keymaps theme=get_ivy<CR>", "[T]elescope [K]eymaps", opts = { nowait = true } },
+		["<leader>fb"] = {
+			"<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=get_ivy<CR>",
+			"file browser telescope open in current buffer",
+			opts = { nowait = true },
+		},
+		["<leader>gg"] = {
+			"<cmd>lua require ('telescope.builtin').live_grep({grep_open_files=true}) theme=get_ivy<CR>",
+			"live grep grep open files",
+			opts = { nowait = true },
+		},
 		["<leader>o"] = { ":Telescope oldfiles theme=get_ivy <CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
 		["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
-		["<leader>x"] = { "<cmd>bdelete %<CR>", "[S]nip [C]lose", opts = { nowait = true } },
-		["<leader>lg"] = { "<cmd>LazyGit<CR>", "[L]azy [G]it", opts = { nowait = true } },
-		["<leader>ww"] = { "<cmd>set wrap!<CR>", "[T]oggle [W]rap", opts = { nowait = true } },
-		["<leader>tw"] = { "<cmd>Twilight<CR>", "[T]oggle [T]wilight", opts = { nowait = true } },
+		["<leader>x"] = { "<cmd>bdelete %<CR>", "close buffer", opts = { nowait = true } },
+		["<leader>lg"] = { "<cmd>LazyGit<CR>", "lazygit", opts = { nowait = true } },
+		["<leader>ww"] = { "<cmd>set wrap!<CR>", "toggle wrap", opts = { nowait = true } },
+		["<leader>tw"] = { "<cmd>Twilight<CR>", "Toggle Twilight", opts = { nowait = true } },
 		-- ["<leader>z"] = { "<cmd>lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
-		["<leader>z"] = { "<cmd>lua ToggleAndWarn()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
+		["<leader>z"] = { "[[:normal za<CR>]]", "[Z]en [M]ode", opts = { nowait = true } },
 		-- ["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
 		["<A-e>"] = { "<cmd>!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
-		["gt"] = { "<cmd>bnext<CR>", "[N]ext [B]uffer", opts = { nowait = true } },
-		["<tab>"] = { "<cmd>bnext<CR>", "[N]ext [B]uffer", opts = { nowait = true } },
-
+		["gt"] = { "<cmd>bnext<CR>", "Next Buffer", opts = { nowait = true } },
+		["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },
-		["<C-q>"] = { "<cmd>q!<CR>", "[Q]uit [W]ithout [S]ave", opts = { nowait = true } },
+		-- ["<M-b>"] = { "<cmd>Oil<CR>", "[O]il", opts = { nowait = true } },
+		["<C-q>"] = { "<cmd>q!<CR>", "quit without save", opts = { nowait = true } },
 		-- ["<C-q>"] = { "<cmd>lua ToggleAndWarn()<CR>", "[Q]uit [W]ithout [S]ave", opts = { nowait = true } },
 		["<C-z>"] = { "u", "[U]ndo", opts = { nowait = true } },
 		["<C-a>"] = { "ggVG", "[S]elect [A]ll", opts = { nowait = true } },

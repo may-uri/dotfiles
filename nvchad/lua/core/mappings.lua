@@ -295,27 +295,27 @@ M.telescope = {
 		-- ["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
 		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["<leader>fw"] = { "<cmd> Telescope live_grep theme=get_ivy<CR>", "Live grep" },
-		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
+		["<leader>b"] = { "<cmd> Telescope buffers theme=get_ivy<CR>", "Find buffers" },
 		["<leader>h"] = { "<cmd> Telescope help_tags theme=get_ivy<CR>", "Help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles theme=get_ivy<CR>", "Find oldfiles" },
 		["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find theme=get_ivy<CR>", "Find in current buffer" },
 
 		-- git
-		["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-		["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+		-- ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+		-- ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
 		-- pick a hidden term
 		["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
 		-- theme switcher
-		["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+		["<leader>th"] = { "<cmd> Telescope themes theme=get_ivy<CR>", "Nvchad themes" },
 
 		["<leader>ma"] = { "<cmd> Telescope marks theme=get_ivy<CR>", "telescope bookmarks" },
 	},
 }
 
 M.nvterm = {
-	plugin = true,
+	plugin = false,
 
 	t = {
 		-- toggle in terminal mode

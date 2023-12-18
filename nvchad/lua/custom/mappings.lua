@@ -28,7 +28,16 @@ end
 -- vim.lsp.buf.format({ async = true })
 M.general = {
 	n = {
-		["<leader>k"] = { ":Telescope keymaps theme=get_ivy<CR>", "[T]elescope [K]eymaps", opts = { nowait = true } },
+		["<leader>k"] = {
+			"<cmd>Telescope keymaps theme=get_ivy<CR>",
+			"[T]elescope [K]eymaps",
+			opts = { nowait = true },
+		},
+		["<leader>pp"] = {
+			"<cmd>Telescope projects theme=get_ivy<CR>",
+			"[T]elescope [K]eymaps",
+			opts = { nowait = true },
+		},
 		["<leader>fb"] = {
 			"<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=get_ivy<CR>",
 			"file browser telescope open in current buffer",

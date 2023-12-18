@@ -144,14 +144,21 @@ local plugins = {
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{ "michaelb/sniprun", event = "VeryLazy" },
 	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
+	{
+		"ahmedkhalf/project.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("project_nvim").setup({})
+		end,
+	},
 	{
 
 		"Exafunction/codeium.vim",

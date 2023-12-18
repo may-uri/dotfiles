@@ -40,6 +40,7 @@ local options = {
 		color_devicons = true,
 		set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+		projects = require("telescope").load_extension("projects"),
 		file_browser = require("telescope").load_extension("file_browser"),
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
@@ -50,7 +51,7 @@ local options = {
 		},
 	},
 
-	extensions_list = { "themes", "terms", "fzf", "file_browser" },
+	extensions_list = { "themes", "terms", "fzf", "file_browser", "projects" },
 	extensions = {
 		fzf = {
 			fuzzy = true,

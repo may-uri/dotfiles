@@ -150,7 +150,26 @@ local plugins = {
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{
 		"michaelb/sniprun", --[[ event = "VeryLazy", ]]
-		ft = { "javascript" },
+		-- ft = { "javascript",
+		-- cmd = "SnipRun",
+		keys = {
+			{
+				"<leader>rr",
+				mode = { "v" },
+				function()
+					vim.cmd("SnipRun")
+				end,
+				desc = "snip run",
+			},
+			{
+				"<leader>rr",
+				mode = { "n" },
+				function()
+					vim.cmd("SnipClose")
+				end,
+				desc = "snip close",
+			},
+		},
 	},
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
@@ -191,6 +210,7 @@ local plugins = {
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/twilight.nvim",
+		enabled = false,
 		event = "BufRead",
 		opts = {
 			alpha = 0.95, -- amount of dimming
@@ -234,7 +254,7 @@ local plugins = {
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
-		event = "BufRead",
+		-- event = "BufRead",
 		opts = {},
   -- stylua: ignore
   keys = {
@@ -261,7 +281,17 @@ local plugins = {
 	-- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 	{
 		"luckasRanarison/nvim-devdocs",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		keys = {
+			{
+				"<leader>dd",
+				mode = { "n", "o", "x" },
+				function()
+					vim.cmd("DevdocsOpenFloat")
+				end,
+				desc = "devdocs",
+			},
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -299,12 +329,13 @@ local plugins = {
 	},
 	{
 		"nvim-neorg/neorg",
-		enabled = false,
+		-- enabled = false,
+		cmd = "Neorg",
 		build = ":Neorg sync-parsers",
 		-- ft = { "norg" },
 		-- lazy = false,
-		event = "VeryLazy",
-		after = "nvim-treesitter",
+		-- event = "VeryLazy",
+		-- after = "nvim-treesitter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("neorg").setup({

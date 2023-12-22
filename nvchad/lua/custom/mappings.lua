@@ -57,7 +57,7 @@ M.general = {
 		},
 		["<leader>o"] = { ":Telescope oldfiles theme=get_ivy <CR>", "[T]elescope [O]ldfiles", opts = { nowait = true } },
 		["<leader>e"] = { ":!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
-		["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
+		-- ["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
 		["<leader>x"] = { "<cmd>bdelete %<CR>", "close buffer", opts = { nowait = true } },
 		["<leader>lg"] = { "<cmd>LazyGit<CR>", "lazygit", opts = { nowait = true } },
 		["<leader>ww"] = { "<cmd>set wrap!<CR>", "toggle wrap", opts = { nowait = true } },
@@ -84,7 +84,7 @@ M.general = {
 	v = {
 		["<C-c>"] = { '"+y', "[C]opy", opts = { nowait = true } },
 
-		["<leader>rr"] = { ":SnipRun<CR>", "[S]nip [R]un", opts = { nowait = true } },
+		-- ["<leader>rr"] = { ":SnipRun<CR>", "[S]nip [R]un", opts = { nowait = true } },
 		[">"] = { ">gv", "indent" },
 		["ge"] = { "G", "[L]ast [Line]", opts = { nowait = true } },
 		["1"] = { "$h", "go to end of line", opts = { nowait = true } },

@@ -2,9 +2,7 @@ local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
-
 	-- Override plugin definition options
-
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -26,9 +24,10 @@ local plugins = {
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},
-		event = "BufRead",
+		-- event = "BufRead",
 		-- event = "VeryLazy",
-		-- event = "UIEnter",
+		event = "UIEnter",
+		-- event = { "BufReadPost", "BufNewFile" },
 		keys = {
 			{
 				"zr",
@@ -88,10 +87,10 @@ local plugins = {
 	},
 
 	-- override plugin configs
-	{
-		"williamboman/mason.nvim",
-		opts = overrides.mason,
-	},
+	-- {
+	-- 	"williamboman/mason.nvim",
+	-- 	opts = overrides.mason,
+	-- },
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
@@ -149,12 +148,14 @@ local plugins = {
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
-	{ "michaelb/sniprun", event = "VeryLazy" },
-	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
+	{
+		"michaelb/sniprun", --[[ event = "VeryLazy", ]]
+		ft = { "javascript" },
+	},
+	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
 	{
 		"ahmedkhalf/project.nvim",
-		event = "VeryLazy",
 		config = function()
 			require("project_nvim").setup({})
 		end,
@@ -188,9 +189,6 @@ local plugins = {
 	-- 	end,
 	-- },
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
-	{ "kevinhwang91/nvim-ufo", event = "VeryLazy", dependencies = {
-		"kevinhwang91/promise-async",
-	} },
 	{
 		"folke/twilight.nvim",
 		event = "BufRead",
@@ -218,26 +216,25 @@ local plugins = {
 				test = { "Identifier", "#FF00FF" },
 			},
 			highlight = {
-				keyword = "bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+				keyword = "wide_bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
 			},
 		},
 	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = overrides.treesitter,
-	},
+	-- {
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- 	opts = overrides.treesitter,
+	-- },
 
-	{
-		"nvim-tree/nvim-tree.lua",
-		opts = overrides.nvimtree,
-	},
+	-- {
+	-- 	"nvim-tree/nvim-tree.lua",
+	-- 	opts = overrides.nvimtree,
+	-- },
 
 	-- Install a plugin
-	{ "mg979/vim-visual-multi", event = "VeryLazy" },
+	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
 		event = "BufRead",
-		---@type Flash.Config
 		opts = {},
   -- stylua: ignore
   keys = {
@@ -261,6 +258,70 @@ local plugins = {
 	--   "mg979/vim-visual-multi",
 	--   lazy = false,
 	-- }
+	-- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+	{
+		"luckasRanarison/nvim-devdocs",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("nvim-devdocs").setup({
+				filetypes = {
+					-- extends the filetype to docs mappings used by the `DevdocsOpenCurrent` command, the version doesn't have to be specified
+					-- scss = "sass",
+					javascript = { "node", "javascript" },
+				},
+				float_win = { -- passed to nvim_open_win(), see :h api-floatwin
+					relative = "editor",
+					height = 55,
+					width = 200,
+					border = "none",
+					-- • "none": No border (default).
+					-- • "single": A single line box.
+					-- • "double": A double line box.
+					-- • "rounded": Like "single", but with rounded corners ("╭"
+					--   etc.).
+					-- • "solid": Adds padding by a single whitespace cell.
+					-- • "shadow": A drop shadow effect by blending with the
+					--   background.
+				},
+				wrap = true, -- text wrap, only applies to floating window
+				previewer_cmd = "glow", -- for example: "glow"
+				cmd_args = { "-s", "dark", "-w", "200" },
+				-- picker_cmd = true, -- use cmd previewer in picker preview
+				-- picker_cmd_args = { "-s", "dark", "-w", "50" },
+			})
+		end,
+		opts = {},
+	},
+	{
+		"nvim-neorg/neorg",
+		enabled = false,
+		build = ":Neorg sync-parsers",
+		-- ft = { "norg" },
+		-- lazy = false,
+		event = "VeryLazy",
+		after = "nvim-treesitter",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {}, -- Loads default behaviour
+					["core.concealer"] = {}, -- Adds pretty icons to your documents
+					["core.dirman"] = { -- Manages Neorg workspaces
+						config = {
+							workspaces = {
+								notes = "~/notes",
+							},
+						},
+					},
+				},
+			})
+		end,
+	},
 }
 
 return plugins

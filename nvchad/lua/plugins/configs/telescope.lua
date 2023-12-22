@@ -47,11 +47,12 @@ local options = {
 		-- Developer configurations: Not meant for general override
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		mappings = {
-			n = { ["q"] = require("telescope.actions").close },
+			i = { ["<C-q>"] = require("telescope.actions").close },
+			n = { ["<C-q>"] = require("telescope.actions").close },
 		},
 	},
 
-	extensions_list = { "themes", "terms", "fzf", "file_browser", "projects" },
+	extensions_list = { "themes", "terms", "fzf", "file_browser", "projects",  },
 	extensions = {
 		fzf = {
 			fuzzy = true,

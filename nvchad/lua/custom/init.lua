@@ -61,3 +61,12 @@ vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
 
 -- Set transparency for the active and inactive status line
 vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+vim.api.nvim_exec(
+	[[
+  augroup MarkdownConceal
+    autocmd!
+    autocmd BufRead *.md setlocal conceallevel=2
+  augroup END
+]],
+	false
+)

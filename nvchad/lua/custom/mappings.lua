@@ -28,17 +28,24 @@ end
 -- vim.lsp.buf.format({ async = true })
 M.general = {
 	n = {
+
 		["<leader>k"] = {
 			"<cmd>Telescope keymaps theme=get_ivy<CR>",
 			"[T]elescope [K]eymaps",
 			opts = { nowait = true },
 		},
+		["<leader>dd"] = {
+			"<cmd>DevdocsOpenFloat<CR>",
+			"dev docs float",
+			opts = { nowait = true },
+		},
+
 		["<leader>pp"] = {
 			"<cmd>Telescope projects theme=get_ivy<CR>",
 			"[T]elescope [K]eymaps",
 			opts = { nowait = true },
 		},
-		["<leader>fb"] = {
+		["<leader>bf"] = {
 			"<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=get_ivy<CR>",
 			"file browser telescope open in current buffer",
 			opts = { nowait = true },
@@ -56,9 +63,9 @@ M.general = {
 		["<leader>ww"] = { "<cmd>set wrap!<CR>", "toggle wrap", opts = { nowait = true } },
 		["<leader>tw"] = { "<cmd>Twilight<CR>", "Toggle Twilight", opts = { nowait = true } },
 		-- ["<leader>z"] = { "<cmd>lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },
-		["<leader>z"] = { "[[:normal za<CR>]]", "[Z]en [M]ode", opts = { nowait = true } },
 		-- ["<A-b>"] = { ":Lexplore<CR>", "[T]oggle [N]etrw", opts = { nowait = true } },
 		["<A-e>"] = { "<cmd>!node %<CR>", "[R]un [N]ode", opts = { nowait = true } },
+		["sj"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
 		["gt"] = { "<cmd>bnext<CR>", "Next Buffer", opts = { nowait = true } },
 		["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },
@@ -66,7 +73,7 @@ M.general = {
 		["<C-q>"] = { "<cmd>q!<CR>", "quit without save", opts = { nowait = true } },
 		-- ["<C-q>"] = { "<cmd>lua ToggleAndWarn()<CR>", "[Q]uit [W]ithout [S]ave", opts = { nowait = true } },
 		["<C-z>"] = { "u", "[U]ndo", opts = { nowait = true } },
-		["<C-a>"] = { "ggVG", "[S]elect [A]ll", opts = { nowait = true } },
+		["<C-a>"] = { "gg<S-v>G", "[S]elect [A]ll", opts = { nowait = true } },
 
 		["<F1>"] = { "<cmd> Telescope find_files <CR>", "Live grep" },
 		["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },

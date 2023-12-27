@@ -59,6 +59,7 @@ local default_plugins = {
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		enabled = false,
 		version = "2.20.7",
 		init = function()
 			require("core.utils").lazy_load("indent-blankline.nvim")
@@ -75,6 +76,9 @@ local default_plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		-- event = "BufReadPre",
+		-- event = "BufRead",
+		-- event = "VeryLazy",
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
 		end,
@@ -150,11 +154,13 @@ local default_plugins = {
 	-- load luasnips + cmp related in insert mode only
 	{
 		"hrsh7th/nvim-cmp",
+		-- commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639", -- lock update (break codeium)
 		event = "InsertEnter",
 		dependencies = {
 			{
 				-- snippet plugin
 				"L3MON4D3/LuaSnip",
+				-- commit = "ea7d7ea510c641c4f15042becd27f35b3e5b3c2b",
 				dependencies = "rafamadriz/friendly-snippets",
 				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
 				config = function(_, opts)
@@ -185,6 +191,7 @@ local default_plugins = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
+				-- "Exafunction/codeium.nvim",
 				-- "capaj/vscode-standardjs-snippets",
 			},
 		},
@@ -235,7 +242,6 @@ local default_plugins = {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		cmd = "Telescope",
 		init = function()

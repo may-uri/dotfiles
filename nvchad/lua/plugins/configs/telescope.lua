@@ -32,7 +32,8 @@ local options = {
 		},
 		file_sorter = require("telescope.sorters").get_fuzzy_file,
 		file_ignore_patterns = { "node_modules" },
-		generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+		-- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+		generic_sorter = require("telescope.sorters").fuzzy_with_index_bias,
 		path_display = { "truncate" },
 		winblend = 0,
 		border = {},
@@ -52,7 +53,7 @@ local options = {
 		},
 	},
 
-	extensions_list = { "themes", "terms", "fzf", "file_browser", "projects",  },
+	extensions_list = { "themes", "terms", "file_browser", "projects" },
 	extensions = {
 		fzf = {
 			fuzzy = true,

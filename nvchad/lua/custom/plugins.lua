@@ -282,6 +282,7 @@ local plugins = {
 	{
 		"luckasRanarison/nvim-devdocs",
 		-- event = "VeryLazy",
+		cmd = "DevdocsOpenFloat",
 		keys = {
 			{
 				"<leader>dd",
@@ -320,7 +321,7 @@ local plugins = {
 				},
 				wrap = true, -- text wrap, only applies to floating window
 				previewer_cmd = "glow", -- for example: "glow"
-				cmd_args = { "-s", "dark", "-w", "200" },
+				cmd_args = { "-s", "dark", "-w", "60" },
 				-- picker_cmd = true, -- use cmd previewer in picker preview
 				-- picker_cmd_args = { "-s", "dark", "-w", "50" },
 			})
@@ -330,9 +331,9 @@ local plugins = {
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,
-		cmd = "Neorg",
+		-- cmd = "Neorg",
 		build = ":Neorg sync-parsers",
-		-- ft = { "norg" },
+		ft = { "norg" },
 		-- lazy = false,
 		-- event = "VeryLazy",
 		-- after = "nvim-treesitter",

@@ -1,5 +1,6 @@
 ---@type MappingsTable
 local M = {}
+
 function Zen()
 	vim.cmd("set laststatus=2")
 	vim.opt.showmode = true
@@ -29,6 +30,12 @@ end
 M.general = {
 	n = {
 
+		["<leader>gf"] = {
+			"vi{gf}",
+			"go to link gf",
+			opts = { nowait = true },
+		},
+
 		["<leader>k"] = {
 			"<cmd>Telescope keymaps theme=get_ivy<CR>",
 			"[T]elescope [K]eymaps",
@@ -42,10 +49,10 @@ M.general = {
 
 		["<leader>pp"] = {
 			"<cmd>Telescope projects theme=get_ivy<CR>",
-			"[T]elescope [K]eymaps",
+			"telescope list all projects",
 			opts = { nowait = true },
 		},
-		["<leader>bf"] = {
+		["<leader>bb"] = {
 			"<cmd>Telescope file_browser path=%:p:h select_buffer=true theme=get_ivy<CR>",
 			"file browser telescope open in current buffer",
 			opts = { nowait = true },

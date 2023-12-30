@@ -12,8 +12,8 @@ vim.o.timeoutlen = 900
 vim.opt.foldlevelstart = 20
 vim.opt.foldlevel = 20
 -- use wider line for folding
-vim.opt.fillchars = { fold = "⏤" }
--- vim.opt.foldtext = 'antonk52#fold#it()'
+-- vim.opt.fillchars = { fold = "⏤" }
+-- vim.opt.foldtext = "antonk52#fold#it()"
 -- Automatically add 'use strict' to the first line of new JavaScript files
 vim.cmd([[
   augroup add_use_strict
@@ -61,6 +61,7 @@ vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
 
 -- Set transparency for the active and inactive status line
 vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+
 vim.api.nvim_exec(
 	[[
   augroup MarkdownConceal
@@ -70,3 +71,7 @@ vim.api.nvim_exec(
 ]],
 	false
 )
+vim.cmd [[
+  au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+]]
+

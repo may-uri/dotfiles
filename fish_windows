@@ -32,9 +32,17 @@ function start_bot
     source venv/bin/activate.fish
     python3 bot/main.py
 end
+function preview_nvim
+ find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
+
+end
+
+# Bind alt+d to the function
+bind \ed 'preview_nvim'
 
 # ==== ALIAS ====
 alias o='nvim +"Telescope oldfiles theme=ivy"'
+alias _n='nvim +"Telescope oldfiles theme=ivy"'
 alias open="firefox.exe"
 alias gcc-11="gcc"
 alias ls="eza"

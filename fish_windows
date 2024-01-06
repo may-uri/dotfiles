@@ -34,6 +34,10 @@ function start_bot
 end
 
 # ==== ALIAS ====
+alias o='nvim +"Telescope oldfiles theme=ivy"'
+alias open="firefox.exe"
+alias gcc-11="gcc"
+alias ls="eza"
 alias mk="mkdir"
 alias t="todo.sh"
 alias tg=start_bot
@@ -97,5 +101,4 @@ set -g theme_nerd_fonts yes
 set -g theme_show_exit_status yes
 set -g theme_display_jobs_verbose yes
 set -g fish_term256 1
-
 

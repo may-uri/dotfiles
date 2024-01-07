@@ -81,6 +81,28 @@ M.general = {
 		["NN"] = { ":tabnew $MYVIMRC<CR>", "Open init.lua", opts = { nowait = true } },
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["1"] = { "$", "go to end of line", opts = { nowait = true } },
+
+		-- probably working :x
+		["<leader>y"] = {
+			function()
+				local cursor_position = vim.fn.getpos(".")
+				local line = vim.fn.getline(cursor_position[2])
+				local start_col, end_col = string.find(line, "https://[^ %c}]*")
+				if start_col then
+					local url = string.sub(line, start_col, end_col):gsub("[%c)}]+$", "") -- Remove trailing symbols after ')' and '}'
+					if vim.fn.has("clipboard") == 1 then
+						vim.fn.setreg("+", url) -- Use system clipboard
+					else
+						vim.fn.setreg('"', url) -- Fallback to default register
+					end
+					print(url)
+				else
+					print("No URL found under the cursor.")
+				end
+			end,
+			"Yank URL under cursor to system clipboard and remove trailing symbols after '}'",
+			opts = { nowait = true },
+		},
 	},
 	v = {
 		["<C-c>"] = { '"+y', "[C]opy", opts = { nowait = true } },
@@ -89,6 +111,9 @@ M.general = {
 		[">"] = { ">gv", "indent" },
 		["ge"] = { "G", "[L]ast [Line]", opts = { nowait = true } },
 		["1"] = { "$h", "go to end of line", opts = { nowait = true } },
+	},
+	i = {
+		-- ["jj"] = { "<Esc>", "Next Buffer", opts = { nowait = true } },
 	},
 }
 
@@ -102,4 +127,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_group,
 	pattern = "*",
 })
+
 return M

@@ -21,7 +21,7 @@ return {
 				"gzip",
 				"logipat",
 				"netrw",
-				"netrwPlugin",
+				-- "netrwPlugin",
 				"netrwSettings",
 				"netrwFileHandlers",
 				"matchit",

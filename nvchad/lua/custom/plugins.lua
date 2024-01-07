@@ -85,7 +85,28 @@ local plugins = {
 			},
 		},
 	},
-
+	{
+		"xiyaowong/link-visitor.nvim",
+		event = "VeryLazy",
+		enabled = false,
+		opts = function()
+			require("link-visitor").setup({
+				open_cmd = "wslview",
+				--[[
+  1. cmd to open url
+    defaults:
+      win or wsl: cmd.exe /c start
+      mac: open
+      linux: xdg-open
+  2. a function to handle the link
+    the function signature: func(link: string)
+  --]]
+				silent = true, -- disable all prints, `false` by defaults skip_confirmation
+				skip_confirmation = true, -- Skip the confirmation step, default: false
+				border = "none", -- none, single, double, rounded, solid, shadow see `:h nvim_open_win()`
+			})
+		end,
+	},
 	-- override plugin configs
 	-- {
 	-- 	"williamboman/mason.nvim",
@@ -149,27 +170,29 @@ local plugins = {
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{
-		"michaelb/sniprun", --[[ event = "VeryLazy", ]]
+		"michaelb/sniprun",
+		event = "VeryLazy",
 		-- ft = { "javascript",
 		-- cmd = "SnipRun",
-		keys = {
-			{
-				"<leader>rr",
-				mode = { "v" },
-				function()
-					vim.cmd("SnipRun")
-				end,
-				desc = "snip run",
-			},
-			{
-				"<leader>rr",
-				mode = { "n" },
-				function()
-					vim.cmd("SnipClose")
-				end,
-				desc = "snip close",
-			},
-		},
+		--
+		-- keys = {
+		-- 	{
+		-- 		"<leader>rr",
+		-- 		mode = { "v" },
+		-- 		function()
+		-- 			vim.cmd("SnipRun")
+		-- 		end,
+		-- 		desc = "snip run",
+		-- 	},
+		-- 	{
+		-- 		"<leader>rr",
+		-- 		mode = { "n" },
+		-- 		function()
+		-- 			vim.cmd("SnipClose")
+		-- 		end,
+		-- 		desc = "snip close",
+		-- 	},
+		-- },
 	},
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
@@ -288,9 +311,10 @@ local plugins = {
 				"<leader>dd",
 				mode = { "n", "o", "x" },
 				function()
-					vim.cmd("DevdocsOpenFloat")
+					vim.cmd("set conceallevel=2")
+					vim.cmd("DevdocsOpen")
 				end,
-				desc = "devdocs",
+				desc = "devdocs open",
 			},
 		},
 		dependencies = {
@@ -308,7 +332,7 @@ local plugins = {
 				float_win = { -- passed to nvim_open_win(), see :h api-floatwin
 					relative = "editor",
 					height = 55,
-					width = 200,
+					width = 150,
 					border = "none",
 					-- • "none": No border (default).
 					-- • "single": A single line box.
@@ -319,14 +343,27 @@ local plugins = {
 					-- • "shadow": A drop shadow effect by blending with the
 					--   background.
 				},
-				wrap = true, -- text wrap, only applies to floating window
-				previewer_cmd = "glow", -- for example: "glow"
-				cmd_args = { "-s", "dark", "-w", "60" },
+				wrap = false, -- text wrap, only applies to floating window
+				-- previewer_cmd = "glow", -- for example: "glow"
+				-- cmd_args = { "-s", "dark", "-w", "80" },
 				-- picker_cmd = true, -- use cmd previewer in picker preview
 				-- picker_cmd_args = { "-s", "dark", "-w", "50" },
 			})
 		end,
 		opts = {},
+	},
+	{
+		"max397574/better-escape.nvim",
+		-- event = "VeryLazy",
+    	event = { "CursorHold", "CursorHoldI" },
+		config = function()
+			require("better_escape").setup({
+				mapping = { "jj" }, -- a table with mappings to use
+				timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+				clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+				keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+			})
+		end,
 	},
 	{
 		"nvim-neorg/neorg",

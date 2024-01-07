@@ -71,7 +71,15 @@ vim.api.nvim_exec(
 ]],
 	false
 )
-vim.cmd [[
+vim.cmd([[
   au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-]]
+]])
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		if vim.fn.argv(0) == "" then
+-- 			require("telescope.builtin").oldfiles()
+-- 		end
+-- 	end,
+-- })
+--

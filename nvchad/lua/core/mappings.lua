@@ -283,7 +283,7 @@ M.telescope = {
 
 	n = {
 		-- find
-		["<leader>ff"] = { "<cmd> Telescope find_files theme=get_ivy<CR>", "Find files" },
+		["<leader>ff"] = { "<cmd> lcd%:p:h<CR><cmd>Telescope find_files theme=get_ivy<CR>", "Find files" },
 		["<leader>fa"] = {
 			"<cmd> Telescope find_files follow=true theme=get_ivy no_ignore=true hidden=true <CR>",
 			"Find all",

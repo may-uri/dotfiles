@@ -32,20 +32,43 @@ function start_bot
     source venv/bin/activate.fish
     python3 bot/main.py
 end
+
 function preview_nvim
  find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
 
 end
-
-# Bind alt+d to the function
+# =======================
+# Function: ee
+# Description: Edit a file using neovim-remote (nvr) and exit the shell afterward.
+# Usage: ee <filename>
+# Example: ee myfile.txt
+# =======================
+function ee
+    nvr --remote $argv && exit
+    # Switch to the last buffer in the current window
+    execute "buffer #"
+end
+# Bind alt+d to the function and alt+0
+bind \eo 'nvim +"Telescope oldfiles theme=ivy"'
 bind \ed 'preview_nvim'
+# bind \el 'vide .'
 
 # ==== ALIAS ====
+# Add this to your fish configuration file (usually ~/.config/fish/config.fish)
+
+
+
+alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
 alias o='nvim +"Telescope oldfiles theme=ivy"'
+alias v='vide'
+alias telescope_file_browser='glow --width 90 /home/genie/telescope_file_browser.md'
 alias _n='nvim +"Telescope oldfiles theme=ivy"'
-bind \eo 'nvim +"Telescope oldfiles theme=ivy"'
 alias open="firefox.exe"
 alias gcc-11="gcc"
+alias i="sudo apt install"
+alias r="sudo apt remove"
+alias e="explorer.exe"
+alias vide="neovide.exe  --frame none --maximized --no-fork --wsl"
 alias ls="eza"
 alias mk="mkdir"
 alias t="todo.sh"
@@ -71,6 +94,7 @@ end
 # ===PATH===
    set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
    set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   # set -gx PATH "/home/genie/.local/lib/python3.11/site-packages/nvr" $PATH
    set -gx PATH "/home/genie/.local/share/nvim/mason/bin" $PATH
    set -x PATH "/home/genie" $PATH 
    set -x PATH "/home/genie/.deno/bin/" $PATH 
@@ -111,3 +135,8 @@ set -g theme_show_exit_status yes
 set -g theme_display_jobs_verbose yes
 set -g fish_term256 1
 
+
+
+set -x NNN_FIFO /tmp/nnn.fifo
+set -x NNN_PLUG "p:preview-tui;"
+source lscolors.csh

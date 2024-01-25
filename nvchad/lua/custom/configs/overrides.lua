@@ -6,10 +6,7 @@ M.treesitter = {
 		"html",
 		"css",
 		"javascript",
-		"typescript",
-		"tsx",
 		"markdown",
-		"markdown_inline",
 	},
 	indent = {
 		enable = true,

@@ -2,13 +2,110 @@ local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
+	{
+		"luckasRanarison/nvim-devdocs",
+		-- ft = { "javascript" },
+		-- event = "VeryLazy",
+		keys = {
+			{
+				"<leader>dd",
+				mode = { "n", "o", "x" },
+				function()
+					vim.cmd("set conceallevel=2")
+					vim.cmd("DevdocsOpen")
+				end,
+				desc = "devdocs",
+			},
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {},
+		config = function()
+			require("nvim-devdocs").setup({
+				wrap = true,
+				float_win = { -- passed to nvim_open_win(), see :h api-floatwin
+					relative = "editor",
+					height = 45,
+					width = 200,
+					border = "none",
+				},
+			})
+		end,
+	},
 	-- Override plugin definition options
+	{
+		"ellisonleao/glow.nvim",
+		enabled = false,
+		cmd = "Glow",
+		config = function()
+			require("glow").setup({
+				border = "single", -- floating window border config
+				width = 80,
+				height = 100,
+				width_ratio = 1, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
+				height_ratio = 1,
+			})
+		end,
+	},
+
+	{
+		{
+			"akinsho/toggleterm.nvim",
+			cmd = "ToggleTerm",
+			-- event = "VeryLazy",
+			version = "*",
+			opts = {
+				start_in_insert = true,
+				direction = "float",
+				persist_size = true,
+				persist_mode = true,
+				float_opts = {
+					border = "single",
+				},
+			},
+		},
+	},
+	{
+		"zeioth/garbage-day.nvim",
+		enabled = false,
+		dependencies = "neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		opts = {
+			-- your options here
+		},
+	},
+	{
+		"stevearc/aerial.nvim",
+		cmd = "AerialToggle",
+		config = function()
+			require("aerial").setup({
+				-- optionally use on_attach to set keymaps when aerial has attached to a buffer
+				on_attach = function(bufnr)
+					-- Jump forwards/backwards with '{' and '}'
+					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				end,
+			})
+			-- You probably also want to set a keymap to toggle aerial
+			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+		end,
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			-- format & linting
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				"nvimtools/none-ls.nvim",
+				-- "jose-elias-alvarez/null-ls.nvim",
 				config = function()
 					require("custom.configs.null-ls")
 				end,
@@ -25,9 +122,8 @@ local plugins = {
 			"kevinhwang91/promise-async",
 		},
 		-- event = "BufRead",
-		-- event = "VeryLazy",
-		event = "UIEnter",
-		-- event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
+		-- event = "UIEnter",
 		keys = {
 			{
 				"zr",
@@ -86,32 +182,33 @@ local plugins = {
 		},
 	},
 	{
-		"xiyaowong/link-visitor.nvim",
-		event = "VeryLazy",
-		enabled = false,
-		opts = function()
-			require("link-visitor").setup({
-				open_cmd = "wslview",
-				--[[
-  1. cmd to open url
-    defaults:
-      win or wsl: cmd.exe /c start
-      mac: open
-      linux: xdg-open
-  2. a function to handle the link
-    the function signature: func(link: string)
-  --]]
-				silent = true, -- disable all prints, `false` by defaults skip_confirmation
-				skip_confirmation = true, -- Skip the confirmation step, default: false
-				border = "none", -- none, single, double, rounded, solid, shadow see `:h nvim_open_win()`
+		"nvim-neorg/neorg",
+		build = ":Neorg sync-parsers",
+		cmd = "Neorg",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		-- ft = { "norg" },
+		-- event = "VeryLazy",
+		config = function()
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {}, -- Loads default behaviour
+					["core.concealer"] = {}, -- Adds pretty icons to your documents
+					["core.dirman"] = { -- Manages Neorg workspaces
+						config = {
+							workspaces = {
+								notes = "~/notes",
+							},
+						},
+					},
+				},
 			})
 		end,
 	},
 	-- override plugin configs
-	-- {
-	-- 	"williamboman/mason.nvim",
-	-- 	opts = overrides.mason,
-	-- },
+	{
+		"williamboman/mason.nvim",
+		opts = overrides.mason,
+	},
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
@@ -125,6 +222,10 @@ local plugins = {
 				centered_peeking = true, -- Peeked line will be centered relative to window
 			})
 		end,
+	},
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function() end,
 	},
 	{
 		"stevearc/oil.nvim",
@@ -164,40 +265,18 @@ local plugins = {
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
+		-- lazy = false,
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
-	{
-		"michaelb/sniprun",
-		event = "VeryLazy",
-		-- ft = { "javascript",
-		-- cmd = "SnipRun",
-		--
-		-- keys = {
-		-- 	{
-		-- 		"<leader>rr",
-		-- 		mode = { "v" },
-		-- 		function()
-		-- 			vim.cmd("SnipRun")
-		-- 		end,
-		-- 		desc = "snip run",
-		-- 	},
-		-- 	{
-		-- 		"<leader>rr",
-		-- 		mode = { "n" },
-		-- 		function()
-		-- 			vim.cmd("SnipClose")
-		-- 		end,
-		-- 		desc = "snip close",
-		-- 	},
-		-- },
-	},
-	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
+	{ "capaj/vscode-standardjs-snippets", event = "VeryLazy" },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
 	{
 		"ahmedkhalf/project.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("project_nvim").setup({})
 		end,
@@ -223,17 +302,9 @@ local plugins = {
 			end, { expr = true })
 		end,
 	},
-	-- {
-	-- 	"Exafunction/codeium.nvim",
-	-- 	-- event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("codeium").setup({})
-	-- 	end,
-	-- },
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/twilight.nvim",
-		enabled = false,
 		event = "BufRead",
 		opts = {
 			alpha = 0.95, -- amount of dimming
@@ -250,35 +321,104 @@ local plugins = {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			signs = false,
-			colors = {
-				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-				info = { "DiagnosticInfo", "#2563EB" },
-				hint = { "DiagnosticHint", "#10B981" },
-				default = { "Identifier", "#7C3AED" },
-				test = { "Identifier", "#FF00FF" },
-			},
 			highlight = {
-				keyword = "wide_bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+				before = "", -- "fg" or "bg" or empty
+				after = "fg", -- "fg" or "bg" or empty
+				keyword = "fg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
 			},
 		},
 	},
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	opts = overrides.treesitter,
-	-- },
+	-- lazy.nvim
+	{
+		"Wansmer/langmapper.nvim",
+		lazy = false,
+		-- priority = 1, -- High priority is needed if you will use `autoremap()`
+		config = function()
+			require("langmapper").setup({--[[ your config ]]
+			})
+		end,
+	},
+	{
+		"RRethy/vim-illuminate",
+		cmd = "IlluminateToggle",
+		-- event = "VeryLazy",
+		config = function()
+			require("illuminate").configure({
+				delay = 200,
+				filetypes_denylist = { "alpha", "aerial", "markdown", "neo-tree", "toggleterm", "DiffviewFiles" },
+				large_file_cutoff = 2000,
+				large_file_overrides = {
+					providers = { "treesitter" }, --   'lsp', 'treesitter',  'regex',
+					-- try lsp and treesitter
+				},
+			})
+		end,
+	},
+	-- lazy.nvim
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		cmd = "TSContextEnable",
+		-- event = "VeryLazy",
+		enabled = true,
+		opts = { mode = "cursor", max_lines = 3 },
+	},
+	{
+		"echasnovski/mini.bufremove",
+		keys = {
+			{
+				"<leader>x",
+				function()
+					local bd = require("mini.bufremove").delete
+					if vim.bo.modified then
+						local choice =
+							vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+						if choice == 1 then -- Yes
+							vim.cmd.write()
+							bd(0)
+						elseif choice == 2 then -- No
+							bd(0, true)
+						end
+					else
+						bd(0)
+					end
+				end,
+				desc = "Delete Buffer",
+			},
+    -- stylua: ignore
+    { "<leader>X", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+		},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = overrides.treesitter,
+	},
 
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	opts = overrides.nvimtree,
-	-- },
+	{
+		"nvim-tree/nvim-tree.lua",
+		enabled = false,
+		opts = overrides.nvimtree,
+	},
 
 	-- Install a plugin
-	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
+	{ "mg979/vim-visual-multi", event = "VeryLazy" },
 	{
 		"folke/flash.nvim",
-		-- event = "BufRead",
-		opts = {},
+		event = "BufRead",
+		---@type Flash.Config
+		opts = {
+			label = {
+				style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+				rainbow = { enabled = true, shade = 3 },
+			},
+			modes = {
+				search = {
+					enabled = false,
+				},
+				char = {
+					multi_line = false,
+				},
+			},
+		},
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
@@ -301,96 +441,6 @@ local plugins = {
 	--   "mg979/vim-visual-multi",
 	--   lazy = false,
 	-- }
-	-- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-	{
-		"luckasRanarison/nvim-devdocs",
-		-- event = "VeryLazy",
-		cmd = "DevdocsOpenFloat",
-		keys = {
-			{
-				"<leader>dd",
-				mode = { "n", "o", "x" },
-				function()
-					vim.cmd("set conceallevel=2")
-					vim.cmd("DevdocsOpen")
-				end,
-				desc = "devdocs open",
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("nvim-devdocs").setup({
-				filetypes = {
-					-- extends the filetype to docs mappings used by the `DevdocsOpenCurrent` command, the version doesn't have to be specified
-					-- scss = "sass",
-					javascript = { "node", "javascript" },
-				},
-				float_win = { -- passed to nvim_open_win(), see :h api-floatwin
-					relative = "editor",
-					height = 55,
-					width = 150,
-					border = "none",
-					-- • "none": No border (default).
-					-- • "single": A single line box.
-					-- • "double": A double line box.
-					-- • "rounded": Like "single", but with rounded corners ("╭"
-					--   etc.).
-					-- • "solid": Adds padding by a single whitespace cell.
-					-- • "shadow": A drop shadow effect by blending with the
-					--   background.
-				},
-				wrap = false, -- text wrap, only applies to floating window
-				-- previewer_cmd = "glow", -- for example: "glow"
-				-- cmd_args = { "-s", "dark", "-w", "80" },
-				-- picker_cmd = true, -- use cmd previewer in picker preview
-				-- picker_cmd_args = { "-s", "dark", "-w", "50" },
-			})
-		end,
-		opts = {},
-	},
-	{
-		"max397574/better-escape.nvim",
-		-- event = "VeryLazy",
-    	event = { "CursorHold", "CursorHoldI" },
-		config = function()
-			require("better_escape").setup({
-				mapping = { "jj" }, -- a table with mappings to use
-				timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-				clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-				keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
-			})
-		end,
-	},
-	{
-		"nvim-neorg/neorg",
-		-- enabled = false,
-		-- cmd = "Neorg",
-		build = ":Neorg sync-parsers",
-		ft = { "norg" },
-		-- lazy = false,
-		-- event = "VeryLazy",
-		-- after = "nvim-treesitter",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("neorg").setup({
-				load = {
-					["core.defaults"] = {}, -- Loads default behaviour
-					["core.concealer"] = {}, -- Adds pretty icons to your documents
-					["core.dirman"] = { -- Manages Neorg workspaces
-						config = {
-							workspaces = {
-								notes = "~/notes",
-							},
-						},
-					},
-				},
-			})
-		end,
-	},
 }
 
 return plugins

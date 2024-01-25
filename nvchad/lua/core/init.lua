@@ -9,7 +9,7 @@ g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
 
 -------------------------------------- options ------------------------------------------
-opt.laststatus = 0 -- global statusline
+opt.laststatus = 2 -- global statusline
 opt.showmode = false
 
 opt.clipboard = "unnamedplus"
@@ -23,18 +23,46 @@ opt.tabstop = 2
 opt.softtabstop = 2
 
 -- Mine
--- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
--- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING
-opt.wrap = false
-opt.list = false -- display trailing space
-opt.sidescrolloff = 30
+opt.breakindent = true -- break indent for long lines
+opt.breakindentopt = { shift = 2 }
+-- opt.showbreak = "󰞷"
+-- opt.showbreak = "..."
+-- opt.showbreak = "_>"
+opt.showbreak = "↪"
+opt.listchars = { eol = "↩", space = "·", tab = "→ " }
+-- opt.fillchars = { eob = " " }
+opt.fillchars = {
+	diff = " ",
+	eob = " ",
+	fold = " ",
+	foldopen = "",
+	foldclose = "",
+}
+-- opt.list = true
+
+----------------------------langmap--------------------------------------------
+-- opt.langmap =
+-- 	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+-- require("langmapper").automapping({ global = true, buffer = true })
+local function escape(str)
+	local escape_chars = [[;,."|\]]
+	return vim.fn.escape(str, escape_chars)
+end
+
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+
+opt.langmap = vim.fn.join({
+	escape(ru_shift) .. ";" .. escape(en_shift),
+	escape(ru) .. ";" .. escape(en),
+}, ",")
+----------------------------swapfile and backup--------------------------------------------
 opt.swapfile = false
 opt.backup = false
-opt.relativenumber = true
-opt.number = true
-opt.langmap =
-	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
-opt.fillchars = { eob = " " }
+opt.relativenumber = false
+opt.number = false
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
@@ -110,10 +138,10 @@ autocmd("BufWritePost", {
 		vim.opt.statusline = "%!v:lua.require('nvchad.statusline." .. config.ui.statusline.theme .. "').run()"
 
 		-- tabufline
-		if config.ui.tabufline.enabled then
-			require("plenary.reload").reload_module("nvchad.tabufline.modules")
-			vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
-		end
+		-- if config.ui.tabufline.enabled then
+		--   require("plenary.reload").reload_module "nvchad.tabufline.modules"
+		--   vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
+		-- end
 
 		require("base46").load_all_highlights()
 		-- vim.cmd("redraw!")

@@ -56,7 +56,18 @@ function EnableAfterDelay()
 	vim.cmd("IlluminateToggle")
 	vim.cmd("IlluminateResume")
 	vim.cmd("TSContextEnable")
+	-- Make vim.cmd("CmpStatus") silent
+	vim.cmd("silent CmpStatus")
+
+	-- Disable all notifications
+	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
+	-- vim.opt.shortmess:append("F") -- Suppress 'file' messages
+	-- vim.opt.shortmess:append("o") -- Suppress 'overlength' messages
+	-- vim.opt.shortmess:append("O") -- Suppress 'msg-overflow' messages
+	-- vim.opt.shortmess:append("A") -- Suppress 'autocmd' messages
+	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
+	-- vim.opt.shortmess:append("t") -- Suppress 'truncate' messages
 end
-vim.api.nvim_exec([[autocmd UIEnter * lua vim.defer_fn(function() EnableAfterDelay() end,200)]], false)
+vim.api.nvim_exec([[autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end,200)]], false)
 
 -- vim.highlight.priorities.semantic_tokens = 90

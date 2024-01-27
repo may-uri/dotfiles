@@ -51,13 +51,21 @@ if vim.g.neovide then
 end
 
 function EnableAfterDelay()
-	vim.highlight.priorities.semantic_tokens = 95
-	vim.cmd("TSEnable highlight")
-	vim.cmd("IlluminateToggle")
-	vim.cmd("IlluminateResume")
-	vim.cmd("TSContextEnable")
-	-- Make vim.cmd("CmpStatus") silent
+	-- Check if the filetype is not 'md'
+	if vim.bo.filetype ~= "markdown" then
+		vim.highlight.priorities.semantic_tokens = 95
+		vim.cmd("silent TSEnable highlight")
+	end
+	vim.cmd("silent TSContextEnable")
+	-- Add a 50ms delay
+	-- vim.schedule(function()
+	-- 	vim.wait(50)
+	-- end)
+	vim.cmd("silent IlluminateToggle")
+	vim.cmd("silent IlluminateResume")
 	vim.cmd("silent CmpStatus")
+	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
+	vim.cmd("silent GarbageDayLsp")
 
 	-- Disable all notifications
 	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
@@ -68,6 +76,5 @@ function EnableAfterDelay()
 	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
 	-- vim.opt.shortmess:append("t") -- Suppress 'truncate' messages
 end
-vim.api.nvim_exec([[autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end,200)]], false)
-
+vim.api.nvim_exec([[autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end,100)]], false)
 -- vim.highlight.priorities.semantic_tokens = 90

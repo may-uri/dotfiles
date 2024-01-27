@@ -16,12 +16,12 @@ end
 function Zen()
 	vim.cmd("set laststatus=2")
 	vim.opt.showmode = true
-	-- vim.o.statusline = "%f %m %r"
-	vim.o.statusline = "%f %m %r %{luaeval('GitStatusLine()')}"
+	vim.o.statusline = "%f %m %r"
+	-- vim.o.statusline = "%f %m %r %{luaeval('GitStatusLine()')}"
 	-- vim.o.statusline = "%<%f %m %r %= %{luaeval('GitStatusLine()')}" -- display to the right
 	-- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
 	vim.o.showtabline = 0
-	vim.opt.number = true
+	vim.opt.number = false
 	vim.opt.relativenumber = false
 end
 
@@ -69,10 +69,21 @@ end
 M.general = {
 	n = {
 		["<leader>k"] = {
-			"<cmd>Telescope keymaps theme=get_ivy<CR>",
+			"<cmd>Telescope keymaps <CR>",
 			"[T]elescope [K]eymaps",
 			opts = { nowait = true },
 		},
+		["<leader>ss"] = {
+			"<cmd>Telescope persisted <CR>",
+			"Telescope Session",
+			opts = { nowait = true },
+		},
+		["<leader>se"] = {
+			"<cmd>SessionLoadLast<CR>",
+			"Telescope Session",
+			opts = { nowait = true },
+		},
+
 		["<leader>gl"] = {
 			"<cmd>Glow<CR>",
 			"glow markdown preview",

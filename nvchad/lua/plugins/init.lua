@@ -24,9 +24,24 @@ local default_plugins = {
 		init = function()
 			require("core.utils").load_mappings("nvterm")
 		end,
-		config = function(_, opts)
-			require("base46.term")
-			require("nvterm").setup(opts)
+		config = function()
+			-- require "base46.term"
+			require("nvterm").setup({
+				auto_insert = true,
+				close_on_exit = true,
+				type_opts = {
+					float = {
+						-- relative = "editor",
+						-- row = 0.9,
+						-- col = 0.95,
+						width = 0.9,
+						height = 0.9,
+						border = "none",
+					},
+					horizontal = { location = "rightbelow", split_ratio = 0.9 },
+					vertical = { location = "rightbelow", split_ratio = 0.9 },
+				},
+			})
 		end,
 	},
 
@@ -47,7 +62,7 @@ local default_plugins = {
 
 	{
 		"nvim-tree/nvim-web-devicons",
-		-- enabled=false,
+		-- enabled = false,
 		opts = function()
 			return { override = require("nvchad.icons.devicons") }
 		end,
@@ -76,9 +91,6 @@ local default_plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- event = "BufReadPre",
-		-- event = "BufRead",
-		-- event = "VeryLazy",
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
 		end,
@@ -102,13 +114,16 @@ local default_plugins = {
 			vim.api.nvim_create_autocmd({ "BufRead" }, {
 				group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
 				callback = function()
-					vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
-					if vim.v.shell_error == 0 then
-						vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
-						vim.schedule(function()
-							require("lazy").load({ plugins = { "gitsigns.nvim" } })
-						end)
-					end
+					vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
+						on_exit = function(_, return_code)
+							if return_code == 0 then
+								vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+								vim.schedule(function()
+									require("lazy").load({ plugins = { "gitsigns.nvim" } })
+								end)
+							end
+						end,
+					})
 				end,
 			})
 		end,
@@ -154,13 +169,12 @@ local default_plugins = {
 	-- load luasnips + cmp related in insert mode only
 	{
 		"hrsh7th/nvim-cmp",
-		-- commit = "6c84bc75c64f778e9f1dcb798ed41c7fcb93b639", -- lock update (break codeium)
-		event = "InsertEnter",
+		cmd = "CmpStatus",
+		-- event = "InsertEnter",
 		dependencies = {
 			{
 				-- snippet plugin
 				"L3MON4D3/LuaSnip",
-				-- commit = "ea7d7ea510c641c4f15042becd27f35b3e5b3c2b",
 				dependencies = "rafamadriz/friendly-snippets",
 				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
 				config = function(_, opts)
@@ -191,8 +205,6 @@ local default_plugins = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
-				-- "Exafunction/codeium.nvim",
-				-- "capaj/vscode-standardjs-snippets",
 			},
 		},
 		opts = function()
@@ -224,7 +236,7 @@ local default_plugins = {
 	-- file managing , picker etc
 	{
 		"nvim-tree/nvim-tree.lua",
-		enabled = false,
+		enabled = true,
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 		init = function()
 			require("core.utils").load_mappings("nvimtree")
@@ -242,6 +254,7 @@ local default_plugins = {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		cmd = "Telescope",
 		init = function()

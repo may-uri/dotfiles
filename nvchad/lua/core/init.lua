@@ -43,7 +43,6 @@ opt.fillchars = {
 ----------------------------langmap--------------------------------------------
 -- opt.langmap =
 -- 	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
--- require("langmapper").automapping({ global = true, buffer = true })
 local function escape(str)
 	local escape_chars = [[;,."|\]]
 	return vim.fn.escape(str, escape_chars)
@@ -61,22 +60,21 @@ opt.langmap = vim.fn.join({
 ----------------------------swapfile and backup--------------------------------------------
 opt.swapfile = false
 opt.backup = false
+-- Numbers
 opt.relativenumber = false
 opt.number = false
+opt.numberwidth = 1
+opt.ruler = false
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
 -- Disable netrw banner
 g.netrw_banner = 0
--- Numbers
-opt.number = true
-opt.numberwidth = 2
-opt.ruler = false
 
 -- disable nvim intro
 opt.shortmess:append("sI")
-
-opt.signcolumn = "yes"
+opt.cmdheight = 1
+-- opt.signcolumn = "yes"     -- отступ от левого края
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true

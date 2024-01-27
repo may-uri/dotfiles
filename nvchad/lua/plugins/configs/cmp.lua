@@ -108,10 +108,17 @@ local options = {
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{ name = "buffer" },
+		{
+			name = "buffer",
+			option = {
+				indexing_interval = 1000,
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end,
+			},
+		},
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		{ name = "codeium" },
 	},
 }
 

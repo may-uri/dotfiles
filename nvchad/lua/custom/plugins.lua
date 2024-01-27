@@ -22,34 +22,17 @@ local plugins = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		opts = {},
-		config = function()
-			require("nvim-devdocs").setup({
-				wrap = true,
-				float_win = { -- passed to nvim_open_win(), see :h api-floatwin
-					relative = "editor",
-					height = 45,
-					width = 200,
-					border = "none",
-				},
-			})
-		end,
+		opts = {
+			wrap = true,
+			float_win = { -- passed to nvim_open_win(), see :h api-floatwin
+				relative = "editor",
+				height = 45,
+				width = 200,
+				border = "none",
+			},
+		},
 	},
 	-- Override plugin definition options
-	{
-		"ellisonleao/glow.nvim",
-		enabled = false,
-		cmd = "Glow",
-		config = function()
-			require("glow").setup({
-				border = "single", -- floating window border config
-				width = 80,
-				height = 100,
-				width_ratio = 1, -- maximum width of the Glow window compared to the nvim window size (overrides `width`)
-				height_ratio = 1,
-			})
-		end,
-	},
 
 	{
 		{
@@ -68,11 +51,14 @@ local plugins = {
 			},
 		},
 	},
+	-- Lazy
 	{
 		"zeioth/garbage-day.nvim",
-		enabled = false,
+		enabled = true,
+		-- cmd="require("garbage-day.utils").start_lsp()",
 		dependencies = "neovim/nvim-lspconfig",
-		event = "VeryLazy",
+
+		-- event = "VeryLazy",
 		opts = {
 			-- your options here
 		},
@@ -80,19 +66,16 @@ local plugins = {
 	{
 		"stevearc/aerial.nvim",
 		cmd = "AerialToggle",
-		config = function()
-			require("aerial").setup({
-				-- optionally use on_attach to set keymaps when aerial has attached to a buffer
-				on_attach = function(bufnr)
-					-- Jump forwards/backwards with '{' and '}'
-					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-				end,
-			})
+		opts = {
+			-- optionally use on_attach to set keymaps when aerial has attached to a buffer
+			on_attach = function(bufnr)
+				-- Jump forwards/backwards with '{' and '}'
+				vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+				vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+			end,
 			-- You probably also want to set a keymap to toggle aerial
-			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
-		end,
-		opts = {},
+			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>"),
+		},
 		-- Optional dependencies
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -116,6 +99,7 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+	
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
@@ -184,25 +168,23 @@ local plugins = {
 	{
 		"nvim-neorg/neorg",
 		build = ":Neorg sync-parsers",
-		cmd = "Neorg",
+		-- cmd = "Neorg",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		-- ft = { "norg" },
+		ft = { "norg" },
 		-- event = "VeryLazy",
-		config = function()
-			require("neorg").setup({
-				load = {
-					["core.defaults"] = {}, -- Loads default behaviour
-					["core.concealer"] = {}, -- Adds pretty icons to your documents
-					["core.dirman"] = { -- Manages Neorg workspaces
-						config = {
-							workspaces = {
-								notes = "~/notes",
-							},
+		opts = {
+			load = {
+				["core.defaults"] = {}, -- Loads default behaviour
+				["core.concealer"] = {}, -- Adds pretty icons to your documents
+				["core.dirman"] = { -- Manages Neorg workspaces
+					config = {
+						workspaces = {
+							notes = "~/notes",
 						},
 					},
 				},
-			})
-		end,
+			},
+		},
 	},
 	-- override plugin configs
 	{
@@ -213,59 +195,18 @@ local plugins = {
 		"nacro90/numb.nvim",
 		enabled = true,
 		event = { "VeryLazy" },
-		config = function()
-			require("numb").setup({
-				show_numbers = true, -- Enable 'number' for the window while peeking
-				show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-				hide_relativenumbers = true, -- Enable turning off 'relativenumber' for the window while peeking
-				number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
-				centered_peeking = true, -- Peeked line will be centered relative to window
-			})
-		end,
+		opts = {
+			show_numbers = true, -- Enable 'number' for the window while peeking
+			show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+			hide_relativenumbers = true, -- Enable turning off 'relativenumber' for the window while peeking
+			number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+			centered_peeking = true, -- Peeked line will be centered relative to window
+		},
 	},
 	{
 		"nvim-telescope/telescope-frecency.nvim",
 		config = function() end,
 	},
-	{
-		"stevearc/oil.nvim",
-		enabled = false,
-		event = "VeryLazy",
-		opts = {},
-
-		config = function()
-			require("oil").setup({
-				columns = {
-					"icon",
-					-- "permissions",
-					-- "size",
-					-- "mtime",
-				},
-				keymaps = {
-					["g?"] = "actions.show_help",
-					["t"] = "actions.select",
-					["T"] = "actions.parent",
-					["<C-s>"] = "actions.select_vsplit",
-					["<C-h>"] = "actions.select_split",
-					["<C-t>"] = "actions.select_tab",
-					["<C-p>"] = "actions.preview",
-					["<C-c>"] = "actions.close",
-					["<C-l>"] = "actions.refresh",
-					["-"] = "actions.parent",
-					["_"] = "actions.open_cwd",
-					["`"] = "actions.cd",
-					["~"] = "actions.tcd",
-					["gs"] = "actions.change_sort",
-					["gx"] = "actions.open_external",
-					["g."] = "actions.toggle_hidden",
-					["g\\"] = "actions.toggle_trash",
-				},
-			})
-		end,
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		-- lazy = false,
@@ -282,7 +223,6 @@ local plugins = {
 		end,
 	},
 	{
-
 		"Exafunction/codeium.vim",
 		enabled = false,
 		event = "BufEnter",
@@ -329,14 +269,21 @@ local plugins = {
 		},
 	},
 	-- lazy.nvim
+  -- Lua
+{
+  "olimorris/persisted.nvim",
+  config = true,
+    cmd="SessionLoadLast",
+},
 	{
 		"Wansmer/langmapper.nvim",
 		lazy = false,
+		enabled = true,
 		-- priority = 1, -- High priority is needed if you will use `autoremap()`
-		config = function()
-			require("langmapper").setup({--[[ your config ]]
-			})
-		end,
+		opts = {
+			disable_hack_modes = { "i" },
+			hack_keymap = false,
+		},
 	},
 	{
 		"RRethy/vim-illuminate",
@@ -345,11 +292,13 @@ local plugins = {
 		config = function()
 			require("illuminate").configure({
 				delay = 200,
-				filetypes_denylist = { "alpha", "aerial", "markdown", "neo-tree", "toggleterm", "DiffviewFiles" },
+				filetypes_denylist = { "terminal", "aerial", "markdown", "neo-tree", "toggleterm", "DiffviewFiles" },
 				large_file_cutoff = 2000,
-				large_file_overrides = {
-					providers = { "treesitter" }, --   'lsp', 'treesitter',  'regex',
-					-- try lsp and treesitter
+				min_count_to_highlight = 2,
+				providers = {
+					"lsp",
+					"treesitter",
+					"regex",
 				},
 			})
 		end,

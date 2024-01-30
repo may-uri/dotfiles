@@ -24,7 +24,7 @@ M.general = {
 		["<C-k>"] = { "<C-w>k", "Window up" },
 
 		-- save
-		["<C-s>"] = { "<cmd> update <CR>", "Save file" },
+		["<C-s>"] = { "<cmd> update<CR>", "Save file" },
 
 		-- Copy all
 		-- ["<C-c>"] = { "<cmd> %y+ <CR>", "Copy whole file" },
@@ -37,10 +37,6 @@ M.general = {
 		-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 		-- empty mode is same as using <cmd> :map
 		-- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-		["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-		["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-		["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
 
 		-- new buffer
 		-- ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
@@ -57,9 +53,12 @@ M.general = {
 		},
 		["<leader>tt"] = {
 			function()
-				require("base46").toggle_transparency()
+				-- require("base46").toggle_transparency()
+				-- vim.cmd("TransparentEnable")
+				vim.cmd("ToggleTerm")
 			end,
-			"toggle transparency",
+			-- "toggle transparency",
+			"toggle term",
 		},
 	},
 
@@ -68,15 +67,15 @@ M.general = {
 	},
 
 	v = {
-		["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-		["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
+		-- ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
+		-- ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
 		["<"] = { "<gv", "Indent line" },
 		[">"] = { ">gv", "Indent line" },
 	},
 
 	x = {
-		["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-		["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
+		-- ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
+		-- ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
 		-- Don't copy the replaced text after pasting in visual mode
 		-- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
 		["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
@@ -111,12 +110,12 @@ M.tabufline = {
 		},
 
 		-- close buffer + hide terminal buffer
-		["<leader>x"] = {
-			function()
-				require("nvchad.tabufline").close_buffer()
-			end,
-			"Close buffer",
-		},
+		-- ["<leader>x"] = {
+		-- 	function()
+		-- 		require("nvchad.tabufline").close_buffer()
+		-- 	end,
+		-- 	"Close buffer",
+		-- },
 	},
 }
 M.comment = {
@@ -174,7 +173,7 @@ M.lspconfig = {
 			"LSP implementation",
 		},
 
-		["<leader>ls"] = {
+		["<leader>ss"] = {
 			function()
 				vim.lsp.buf.signature_help()
 			end,
@@ -211,7 +210,7 @@ M.lspconfig = {
 
 		["<leader>f"] = {
 			function()
-				vim.diagnostic.open_float({ border = "rounded" })
+				vim.diagnostic.open_float({ border = "none" })
 			end,
 			"Floating diagnostic",
 		},
@@ -287,9 +286,10 @@ M.telescope = {
 	n = {
 		-- find
 		["<leader>ff"] = {
-			"<cmd>lua require('telescope.builtin').find_files({find_command={'fd','--type','f' }})<CR>",
+			"<cmd>lua require('telescope.builtin').find_files({find_command={'fdfind','--type','f' }})<CR>",
 			"Find files",
 		},
+		["<leader>fF"] = { "<cmd>lcd%:p:h<CR><cmd>Telescope find_files <CR>", "Find files" },
 		["<leader>fa"] = {
 			"<cmd> Telescope find_files follow=true  no_ignore=true hidden=true <CR>",
 			"Find all",
@@ -297,15 +297,15 @@ M.telescope = {
 		-- ["<F1>"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
 		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-		-- ["<leader>fw"] = { "<cmd> Telescope ast_grep theme=get_ivy<CR>", "Live grep" },
+		["<leader>fW"] = { "<cmd>lcd%:p:h<CR><cmd>Telescope live_grep <CR>", "Live grep" },
 		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
-		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
+		["<leader>h"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
 		["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
 		-- git
-		["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-		["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+		-- ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+		-- ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
 		-- pick a hidden term
 		["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
@@ -313,76 +313,76 @@ M.telescope = {
 		-- theme switcher
 		["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
 
-		["<leader>ma"] = { "<cmd> Telescope marks<CR>", "telescope bookmarks" },
+		["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
 	},
 }
 
-M.nvterm = {
-	plugin = true,
-
-	t = {
-		-- toggle in terminal mode
-		["<C-i>"] = {
-			function()
-				require("nvterm.terminal").toggle("float")
-			end,
-			"Toggle floating term",
-		},
-
-		["<A-h>"] = {
-			function()
-				require("nvterm.terminal").toggle("horizontal")
-			end,
-			"Toggle horizontal term",
-		},
-
-		["<A-v>"] = {
-			function()
-				require("nvterm.terminal").toggle("vertical")
-			end,
-			"Toggle vertical term",
-		},
-	},
-
-	n = {
-		-- toggle in normal mode
-		["<C-i>"] = {
-			function()
-				require("nvterm.terminal").toggle("float")
-			end,
-			"Toggle floating term",
-		},
-
-		["<A-h>"] = {
-			function()
-				require("nvterm.terminal").toggle("horizontal")
-			end,
-			"Toggle horizontal term",
-		},
-
-		["<A-v>"] = {
-			function()
-				require("nvterm.terminal").toggle("vertical")
-			end,
-			"Toggle vertical term",
-		},
-
-		-- new
-		["<leader>h"] = {
-			function()
-				require("nvterm.terminal").new("horizontal")
-			end,
-			"New horizontal term",
-		},
-
-		["<leader>v"] = {
-			function()
-				require("nvterm.terminal").new("vertical")
-			end,
-			"New vertical term",
-		},
-	},
-}
+-- M.nvterm = {
+-- 	plugin = false,
+--
+-- 	t = {
+-- 		-- toggle in terminal mode
+-- 		["<A-i>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("float")
+-- 			end,
+-- 			"Toggle floating term",
+-- 		},
+--
+-- 		["<A-h>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("horizontal")
+-- 			end,
+-- 			"Toggle horizontal term",
+-- 		},
+--
+-- 		["<A-v>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("vertical")
+-- 			end,
+-- 			"Toggle vertical term",
+-- 		},
+-- 	},
+--
+-- 	n = {
+-- 		-- toggle in normal mode
+-- 		["<A-i>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("float")
+-- 			end,
+-- 			"Toggle floating term",
+-- 		},
+--
+-- 		["<A-h>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("horizontal")
+-- 			end,
+-- 			"Toggle horizontal term",
+-- 		},
+--
+-- 		["<A-v>"] = {
+-- 			function()
+-- 				require("nvterm.terminal").toggle("vertical")
+-- 			end,
+-- 			"Toggle vertical term",
+-- 		},
+--
+-- 		-- new
+-- 		["<leader>h"] = {
+-- 			function()
+-- 				require("nvterm.terminal").new("horizontal")
+-- 			end,
+-- 			"New horizontal term",
+-- 		},
+--
+-- 		["<leader>v"] = {
+-- 			function()
+-- 				require("nvterm.terminal").new("vertical")
+-- 			end,
+-- 			"New vertical term",
+-- 		},
+-- 	},
+-- }
 
 M.whichkey = {
 	plugin = true,

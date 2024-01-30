@@ -12,8 +12,8 @@ local field_arrangement = {
 
 local formatting_style = {
 	-- default fields order i.e completion word + item.kind + item.kind icons
-	-- fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
-	fields = field_arrangement[cmp_style] or { "kind", "menu" },
+	fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
+	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
 
 	format = function(_, item)
 		local icons = require("nvchad.icons.lspkind")
@@ -119,6 +119,7 @@ local options = {
 		},
 		{ name = "nvim_lua" },
 		{ name = "path" },
+		{ name = "codeium" },
 	},
 }
 

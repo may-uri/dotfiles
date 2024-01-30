@@ -5,11 +5,12 @@ local config = require("core.utils").load_config()
 -------------------------------------- globals -----------------------------------------
 g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
-g.toggle_theme_icon = "   "
+g.toggle_theme_icon = ""
+-- g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
 
 -------------------------------------- options ------------------------------------------
-opt.laststatus = 2 -- global statusline
+opt.laststatus = 0 -- global statusline
 opt.showmode = false
 
 opt.clipboard = "unnamedplus"
@@ -23,14 +24,11 @@ opt.tabstop = 2
 opt.softtabstop = 2
 
 -- Mine
-opt.breakindent = true -- break indent for long lines
+opt.breakindent = true -- break indentation for long lines
 opt.breakindentopt = { shift = 2 }
--- opt.showbreak = "󰞷"
--- opt.showbreak = "..."
--- opt.showbreak = "_>"
+-- opt.showbreak = "↳" -- character for line break
 opt.showbreak = "↪"
 opt.listchars = { eol = "↩", space = "·", tab = "→ " }
--- opt.fillchars = { eob = " " }
 opt.fillchars = {
 	diff = " ",
 	eob = " ",
@@ -38,43 +36,32 @@ opt.fillchars = {
 	foldopen = "",
 	foldclose = "",
 }
--- opt.list = true
-
-----------------------------langmap--------------------------------------------
--- opt.langmap =
--- 	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
-local function escape(str)
-	local escape_chars = [[;,."|\]]
-	return vim.fn.escape(str, escape_chars)
-end
-
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
-local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
-opt.langmap = vim.fn.join({
-	escape(ru_shift) .. ";" .. escape(en_shift),
-	escape(ru) .. ";" .. escape(en),
-}, ",")
-----------------------------swapfile and backup--------------------------------------------
+-- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
+-- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING
+opt.wrap = false
+opt.list = false -- display trailing space
+-- opt.sidescrolloff = 30
 opt.swapfile = false
 opt.backup = false
--- Numbers
 opt.relativenumber = false
 opt.number = false
-opt.numberwidth = 1
-opt.ruler = false
+opt.langmap =
+	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
 -- Disable netrw banner
 g.netrw_banner = 0
+-- Numbers
+opt.number = true
+opt.numberwidth = 1
+opt.ruler = false
 
 -- disable nvim intro
 opt.shortmess:append("sI")
-opt.cmdheight = 1
--- opt.signcolumn = "yes"     -- отступ от левого края
+
+opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
@@ -137,8 +124,8 @@ autocmd("BufWritePost", {
 
 		-- tabufline
 		-- if config.ui.tabufline.enabled then
-		--   require("plenary.reload").reload_module "nvchad.tabufline.modules"
-		--   vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
+		-- 	require("plenary.reload").reload_module("nvchad.tabufline.modules")
+		-- 	vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
 		-- end
 
 		require("base46").load_all_highlights()

@@ -13,68 +13,120 @@ vim.opt.foldlevelstart = 20
 vim.opt.foldlevel = 20
 -- use wider line for folding
 vim.opt.fillchars = { fold = "⏤" }
+-- vim.opt.foldtext = "antonk52#fold#it()"
+-- Automatically add 'use strict' to the first line of new JavaScript files
+vim.cmd([[
+  augroup add_use_strict
+    autocmd!
+    autocmd BufNewFile *.js silent! 0r !echo "\"use strict\""
+  augroup END
+]])
+-- Automatically add '<!-- prettier-ignore --> ' to the first line of new html files
+vim.api.nvim_exec(
+	[[
+  augroup add_prettier_ignore
+    autocmd!
+    autocmd BufNewFile *.html call append(0, "<!-- prettier-ignore -->")
+  augroup END
+]],
+	false
+)
 
--- format on save
--- vim.cmd([[
---   augroup FormatOnSave
---     autocmd!
---     autocmd BufWritePre *.css,*.html,*.py,*.lua,*.js, *.c, lua vim.lsp.buf.format({ async = true })
---   augroup end
--- ]])
 -- zen mode
 vim.cmd("autocmd VimEnter * lua Zen()")
--- make doctype uppercase
--- vim.api.nvim_exec(
--- 	[[
--- augroup doctype_autocmd
---   autocmd!
---   autocmd BufWritePre *.html silent! %s/<!doctype html>/<!DOCTYPE html>/
--- augroup END
--- ]],
--- 	false
--- )
--- vim.opt.scrolloff = 20 -- Кол-во строк, которые видны над и под текущей позицией курсора
--- vim.opt.sidescrolloff = 40 -- Кол-во строк, которые видны над и под текущей позицией курсора
--- vim.opt.wrap = true -- Включить перенос строк, игнорируя целостность слов
-vim.opt.linebreak = true -- Включить перенос строк, сохраняя целостность слов
--- Set Fish shell as default for Neovim
-vim.cmd([[set shell=fish]])
 
--- autocmd to jump to the last edited position after reading a buffer
+-- treesitter highlight works only without TSEnable function
+-- vim.highlight.priorities.semantic_tokens = 95
+-- Set transparency for the status line
+vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
+vim.cmd([[ hi StatusLineNC guibg=NONE ctermbg=NONE ]])
+
+-- Set transparency for the active and inactive status line
+vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+
+-- Set transparency for the active and inactive status line
+vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+
+vim.api.nvim_exec(
+	[[
+  augroup MarkdownConceal
+    autocmd!
+    autocmd BufRead *.md setlocal conceallevel=2
+  augroup END
+]],
+	false
+)
+
+-- Autocmd to jump to the last edited position after reading a buffer
 vim.cmd([[
-au BufReadPost * if line("'\"")>=1 && line ("'\"") <= line("$") | exe "normal! g`\"" | endif]])
+  au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+]])
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		if vim.fn.argv(0) == "" then
+-- 			require("telescope.builtin").oldfiles()
+-- 		end
+-- 	end,
+-- })
+--
+
+-------------
+-- Neovide --
+-------------
 if vim.g.neovide then
-	vim.g.neovide_refresh_rate = 60
+	vim.g.clipboard = {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
+		cache_enabled = 0,
+	}
+
+	-- vim.g.neovide_theme = "auto"
+	vim.g.neovide_padding_left = 10
+	vim.g.neovide_scroll_animation_length = 0.3
+	vim.g.neovide_hide_mouse_when_typing = true
+	vim.g.neovide_underline_stroke_scale = 0.9
+	vim.g.neovide_padding_top = 0
+	vim.g.neovide_padding_bottom = 0
+	vim.g.neovide_padding_right = 0
+	vim.g.neovide_no_custom_clipboard = true
+	vim.keymap.set("v", "<C-c>", "y") -- Copy
+	vim.keymap.set("n", "<C-v>", "P") -- Paste normal mode
+	vim.keymap.set("v", "<C-v>", "P") -- Paste visual mode
+	vim.keymap.set("c", "<C-v>", "<C-R>+") -- Paste command mode
+	vim.keymap.set("i", "<C-v>", "<ESC>pa") -- Paste insert mode
+
 	vim.g.neovide_cursor_antialiasing = true
-	vim.g.neovide_refresh_rate_idle = 5
+	vim.g.neovide_remember_window_size = true
+	vim.g.remember_window_position = true
+
+	vim.o.switchbuf = "newtab"
 end
 
+-----------------------
+-- EnableAfterDelay --
+-----------------------
 function EnableAfterDelay()
-	-- Check if the filetype is not 'md'
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
 		vim.cmd("silent TSEnable highlight")
 	end
-	vim.cmd("silent TSContextEnable")
-	-- Add a 50ms delay
-	-- vim.schedule(function()
-	-- 	vim.wait(50)
-	-- end)
-	vim.cmd("silent IlluminateToggle")
-	vim.cmd("silent IlluminateResume")
+	-- vim.cmd("silent TSContextEnable")
+	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
 	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
 	vim.cmd("silent GarbageDayLsp")
-
-	-- Disable all notifications
-	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
-	-- vim.opt.shortmess:append("F") -- Suppress 'file' messages
-	-- vim.opt.shortmess:append("o") -- Suppress 'overlength' messages
-	-- vim.opt.shortmess:append("O") -- Suppress 'msg-overflow' messages
-	-- vim.opt.shortmess:append("A") -- Suppress 'autocmd' messages
-	-- vim.opt.shortmess:append("c") -- Suppress 'ins-completion' messages
-	-- vim.opt.shortmess:append("t") -- Suppress 'truncate' messages
 end
-vim.api.nvim_exec([[autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end,100)]], false)
--- vim.highlight.priorities.semantic_tokens = 90
+vim.api.nvim_exec(
+	[[
+    autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 100)
+]],
+	false
+)

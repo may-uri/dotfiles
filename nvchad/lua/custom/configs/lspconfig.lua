@@ -5,7 +5,14 @@ local lspconfig = require("lspconfig")
 
 -- if you just want default config for the servers then put them in a table
 
-local servers = { "html", "cssls", "tsserver", "pylsp", "clangd" }
+local servers = {
+	"html",
+	"cssls",
+	"pylsp",
+	"tsserver",
+	-- "denols",
+	"clangd",
+}
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -28,7 +35,7 @@ lspconfig.clangd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = {
-    "clangd",
+		"clangd",
 		"--background-index",
 		"--pch-storage=memory",
 		"--clang-tidy",
@@ -38,3 +45,8 @@ lspconfig.clangd.setup({
 		"--offset-encoding=utf-16",
 	},
 })
+-- Setup required for ufo
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}

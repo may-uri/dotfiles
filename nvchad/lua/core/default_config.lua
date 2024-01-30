@@ -20,11 +20,11 @@ M.ui = {
 
 	-- cmp themeing
 	cmp = {
-		icons = false,
+		icons = true,
 		lspkind_text = true,
 		style = "atom", -- default/flat_light/flat_dark/atom/atom_colored
 		border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
-		selected_item_bg = "colored", -- colored / simple
+		selected_item_bg = "simple", -- colored / simple
 	},
 
 	telescope = { style = "borderless" }, -- borderless / bordered
@@ -41,7 +41,7 @@ M.ui = {
 	-- lazyload it when there are 1+ buffers
 	tabufline = {
 		show_numbers = false,
-		enabled =false,
+		enabled = true,
 		lazyload = true,
 		overriden_modules = nil,
 	},

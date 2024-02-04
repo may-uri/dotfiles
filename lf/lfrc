@@ -1,0 +1,7 @@
+set icons
+set drawbox
+set cursorpreviewfmt ""
+set cursorparentfmt "\033[7;90m"
+set incsearch
+
+set previewer ~/.config/lf/pv.sh

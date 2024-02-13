@@ -118,15 +118,21 @@ function EnableAfterDelay()
 		vim.highlight.priorities.semantic_tokens = 95
 		vim.cmd("silent TSEnable highlight")
 	end
-	-- vim.cmd("silent TSContextEnable")
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
+	vim.cmd("silent TSContextEnable")
 	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
 	vim.cmd("silent GarbageDayLsp")
+	vim.cmd("silent FocusEnable")
 end
-vim.api.nvim_exec(
-	[[
-    autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 100)
-]],
-	false
-)
+-- execute the autocmd only if the file size is less than 100KB
+local file_size = vim.fn.getfsize(vim.fn.expand('%'))
+
+if file_size < 100 * 1024 then
+    vim.api.nvim_exec(
+        [[
+            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 100)
+        ]],
+        false
+    )
+end

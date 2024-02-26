@@ -208,7 +208,7 @@ M.lspconfig = {
 			"LSP references",
 		},
 
-		["<leader>f"] = {
+		["<leader>fd"] = {
 			function()
 				vim.diagnostic.open_float({ border = "none" })
 			end,
@@ -231,7 +231,8 @@ M.lspconfig = {
 
 		["<leader>q"] = {
 			function()
-				vim.diagnostic.setloclist()
+				-- vim.diagnostic.setloclist()
+				require("trouble").toggle()
 			end,
 			"Diagnostic setloclist",
 		},

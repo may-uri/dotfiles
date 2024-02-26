@@ -109,6 +109,23 @@ local plugins = {
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
 	{
+		"nvim-lualine/lualine.nvim",
+		-- event = "VimEnter",
+		event = "VeryLazy",
+		enabled = true,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			options = {
+				theme = "everforest",
+			},
+		},
+	},
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
 		"michaelb/sniprun",
 		event = "VeryLazy",
 		-- ft = { "javascript",
@@ -133,11 +150,34 @@ local plugins = {
 		-- 	},
 		-- },
 	},
+
+	{
+		"RRethy/vim-illuminate",
+		-- event = "VeryLazy",
+		cmd = "IlluminateResume",
+		config = function()
+			require("illuminate").configure({
+				providers = {
+					"lsp",
+					"treesitter",
+					"regex",
+				},
+				filetypes_denylist = {
+					"dirbuf",
+					"dirvish",
+					"fugitive",
+				},
+				min_count_to_highlight = 2,
+			})
+		end,
+	},
+
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
 	{
 		"ahmedkhalf/project.nvim",
 		event = "BufEnter",
+		-- event = "UIEnter",
 		config = function()
 			require("project_nvim").setup({})
 		end,
@@ -183,6 +223,34 @@ local plugins = {
 			-- refer to the configuration section below
 		},
 	},
+	{
+		{
+			"lmburns/lf.nvim",
+			dependencies = { "akinsho/toggleterm.nvim" },
+			cmd = "Lf",
+			config = function()
+				-- This feature will not work if the plugin is lazy-loaded
+				vim.g.lf_netrw = 1
+				require("lf").setup({
+					direction = "float", -- window type: float horizontal vertical
+					border = "none", -- border kind: single double shadow curved
+					width = vim.o.columns, -- maximally available columns
+					height = vim.o.lines - 1, -- maximally available lines
+					winblend = 0, -- psuedotransparency level
+					default_file_manager = true, -- make lf default file manager
+					escape_quit = true, -- map escape to the quit command (so it doesn't go into a meta normal mode)
+					mappings = true, -- whether terminal buffer mapping is enabled
+					disable_netrw_warning = true, -- don't display a message when opening a directory with `default_file_manager` as true
+					highlights = { -- highlights passed to toggleterm
+						Normal = { link = "Normal" },
+						NormalFloat = { link = "Normal" },
+					},
+				})
+				vim.keymap.set("n", "<M-o>", "<Cmd>Lf<CR>")
+			end,
+			requires = { "toggleterm.nvim" },
+		},
+	},
 	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
 	{
 		"folke/todo-comments.nvim",
@@ -215,10 +283,24 @@ local plugins = {
 
 	-- Install a plugin
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
+
 	{
 		"folke/flash.nvim",
 		-- event = "BufRead",
-		opts = {},
+		opts = {
+			label = {
+				style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+				rainbow = { enabled = true, shade = 3 },
+			},
+			modes = {
+				search = {
+					enabled = false,
+				},
+				char = {
+					multi_line = false,
+				},
+			},
+		},
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
@@ -291,9 +373,22 @@ local plugins = {
 	},
 
 	{
+		"nvim-focus/focus.nvim",
+		version = "*",
+		cmd = "FocusEnable",
+		-- event = "VeryLazy",
+		opts = {
+			split = {
+				-- bufnew = false, -- Create blank buffer for new split windows
+				-- tmux = true, -- Create tmux splits instead of neovim splits
+			},
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		event = "VeryLazy",
-		enabled = false,
+		-- cmd = "ToogleTerm",
+		-- enabled = true,
 		version = "*",
 		opts = {
 			size = 120,
@@ -312,7 +407,6 @@ local plugins = {
 	},
 	{
 		"max397574/better-escape.nvim",
-		-- event = "VeryLazy",
 		event = { "CursorHold", "CursorHoldI" },
 		opts = {
 			mapping = { "jj" }, -- a table with mappings to use
@@ -320,6 +414,21 @@ local plugins = {
 			clear_empty_lines = false, -- clear line after escaping if there is only whitespace
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
+	},
+	{
+		"echasnovski/mini.starter",
+		version = "*",
+		enabled = false,
+		lazy = false,
+		-- event = "VimEnter",
+		config = function()
+			local opts = require("custom.configs.starter")
+			require("mini.starter").setup(opts)
+		end,
+	},
+	{
+		"jghauser/mkdir.nvim",
+		event = "VeryLazy",
 	},
 	{
 		"zeioth/garbage-day.nvim",
@@ -331,32 +440,38 @@ local plugins = {
 			-- your options here
 		},
 	},
-{
-  "echasnovski/mini.bufremove",
-  keys = {
-   {
-    "<leader>x",
-    function()
-     local bd = require("mini.bufremove").delete
-     if vim.bo.modified then
-      local choice =
-       vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-      if choice == 1 then -- Yes
-       vim.cmd.write()
-       bd(0)
-      elseif choice == 2 then -- No
-       bd(0, true)
-      end
-     else
-      bd(0)
-     end
-    end,
-    desc = "Delete Buffer",
-   },
+	{ "nvim-treesitter/nvim-treesitter-context", cmd = "TSContextEnable", opts = { mode = "cursor", max_lines = 3 } },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
+	{
+		"echasnovski/mini.bufremove",
+		keys = {
+			{
+				"<leader>x",
+				function()
+					local bd = require("mini.bufremove").delete
+					if vim.bo.modified then
+						local choice =
+							vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+						if choice == 1 then -- Yes
+							vim.cmd.write()
+							bd(0)
+						elseif choice == 2 then -- No
+							bd(0, true)
+						end
+					else
+						bd(0)
+					end
+				end,
+				desc = "Delete Buffer",
+			},
     -- stylua: ignore
     { "<leader>X", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-  },
- },
+		},
+	},
+
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,

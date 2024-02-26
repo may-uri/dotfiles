@@ -32,20 +32,17 @@ vim.api.nvim_exec(
 	false
 )
 
--- zen mode
-vim.cmd("autocmd VimEnter * lua Zen()")
-
 -- treesitter highlight works only without TSEnable function
 -- vim.highlight.priorities.semantic_tokens = 95
 -- Set transparency for the status line
-vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
-vim.cmd([[ hi StatusLineNC guibg=NONE ctermbg=NONE ]])
+-- vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
+-- vim.cmd([[ hi StatusLineNC guibg=NONE ctermbg=NONE ]])
 
 -- Set transparency for the active and inactive status line
-vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+-- vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
 
 -- Set transparency for the active and inactive status line
-vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
+-- vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
 
 vim.api.nvim_exec(
 	[[
@@ -124,15 +121,20 @@ function EnableAfterDelay()
 	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
 	vim.cmd("silent GarbageDayLsp")
 	vim.cmd("silent FocusEnable")
+	vim.cmd("silent IlluminateResume")
 end
 -- execute the autocmd only if the file size is less than 100KB
-local file_size = vim.fn.getfsize(vim.fn.expand('%'))
+local file_size = vim.fn.getfsize(vim.fn.expand("%"))
 
 if file_size < 100 * 1024 then
-    vim.api.nvim_exec(
-        [[
-            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 100)
+	vim.api.nvim_exec(
+		[[
+            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 63)
         ]],
-        false
-    )
+		false
+	)
 end
+-- zen mode
+-- vim.cmd("autocmd VimEnter * lua Zen()")
+
+vim.o.path = ".,**"

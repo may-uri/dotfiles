@@ -35,7 +35,7 @@ change_detection = {
 				"vimballPlugin",
 				"zip",
 				"zipPlugin",
-				"tutor",
+				-- "tutor",
 				"rplugin",
 				"syntax",
 				"synmenu",

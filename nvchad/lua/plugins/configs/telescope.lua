@@ -52,13 +52,14 @@ local options = {
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 		-- Developer configurations: Not meant for general override
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+		fzf = require("telescope").load_extension("fzf"),
 		mappings = {
 			i = { ["<C-q>"] = require("telescope.actions").close },
 			n = { ["<C-q>"] = require("telescope.actions").close },
 		},
 	},
 
-	extensions_list = { "themes", "terms", "file_browser", "projects" },
+	extensions_list = { "themes", "terms", "file_browser", "projects", "fzf" },
 	extensions = {
 		fzf = {
 			fuzzy = true,

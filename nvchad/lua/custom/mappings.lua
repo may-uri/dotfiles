@@ -1,15 +1,33 @@
 ---@type MappingsTable
 local M = {}
+local u = require("custom.configs.ext_hover")
 -- Use wslview for gx in WSL
 if vim.fn.has("unix") then
 	vim.g.netrw_browsex_viewer = "wslview"
 end
 ----------------------------------Function----------------------------------
+function ToggleTabline()
+	-- Check if the tabline is currently visible
+	local tabline_visible = vim.o.showtabline
+
+	-- Toggle the visibility of the tabline
+	if tabline_visible == 2 then
+		-- If tabline is currently visible, hide it
+		vim.o.showtabline = 0
+	else
+		-- If tabline is currently hidden, show it
+		vim.o.showtabline = 2
+	end
+end
 -- Define a function to determine the file type and execute the appropriate command
 function RunFile()
 	local file_type = vim.bo.filetype
 	if file_type == "javascript" or file_type == "jsx" then
 		vim.cmd("!node %")
+	elseif file_type == "go" then
+		vim.cmd("!go run %")
+	elseif file_type == "python" then
+		vim.cmd("!python3 % ")
 	elseif file_type == "c" or file_type == "cpp" then
 		vim.cmd("!gcc % && ./a.out")
 	else
@@ -73,13 +91,37 @@ end
 M.general = {
 	n = {
 		-- ["p"] = { "P", "paste without copy to register", opts = { nowait = true } },
+		["<M-o>"] = {
+			"<cmd>Telescope oldfiles<cr>",
+			"telescope old files",
+			opts = { nowait = true },
+		},
+		["<M-n>"] = {
+			"<cmd>Lf<cr>",
+			"lf file manager",
+			opts = { nowait = true },
+		},
 
+		["<leader>T"] = {
+			"<cmd>ToggleTerm<cr>",
+			"toggle terminal",
+			opts = { nowait = true },
+		},
+		["<leader>gk"] = {
+			require("custom.configs.ext_hover").extended_hover,
+			"",
+			opts = { nowait = true },
+		},
 		["<leader>gf"] = {
 			"vi{gf}",
 			"go to link gf",
 			opts = { nowait = true },
 		},
-
+		["<leader>tb"] = {
+			":lua ToggleTabline()<CR>",
+			"toggle tab line",
+			opts = { nowait = true },
+		},
 		["<leader>k"] = {
 			"<cmd>Telescope keymaps <CR>",
 			"[T]elescope [K]eymaps",
@@ -136,7 +178,7 @@ M.general = {
 		["1"] = { "$", "go to end of line", opts = { nowait = true } },
 
 		-- probably working :x
-		["<leader>cc"] = {
+		["gx"] = {
 			function()
 				local cursor_position = vim.fn.getpos(".")
 				local line = vim.fn.getline(cursor_position[2])
@@ -148,7 +190,8 @@ M.general = {
 					else
 						vim.fn.setreg('"', url) -- Fallback to default register
 					end
-					print(url)
+					-- print(url)
+					vim.cmd("silent !open " .. url)
 				else
 					print("No URL found under the cursor.")
 				end

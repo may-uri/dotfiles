@@ -34,7 +34,9 @@ function start_bot
 end
 
 function preview_nvim
- find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
+ # find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
+ fzf -i --reverse  --cycle  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --color=always {}" --bind 'enter:become(nvim {})'
+ # find . -maxdepth 3 -type f -not -path '*/\.*' | fzf -i --cycle --preview="bat --color=always {}" --bind 'enter:execute(nvim {})'
 
 end
 # =======================
@@ -51,6 +53,7 @@ end
 # Bind alt+d to the function and alt+0
 bind \eo 'nvim +"Telescope oldfiles theme=ivy"'
 bind \ed 'preview_nvim'
+bind \en 'lfcd'
 # bind \el 'vide .'
 
 # ==== ALIAS ====
@@ -58,12 +61,15 @@ bind \ed 'preview_nvim'
 
 
 
-alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
+# alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
 alias o='nvim +"Telescope oldfiles theme=ivy"'
+alias ra='lf'
+alias gi='git clone'
 alias v='vide'
 alias telescope_file_browser='glow --width 90 /home/genie/telescope_file_browser.md'
 alias _n='nvim +"Telescope oldfiles theme=ivy"'
 alias open="firefox.exe"
+alias pr="python3 $HOME/private.py"
 alias gcc-11="gcc"
 alias i="sudo apt install"
 alias r="sudo apt remove"
@@ -94,6 +100,7 @@ end
 # ===PATH===
    set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
    set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   set -gx PATH "/home/genie/go/bin" $PATH
    # set -gx PATH "/home/genie/.local/lib/python3.11/site-packages/nvr" $PATH
    set -gx PATH "/home/genie/.local/share/nvim/mason/bin" $PATH
    set -x PATH "/home/genie" $PATH 
@@ -103,6 +110,7 @@ end
    set -x PATH $PATH /home/genie/.local/bin/bin
       set -x ESLINT_CONFIG_PATH ~/.eslint
       set -x EDITOR nvim
+      set -x $EDITOR nvim
 set -x PATH $PATH ~/.bun/bin
 
 # ===tab to select autosuggestion===
@@ -136,7 +144,18 @@ set -g theme_display_jobs_verbose yes
 set -g fish_term256 1
 
 
-
 set -x NNN_FIFO /tmp/nnn.fifo
-set -x NNN_PLUG "p:preview-tui;"
-source lscolors.csh
+set -x NNN_PLUG "p:preview-tui;z:autojump"
+# write curl download lscolors to fish directory
+source $HOME/.config/fish/lscolors.csh
+# jump command
+jump shell fish | source
+function lfcd --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
+    # `command` is needed in case `lfcd` is aliased to `lf`.
+    # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
+    cd "$(command lf -print-last-dir $argv)"
+end
+set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:#1a2327
+  --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
+  --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf
+  --color=border:#262626,label:#aeaeae,query:#d9d9d9"

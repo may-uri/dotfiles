@@ -35,7 +35,7 @@ end
 
 function preview_nvim
  # find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
- fzf -i --reverse  --cycle  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --color=always {}" --bind 'enter:become(nvim {})'
+ fzf -i --reverse  --cycle --preview-window noborder  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --color=always --style snip {}" --bind 'enter:become(nvim {})'
  # find . -maxdepth 3 -type f -not -path '*/\.*' | fzf -i --cycle --preview="bat --color=always {}" --bind 'enter:execute(nvim {})'
 
 end
@@ -155,7 +155,8 @@ function lfcd --wraps="lf" --description="lf - Terminal file manager (changing d
     # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
     cd "$(command lf -print-last-dir $argv)"
 end
-set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:#1a2327
+set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1
   --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
-  --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf
-  --color=border:#262626,label:#aeaeae,query:#d9d9d9"
+  --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf
+  --color=border:-1,label:#aeaeae,query:#d9d9d9"
+

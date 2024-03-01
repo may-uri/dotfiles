@@ -135,6 +135,16 @@ if file_size < 100 * 1024 then
 	)
 end
 -- zen mode
--- vim.cmd("autocmd VimEnter * lua Zen()")
+vim.cmd("autocmd VimEnter * lua Zen()")
 
 vim.o.path = ".,**"
+vim.keymap.set("v", "p", "P")
+-- vim.keymap.set("n", "<leader>/", function()
+-- 	local opts = {
+-- 		winblend = 10,
+-- 		border = true,
+-- 		previewer = false,
+-- 		shorten_path = false,
+-- 	}
+-- 	require("telescope.builtin").current_buffer_fuzzy_find(opts)
+-- end)

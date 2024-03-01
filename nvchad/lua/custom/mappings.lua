@@ -112,11 +112,6 @@ M.general = {
 			"",
 			opts = { nowait = true },
 		},
-		["<leader>gf"] = {
-			"vi{gf}",
-			"go to link gf",
-			opts = { nowait = true },
-		},
 		["<leader>tb"] = {
 			":lua ToggleTabline()<CR>",
 			"toggle tab line",
@@ -155,8 +150,6 @@ M.general = {
 		},
 		["<leader>e"] = { "<cmd>:lua RunFile()<CR>", "run node or c compiler", opts = { nowait = true } },
 		["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
-		["<leader>x"] = { "<cmd>bdelete %<CR>", "close buffer", opts = { nowait = true } },
-		["<leader>X"] = { "<cmd>bdelete! %<CR>", "close buffer", opts = { nowait = true } },
 		["<leader>lg"] = { "<cmd>LazyGit<CR>", "lazygit", opts = { nowait = true } },
 		["<leader>ww"] = { "<cmd>set wrap!<CR>", "toggle wrap", opts = { nowait = true } },
 		["<leader>z"] = { "<cmd>lua Zen()<CR>", "[Z]en [M]ode", opts = { nowait = true } },

@@ -203,7 +203,8 @@ M.lspconfig = {
 
 		["gr"] = {
 			function()
-				vim.lsp.buf.references()
+				-- vim.lsp.buf.references()
+				require("trouble").toggle("lsp_references")
 			end,
 			"LSP references",
 		},
@@ -234,7 +235,7 @@ M.lspconfig = {
 				-- vim.diagnostic.setloclist()
 				require("trouble").toggle()
 			end,
-			"Diagnostic setloclist",
+			"Diagnostic setloclist trouble",
 		},
 
 		["<leader>wa"] = {
@@ -302,7 +303,8 @@ M.telescope = {
 		["<leader>b"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
 		["<leader>h"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
-		["<leader>fb"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+		["<leader>/"] = { ":lua curbuf()<cr>", "Find in current buffer fuzzy" },
+		["<leader>s/"] = { ":lua grep_open_files()<cr>", "live grep in open files" },
 
 		-- git
 		-- ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },

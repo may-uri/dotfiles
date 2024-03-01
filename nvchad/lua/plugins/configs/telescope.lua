@@ -73,4 +73,21 @@ local options = {
 		},
 	},
 }
+local themes = require("telescope.themes")
+function curbuf()
+	local opts = themes.get_ivy({
+		winblend = 6,
+		shorten_path = false,
+	})
+	require("telescope.builtin").current_buffer_fuzzy_find(opts)
+end
+function grep_open_files(opts)
+	opts = opts or {}
+	opts.grep_open_files = true
+	opts.path_display = { "shorten" }
+	opts.prompt_title = "Live Grep in Open Files"
+
+	require("telescope.builtin").live_grep(opts)
+end
+
 return options

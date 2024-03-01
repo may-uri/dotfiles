@@ -108,11 +108,12 @@ local plugins = {
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
+	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
 	{
 		"nvim-lualine/lualine.nvim",
 		-- event = "VimEnter",
 		event = "VeryLazy",
-		enabled = true,
+		enabled = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
@@ -123,6 +124,12 @@ local plugins = {
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
+		"Wansmer/symbol-usage.nvim",
+		event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+		enabled = false,
 		opts = {},
 	},
 	{

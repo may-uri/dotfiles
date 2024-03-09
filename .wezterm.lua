@@ -3,28 +3,33 @@ local wezterm = require("wezterm")
 local config = {}
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
-config.font_rules = {
-	{
-		intensity = "Normal",
-		font = wezterm.font({
-			family = "Iosevka Comfy",
-			weight = "Regular",
-		}),
-	},
-}
+
+-- font_rules
+
+-- config.font_rules = {
+-- 	{
+-- 		intensity = "Normal",
+-- 		font = wezterm.font({
+-- 			family = "Iosevka Comfy",
+-- 			weight = "Regular",
+-- 		}),
+-- 	},
+-- }
+
+-- config.font = wezterm.font({ family = "Brutalist Mono" })
+-- config.font = wezterm.font({ family = "Anonymous Pro", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Dank Mono", weight = "Regular" })
+-- config.font = wezterm.font({ family = "VictorMono Nerd Font Mono", weight = "Regular" })
+-- config.font = wezterm.font({ family = "MonoLisa Nerd Font Mono", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Monaspace Krypton", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Monaspace Argon", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Monaspace Neon", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Monaspace Xenon" })
 -- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font", weight = "Regular" })
--- config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
--- config.font = wezterm.font({ family = "Iosevka Comfy" })
--- config.font = wezterm.font_with_fallback({
--- 	"Iosevka Comfy",
--- 	weight = "Regular",
--- 	{ family = "Symbols Nerd Font Mono", scale = 0.75 },
--- })
--- config.font = wezterm.font({ family = "Iosevka Comfy Motion" })
--- config.font = wezterm.font({ family = "Iosevka Comfy Wide Extended" })
--- config.font = wezterm.font({ family = "Iosevka Comfy Wide Motion Duo Extended" })
--- config.font = wezterm.font({ family = "Iosevka Comfy Wide Motion Extended" })
--- config.font = wezterm.font({ family = "BlexMono Nerd Font" })
+-- config.font = wezterm.font({ family = "CozetteVector", weight = "Regular" })
+-- config.font = wezterm.font({ family = "Operator Mono Light", weight = "Regular" })
+config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
+-- config.font = wezterm.font({ family = "BlexMono Nerd Font", weight = "Regular" })
 -- config.font = wezterm.font({ family = "CaskaydiaCove NF" })
 -- config.window_background_opacity =  0.9
 -- config.window_background_opacity =  0.9
@@ -38,10 +43,26 @@ config.audible_bell = "Disabled"
 -- config.color_scheme = "ayu"
 -- config.color_scheme = "Tomorrow Night Burns" -- black with red
 -- config.color_scheme = "Tomorrow Night Bright" -- bright black
--- config.color_scheme = "tender (base16)" -- Gruvbox alt
+-- config.color_scheme = "tender (base16)" -- Gruvbox alt identical to colorsmech from nvim gruvbox.
+-- config.color_scheme = "tokyonight"
+-- config.color_scheme = "thwump (terminal.sexy)"
+-- config.color_scheme = "Terminix Dark (Gogh)" -- identical to color_scheme from nvim yoru
+-- config.color_scheme = "Yousai (terminal.sexy)"
+-- config.color_scheme = "Twilight"
+-- config.color_scheme = "Tinacious Design (Dark)"
+-- config.color_scheme = "Thayer Bright"
+-- config.color_scheme = "Apple System Colors" -- black
+-- config.color_scheme = "flexoki-dark" -- pastel black
+-- config.color_scheme = "iTerm2 Pastel Dark Background" -- deep black
+-- config.color_scheme = "iTerm2 Smoooooth" -- pastel dark
+-- config.color_scheme = "Selenized Dark (Gogh)" -- solarized
+-- config.color_scheme = "Github Dark (Gogh)" -- pastel dark
+-- config.color_scheme = "Catppuccin Mocha" -- identical to colorsmech from nvim Catppuccin.
 -- config.color_scheme = "Tokyo Night"
 -- config.color_scheme = "Summerfruit Dark (base16)" -- pastel
-config.color_scheme = "Atlas (base16)" -- solarized warm dark
+-- config.color_scheme = "Atlas (base16)" -- solarized warm dark
+-- config.color_scheme = "Vs Code Dark+ (Gogh)"
+-- config.color_scheme = "vulcan (base16)"
 -- config.color_scheme = "Solarized Dark - Patched" -- solarized dark
 -- config.color_scheme = "Solarized Dark Higher Contrast" -- solarized dark
 -- config.color_scheme = "Spacemacs (base16)" -- dark with red
@@ -51,7 +72,6 @@ config.color_scheme = "Atlas (base16)" -- solarized warm dark
 -- config.color_scheme = "Sea Shells (Gogh)" -- pastel dark
 -- config.color_scheme = "Seafoam Pastel" -- pastel green
 -- config.color_scheme = "Seti UI (base16)" -- good pastel dark
--- config.color_scheme = "Sex Colors (terminal.sexy)" -- black
 -- config.color_scheme = "Silk Dark (base16)" -- light solarized
 -- config.color_scheme = "Slate" -- dark pastel with neon
 -- config.color_scheme = "SleepyHollow" -- dark pastel with orange
@@ -72,8 +92,8 @@ config.color_scheme = "Atlas (base16)" -- solarized warm dark
 -- config.color_scheme = "Google Dark (base16)"
 -- config.color_scheme = "Gigavolt (base16)" -- good blue pastel theme
 -- config.color_scheme = "Kimber (base16)" -- good pastel
--- config.color_scheme = 'Violet Dark'
--- config.color_scheme = 'Vice Dark (base16)' -- almost cyberpunk theme :>
+-- config.color_scheme = "Violet Dark"
+-- config.color_scheme = "Vice Dark (base16)" -- almost cyberpunk theme :>
 -- config.color_scheme = "Vaughn" --  interesting blue theme
 -- config.color_scheme = "Twilight" -- good monochrome
 -- config.color_scheme = "Atelier Cave (base16)"
@@ -84,6 +104,7 @@ config.color_scheme = "Atlas (base16)" -- solarized warm dark
 -- config.color_scheme = "OneDark (base16)"
 -- config.color_scheme = "Overnight Slumber" -- now enabled
 -- config.color_scheme = "Tokyo Night Moon"
+config.color_scheme = "Everforest Dark (Gogh)"
 -- config.color_scheme = "Apprentice (base16)"
 -- config.color_scheme = "iceberg-dark"
 -- config.color_scheme = "lovelace"
@@ -96,7 +117,7 @@ config.initial_cols = 120
 config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
 config.keys = {
-	{ action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
+	-- { action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.IncreaseFontSize, mods = "CTRL", key = "=" },
 	{ action = wezterm.action.Hide, mods = "ALT", key = "Enter" },
@@ -119,7 +140,7 @@ config.keys = {
 -- end
 
 config.scrollback_lines = 10000
-config.show_update_window = true
+config.show_update_window = false
 config.unicode_version = 15
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
@@ -167,5 +188,26 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	window:set_config_overrides(overrides)
 end)
 config.default_cursor_style = "SteadyBlock"
-return config
+config.mouse_bindings = {
+	-- Clicking the scroll wheel while holding CTRL resets the font size
+	{
+		event = { Down = { streak = 1, button = "Middle" } },
+		mods = "CTRL",
+		action = wezterm.action.ResetFontSize,
+	},
 
+	-- Scrolling up while holding CTRL increases the font size
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "CTRL",
+		action = wezterm.action.IncreaseFontSize,
+	},
+
+	-- Scrolling down while holding CTRL decreases the font size
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "CTRL",
+		action = wezterm.action.DecreaseFontSize,
+	},
+}
+return config

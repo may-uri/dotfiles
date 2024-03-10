@@ -24,11 +24,11 @@ M.override = {
 M.add = {
 	NvimTreeOpenedFolderName = { fg = "green", bold = true },
 	-- Visual = { fg = "green", bold = true },
-  --  gitsigns
- GitSignsChange = { fg = "green" },
- GitSignsAdd = { fg = "vibrant_green" },
- GitSignsDelete = { fg = "red" },
- GitSignsText = { fg = "white", bg = "red", bold = true },
+	--  gitsigns
+	GitSignsChange = { fg = "green" },
+	GitSignsAdd = { fg = "vibrant_green" },
+	GitSignsDelete = { fg = "red" },
+	GitSignsText = { fg = "white", bg = "red", bold = true },
 }
 
 return M

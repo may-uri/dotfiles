@@ -148,3 +148,16 @@ vim.keymap.set("v", "p", "P")
 -- 	}
 -- 	require("telescope.builtin").current_buffer_fuzzy_find(opts)
 -- end)
+vim.g.fzf_vim = {
+	preview_window = { "" },
+}
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- neorg better work
+vim.cmd([[
+    augroup SetNorgFileType
+        autocmd!
+        autocmd BufRead,BufNewFile *.norg lua vim.cmd("setlocal filetype=norg")
+    augroup END
+]])

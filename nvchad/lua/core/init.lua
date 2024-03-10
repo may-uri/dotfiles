@@ -14,7 +14,7 @@ opt.laststatus = 2 -- global statusline
 opt.showmode = false
 
 opt.clipboard = "unnamedplus"
-opt.cursorline = false
+opt.cursorline = true
 
 -- Indenting
 opt.expandtab = true
@@ -54,7 +54,6 @@ opt.mouse = "a"
 -- Disable netrw banner
 g.netrw_banner = 0
 -- Numbers
-opt.number = true
 opt.numberwidth = 1
 opt.ruler = false
 

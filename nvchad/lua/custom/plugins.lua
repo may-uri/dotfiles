@@ -19,6 +19,8 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+
+	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
 		dependencies = {
@@ -85,11 +87,8 @@ local plugins = {
 			},
 		},
 	},
-	-- override plugin configs
-	-- {
-	-- 	"williamboman/mason.nvim",
-	-- 	opts = overrides.mason,
-	-- },
+
+	-- interactive search in file by :<linenumber> : useful
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
@@ -103,12 +102,18 @@ local plugins = {
 		},
 	},
 
+	-- telescope file browser variant : not useful
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
+		enabled = false,
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
+	-- track your time in neovim : useful
 	{ "wakatime/vim-wakatime", event = "VeryLazy" },
+	-- more useful word motions for vim
+	-- camelcase, acronyms, uppercase, lowercase, hexcode and other
 	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
+	-- other statusline : works slowly : not really useful
 	{
 		"nvim-lualine/lualine.nvim",
 		-- event = "VimEnter",
@@ -121,17 +126,20 @@ local plugins = {
 			},
 		},
 	},
+	-- better quickfix window : little used
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
+	-- function usage as virtual text : little used
 	{
 		"Wansmer/symbol-usage.nvim",
 		event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
 		enabled = false,
 		opts = {},
 	},
+	-- run some code directly in neovim : useful but most of time i'm using the whole file compiler
 	{
 		"michaelb/sniprun",
 		event = "VeryLazy",
@@ -157,7 +165,9 @@ local plugins = {
 		-- 	},
 		-- },
 	},
-
+	-- Neovim plugin for automatically highlighting other uses of the word under the cursor
+	-- using either LSP, Tree-sitter, or regex matching.
+	-- : very useful
 	{
 		"RRethy/vim-illuminate",
 		-- event = "VeryLazy",
@@ -178,9 +188,11 @@ local plugins = {
 			})
 		end,
 	},
-
+	-- some more snippets for javascript with cmp engine : very useful
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
+	-- makes neovim transparent : works bad with tabline bufferline and statusline
 	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
+	-- telescope project manager : useful
 	{
 		"ahmedkhalf/project.nvim",
 		event = "BufEnter",
@@ -189,8 +201,8 @@ local plugins = {
 			require("project_nvim").setup({})
 		end,
 	},
+	-- codeium ai auto-complete : works bad in neovim somehow in vscode its work better in x100
 	{
-
 		"Exafunction/codeium.vim",
 		enabled = false,
 		event = "BufEnter",
@@ -210,14 +222,18 @@ local plugins = {
 			end, { expr = true })
 		end,
 	},
-	-- {
-	-- 	"Exafunction/codeium.nvim",
-	-- 	-- event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("codeium").setup({})
-	-- 	end,
-	-- },
+	-- codeium ai auto-complete with cmp engine somehow in vscode its work better in x100
+	{
+		"Exafunction/codeium.nvim",
+		enabled = false,
+		-- event = "VeryLazy",
+		config = function()
+			require("codeium").setup({})
+		end,
+	},
+	-- integration of lazygit in neovim : very useful
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
+
 	{
 		"folke/twilight.nvim",
 		enabled = false,
@@ -230,6 +246,7 @@ local plugins = {
 			-- refer to the configuration section below
 		},
 	},
+	-- integration of lf file browser in neovim : very useful i like this file browser
 	{
 		{
 			"lmburns/lf.nvim",
@@ -258,7 +275,10 @@ local plugins = {
 			requires = { "toggleterm.nvim" },
 		},
 	},
+	-- game to learn vim
 	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
+
+	-- write better todo-comments : very useful help pay attention to some comments
 	{
 		"folke/todo-comments.nvim",
 		event = "VeryLazy",
@@ -278,19 +298,12 @@ local plugins = {
 			},
 		},
 	},
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	opts = overrides.treesitter,
-	-- },
 
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	opts = overrides.nvimtree,
-	-- },
-
-	-- Install a plugin
+	-- multi-cursor : very useful but rarely buggy
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
-
+	-- flash.nvim lets you navigate your code with search labels, enhanced character motions, and Treesitter integration.
+	-- like hop or any other jump plugin
+	-- : very useful
 	{
 		"folke/flash.nvim",
 		-- event = "BufRead",
@@ -317,20 +330,7 @@ local plugins = {
     -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 	},
-	-- To make a plugin not be loaded
-	-- {
-	--   "NvChad/nvim-colorizer.lua",
-	--   enabled = false
-	-- },
-
-	-- All NvChad plugins are lazy-loaded by default
-	-- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-	-- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-	-- {
-	--   "mg979/vim-visual-multi",
-	--   lazy = false,
-	-- }
-	-- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+	-- open documents for any language : useful but for some reason i've been using it very rarely lately
 	{
 		"luckasRanarison/nvim-devdocs",
 		-- event = "VeryLazy",
@@ -378,7 +378,7 @@ local plugins = {
 			-- picker_cmd_args = { "-s", "dark", "-w", "50" },
 		},
 	},
-
+	-- always have a nice view over your split windows : very useful
 	{
 		"nvim-focus/focus.nvim",
 		version = "*",
@@ -391,6 +391,7 @@ local plugins = {
 			},
 		},
 	},
+	-- float terminal in neovim : very useful
 	{
 		"akinsho/toggleterm.nvim",
 		event = "VeryLazy",
@@ -412,6 +413,7 @@ local plugins = {
 			},
 		},
 	},
+	-- press jj in insert mode to exit : very useful
 	{
 		"max397574/better-escape.nvim",
 		event = { "CursorHold", "CursorHoldI" },
@@ -422,6 +424,7 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
+	-- starter window : some problem with buffer close
 	{
 		"echasnovski/mini.starter",
 		version = "*",
@@ -433,10 +436,23 @@ local plugins = {
 			require("mini.starter").setup(opts)
 		end,
 	},
+	-- Better Around/Inside textobjects
+	--
+	-- Examples:
+	--  - va)  - [V]isually select [A]round [)]paren
+	--  - yinq - [Y]ank [I]nside [N]ext [']quote
+	--  - ci'  - [C]hange [I]nside [']quote
+	--  : very useful
+	{ "echasnovski/mini.ai", version = "*", event = "VeryLazy", opts = {} },
+	-- fzf search
+	-- { "junegunn/fzf.vim", event = "VeryLazy", dependencies = "junegunn/fzf" },
+
+	-- creates missing directories on saving a file : very useful
 	{
 		"jghauser/mkdir.nvim",
 		event = "VeryLazy",
 	},
+	-- stops inactive LSP clients to free RAM : very useful
 	{
 		"zeioth/garbage-day.nvim",
 		enabled = true,
@@ -447,11 +463,15 @@ local plugins = {
 			-- your options here
 		},
 	},
+	-- show code context in first line of buffer : very useful
 	{ "nvim-treesitter/nvim-treesitter-context", cmd = "TSContextEnable", opts = { mode = "cursor", max_lines = 3 } },
+	-- some other implementation of fzf in neovim with telescope : not really useful
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
+	
+	-- better remove buffer : very useful
 	{
 		"echasnovski/mini.bufremove",
 		keys = {
@@ -478,7 +498,7 @@ local plugins = {
     { "<leader>X", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
 		},
 	},
-
+	-- note plugin to be like orgmode in emacs : useful
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,

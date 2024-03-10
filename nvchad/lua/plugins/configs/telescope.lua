@@ -47,7 +47,6 @@ local options = {
 		set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		projects = require("telescope").load_extension("projects"),
-		file_browser = require("telescope").load_extension("file_browser"),
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 		-- Developer configurations: Not meant for general override
@@ -59,17 +58,13 @@ local options = {
 		},
 	},
 
-	extensions_list = { "themes", "terms", "file_browser", "projects", "fzf" },
+	extensions_list = { "themes", "terms", "projects", "fzf" },
 	extensions = {
 		fzf = {
 			fuzzy = true,
 			override_generic_sorter = true,
 			override_file_sorter = true,
 			case_mode = "smart_case",
-		},
-		file_browser = {
-			dir_icon = "+",
-			hijack_netrw = true,
 		},
 	},
 }

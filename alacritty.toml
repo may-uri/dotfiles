@@ -1,0 +1,43 @@
+[font]
+size=18
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control"
+
+# [[keyboard.bindings]]
+# action = "Copy"
+# key = "c"
+# mods = "Control"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+[colors.primary]
+background = "#1e1e1e"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[window]
+dimensions = { columns = 80, lines = 30 }
+decorations = "None" # "Full" | "None"
+[mouse]
+hide_when_typing=true
+
+# [debug]
+# render_timer=true
+# "C:\Program Files\Alacritty\alacritty.exe" --command wsl --cd ~
+

@@ -7,16 +7,21 @@ local sources = {
 	-- webdev stuff
 	-- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
 	-- b.formatting.cbfmt.with({ filetypes = { "markdown" } }),
-	b.formatting.prettierd.with({ filetypes = { "html",  "css", "javascript" } }), -- so prettier works only on these filetypes
 	-- b.formatting.htmlbeautifier.with({ filetypes = { "html" } }), -- for no warnings in w3 validator
+
 	b.diagnostics.eslint_d,
+
+	-- NOTE: turn off all formatting to test conform
+
 	-- Lua
-	b.formatting.stylua,
+	-- b.formatting.stylua,
 	-- Python
-	b.formatting.autopep8.with({ filetypes = { "python" } }),
+	-- b.formatting.autopep8.with({ filetypes = { "python" } }),
 	-- cpp
-	b.formatting.clang_format.with({ filetypes = { "c" } }),
-	b.formatting.gofmt.with({ filetypes = { "go" } }),
+	-- b.formatting.clang_format.with({ filetypes = { "c" } }),
+	-- b.formatting.gofmt.with({ filetypes = { "go" } }),
+	-- html css javascript
+	-- b.formatting.prettierd.with({ filetypes = { "html", "css", "javascript" } }), -- so prettier works only on these filetypes
 }
 
 null_ls.setup({

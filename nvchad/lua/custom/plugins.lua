@@ -19,7 +19,38 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+	{
+		-- NOTE: test this format plug is better of null-ls or not???
+		enabled = true,
+		"stevearc/conform.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					format_on_save = {
+						-- These options will be passed to conform.format()
+						timeout_ms = 50,
+						lsp_fallback = true,
+					},
+					lua = { "stylua" },
+					-- Conform will run multiple formatters sequentially
+					python = { "autopep8", "black" },
+					-- Use a sub-list to run only the first available formatter
+					javascript = { { "prettierd", "prettier" } },
+					html = { { "prettierd", "prettier" } },
+					css = { { "prettierd", "prettier" } },
+					c = { { "clang_format" } },
 
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						pattern = "*",
+						callback = function(args)
+							require("conform").format({ bufnr = args.buf })
+						end,
+					}),
+				},
+			})
+		end,
+	},
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
@@ -470,8 +501,9 @@ local plugins = {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
-	
+	{ "deathbeam/lspecho.nvim", event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
+
 	{
 		"echasnovski/mini.bufremove",
 		keys = {

@@ -157,6 +157,9 @@ M.general = {
 		["<A-e>"] = { "<cmd>:lua RunFile()<CR>", "run node or c compiler", opts = { nowait = true } },
 		["sj"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
 		["<leader>j"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
+		-- TODO: подумать как лучше оформить: открытие в нынешнем буффере 
+    -- либо открыть в новом и сразу перейти в этот буффер
+		["<leader>n"] = { "<cmd>e $HOME/notes/index.norg<cr>", "edit neorg notes index", opts = { nowait = true } },
 		["gt"] = { "<cmd>bnext<CR>", "Next Buffer", opts = { nowait = true } },
 		-- ["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },

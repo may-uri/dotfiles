@@ -1,9 +1,0 @@
-{
-  "diagnostic.virtualText": true,
-  "diagnostic.virtualTextCurrentLineOnly": false,
-  "coc.preferences.bracketEnterImprove": true,
-  "diagnostic.enableMessage": "never",
-  "suggest.timeout": 5000,
-  "prettier.singleQuote": true,
-  "coc.preferences.formatOnSave": true
-}

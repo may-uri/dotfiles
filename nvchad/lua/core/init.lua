@@ -11,7 +11,7 @@ g.transparency = config.ui.transparency
 
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 2 -- global statusline
-opt.showmode = false
+opt.showmode = true
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
@@ -60,7 +60,7 @@ opt.ruler = false
 -- disable nvim intro
 opt.shortmess:append("sI")
 
-opt.signcolumn = "yes"
+opt.signcolumn = "no"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true

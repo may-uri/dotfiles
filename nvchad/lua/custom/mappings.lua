@@ -37,8 +37,11 @@ end
 function Zen()
 	vim.cmd("set laststatus=2")
 	vim.opt.showmode = true
-	vim.o.statusline = "%f %m %r"
+	-- vim.o.statusline = "%f %m %r%{&filetype}"
 	-- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) %p%%"
+	-- vim.o.statusline = "%<%f %h%m%r%=%-14.(%l,%c%V%) [%{&filetype}]"
+	vim.o.statusline = vim.cmd("echo &statusline | set statusline&vi | echo &statusline")
+	-- vim.o.statusline = "%<%f %m%r%y %LL " .. "%=" .. " 0x%-4.B %-16.(%lL,%cC%V,%oB%) %P"
 	-- vim.o.showtabline = 0
 	vim.opt.number = false
 	vim.opt.relativenumber = false
@@ -157,8 +160,8 @@ M.general = {
 		["<A-e>"] = { "<cmd>:lua RunFile()<CR>", "run node or c compiler", opts = { nowait = true } },
 		["sj"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
 		["<leader>j"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
-		-- TODO: подумать как лучше оформить: открытие в нынешнем буффере 
-    -- либо открыть в новом и сразу перейти в этот буффер
+		-- TODO: подумать как лучше оформить: открытие в нынешнем буффере
+		-- либо открыть в новом и сразу перейти в этот буффер
 		["<leader>n"] = { "<cmd>e $HOME/notes/index.norg<cr>", "edit neorg notes index", opts = { nowait = true } },
 		["gt"] = { "<cmd>bnext<CR>", "Next Buffer", opts = { nowait = true } },
 		-- ["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },

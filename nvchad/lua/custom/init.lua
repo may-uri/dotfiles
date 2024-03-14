@@ -113,7 +113,7 @@ end
 function EnableAfterDelay()
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
-		vim.cmd("silent TSEnable highlight")
+		-- vim.cmd("silent TSEnable highlight")
 	end
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
@@ -137,22 +137,13 @@ end
 -- zen mode
 vim.cmd("autocmd VimEnter * lua Zen()")
 
-vim.o.path = ".,**"
+-- vim.o.path = ".,**"
 vim.keymap.set("v", "p", "P")
--- vim.keymap.set("n", "<leader>/", function()
--- 	local opts = {
--- 		winblend = 10,
--- 		border = true,
--- 		previewer = false,
--- 		shorten_path = false,
--- 	}
--- 	require("telescope.builtin").current_buffer_fuzzy_find(opts)
--- end)
 vim.g.fzf_vim = {
 	preview_window = { "" },
 }
-
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- working bad with fzf
+-- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- neorg better work
 vim.cmd([[
@@ -161,3 +152,33 @@ vim.cmd([[
         autocmd BufRead,BufNewFile *.norg lua vim.cmd("setlocal filetype=norg")
     augroup END
 ]])
+
+-- Set fzf layout options
+vim.g.fzf_preview_window = "right:50%"
+vim.g.fzf_layout = { window = { width = vim.o.columns, height = vim.o.lines, border = "none" } }
+
+-- Set default fzf options
+vim.env.FZF_DEFAULT_OPTS =
+	'-i --reverse --cycle --margin=2 --preview-window noborder --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout=reverse --preview="bat --paging never --decorations never --wrap character --color always {}" '
+local fzf_default_opts = vim.env.FZF_DEFAULT_OPTS or ""
+local additional_opts =
+	"--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf --color=border:-1,label:#aeaeae,query:#d9d9d9"
+vim.env.FZF_DEFAULT_OPTS = fzf_default_opts .. " " .. additional_opts
+
+-- Map keybindings
+vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>l", ":BLines<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>L", ":Lines<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>'", ":Marks<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>a", ":AgRaw<space>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>r", ":Rg<space>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>H", ":Helptags!<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })

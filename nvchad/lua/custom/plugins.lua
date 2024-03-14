@@ -20,6 +20,33 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
+		"windwp/windline.nvim",
+		event = "VeryLazy",
+		enabled = false,
+		config = function()
+			-- require("wlsample.bubble")
+			-- require("wlsample.bubble2")
+			require("wlsample.evil_line")
+			-- require("wlsample.airline")
+			-- require("wlsample.vscode")
+			-- require("wlsample.basic")
+			-- require("wlsample.wind")
+			-- require("wlsample.airline_luffy")
+			vim.o.showmode = false
+		end,
+	},
+	{
+		"tjdevries/express_line.nvim",
+		-- lazy=false,
+		enabled = false,
+		event = "VeryLazy",
+		config = function()
+			-- local opts = require("custom.configs.line")
+			-- require("el").setup(opts)
+			require("custom.configs.line")
+		end,
+	},
+	{
 		-- NOTE: test this format plug is better of null-ls or not???
 		enabled = true,
 		"stevearc/conform.nvim",
@@ -34,11 +61,11 @@ local plugins = {
 					},
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
-					python = { "autopep8", "black" },
+					python = { "autopep8" },
 					-- Use a sub-list to run only the first available formatter
-					javascript = { { "prettierd", "prettier" } },
-					html = { { "prettierd", "prettier" } },
-					css = { { "prettierd", "prettier" } },
+					javascript = { { "prettierd" } },
+					html = { { "prettierd" } },
+					css = { { "prettierd" } },
 					c = { { "clang_format" } },
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
@@ -110,10 +137,11 @@ local plugins = {
 			end,
 			preview = {
 				win_config = {
-					border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
-					-- border = { "", "", "", "", "", "", "", "" },
+					-- border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+					border = { "", "", "", "", "", "", "", "" },
 					winblend = 0,
-					winhighlight = "Normal:LazyNormal",
+					-- winhighlight = "Normal:LazyNormal",
+					winhighlight = "Normal:Folded",
 				},
 			},
 		},
@@ -161,7 +189,14 @@ local plugins = {
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		opts = {
+			auto_fold = true,
+			win_config = { border = "single" }, -- window configuration for floating windows. See |nvim_open_win()|.
+			winblend = 10,
+			action_keys = {
+				switch_severity = "S",
+			},
+		},
 	},
 	-- function usage as virtual text : little used
 	{
@@ -476,7 +511,7 @@ local plugins = {
 	--  : very useful
 	{ "echasnovski/mini.ai", version = "*", event = "VeryLazy", opts = {} },
 	-- fzf search
-	-- { "junegunn/fzf.vim", event = "VeryLazy", dependencies = "junegunn/fzf" },
+	{ "junegunn/fzf.vim", event = "VeryLazy", dependencies = "junegunn/fzf" },
 
 	-- creates missing directories on saving a file : very useful
 	{

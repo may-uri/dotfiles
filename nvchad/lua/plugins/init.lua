@@ -243,6 +243,7 @@ local default_plugins = {
 
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"ahmedkhalf/project.nvim",

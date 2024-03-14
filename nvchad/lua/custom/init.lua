@@ -156,7 +156,7 @@ vim.cmd([[
 -- Set fzf layout options
 vim.g.fzf_preview_window = "right:50%"
 vim.g.fzf_layout = { window = { width = vim.o.columns, height = vim.o.lines, border = "none" } }
-vim.env.FZF_DEFAULT_COMMAND = "fdfind --type f --follow --exclude .git"
+vim.env.FZF_DEFAULT_COMMAND = "fdfind --type f --exclude .git "
 
 -- Set default fzf options
 vim.env.FZF_DEFAULT_OPTS =

@@ -120,7 +120,7 @@ M.general = {
 			"toggle tab line",
 			opts = { nowait = true },
 		},
-		["<leader>k"] = {
+		["<leader>Key"] = {
 			"<cmd>Telescope keymaps <CR>",
 			"[T]elescope [K]eymaps",
 			opts = { nowait = true },
@@ -146,7 +146,7 @@ M.general = {
 			"live grep grep open files",
 			opts = { nowait = true },
 		},
-		["<leader>o"] = {
+		["<leader>Old"] = {
 			"<cmd>Telescope oldfiles  <CR>",
 			"[T]elescope [O]ldfiles",
 			opts = { nowait = true },

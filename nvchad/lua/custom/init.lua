@@ -139,9 +139,6 @@ vim.cmd("autocmd VimEnter * lua Zen()")
 
 -- vim.o.path = ".,**"
 vim.keymap.set("v", "p", "P")
-vim.g.fzf_vim = {
-	preview_window = { "" },
-}
 -- working bad with fzf
 -- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -154,13 +151,15 @@ vim.cmd([[
 ]])
 
 -- Set fzf layout options
-vim.g.fzf_preview_window = "right:50%"
+vim.g.fzf_vim = {
+	preview_window = { "right:50%", "P" },
+}
 vim.g.fzf_layout = { window = { width = vim.o.columns, height = vim.o.lines, border = "none" } }
-vim.env.FZF_DEFAULT_COMMAND = "fdfind .. --type f --exclude .git "
+vim.env.FZF_DEFAULT_COMMAND = "fdfind  .. --type f --exclude .git -i"
 
 -- Set default fzf options
 vim.env.FZF_DEFAULT_OPTS =
-	'-i --reverse --cycle --margin=2 --preview-window noborder --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout=reverse --preview="bat --paging never --decorations never --wrap character --color always {}" '
+	'-i  --reverse --cycle --margin=2 --preview-window noborder --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout=reverse --no-preview'
 local fzf_default_opts = vim.env.FZF_DEFAULT_OPTS or ""
 local additional_opts =
 	"--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf --color=border:-1,label:#aeaeae,query:#d9d9d9"
@@ -172,18 +171,18 @@ vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = t
 vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>l", ":BLines<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>/", ":BLines<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>L", ":Lines<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>'", ":Marks<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>a", ":AgRaw<space>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>H", ":Helptags!<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })
 
--- search hidden
+-- Search hidden
 vim.cmd([[
   command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
 ]])

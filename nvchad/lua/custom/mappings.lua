@@ -95,13 +95,14 @@ M.general = {
 	n = {
 		-- ["p"] = { "P", "paste without copy to register", opts = { nowait = true } },
 		["<M-o>"] = {
-			"<cmd>Telescope oldfiles<cr>",
-			"telescope old files",
+			"<cmd>History<cr>",
+			"old files",
 			opts = { nowait = true },
 		},
 		["<M-n>"] = {
-			"<cmd>Lf<cr>",
-			"lf file manager",
+			"<cmd>Yazi<cr>",
+			-- "<cmd>Lf<cr>",
+			"file manager",
 			opts = { nowait = true },
 		},
 
@@ -162,7 +163,7 @@ M.general = {
 		["<leader>j"] = { "<C-w>w", "cycle through windows", opts = { nowait = true } },
 		-- TODO: подумать как лучше оформить: открытие в нынешнем буффере
 		-- либо открыть в новом и сразу перейти в этот буффер
-		["<leader>n"] = { "<cmd>e $HOME/notes/index.norg<cr>", "edit neorg notes index", opts = { nowait = true } },
+		["<leader>n"] = { "<cmd>e $HOME/notes/norg/index.norg<cr>", "edit neorg notes index", opts = { nowait = true } },
 		["gt"] = { "<cmd>bnext<CR>", "Next Buffer", opts = { nowait = true } },
 		-- ["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },
@@ -193,7 +194,7 @@ M.general = {
 					-- print(url)
 					vim.cmd("silent !open " .. url)
 				else
-					print("No URL found under the cursor.")
+					print("no url found under the cursor")
 				end
 			end,
 			"copy yank url under cursor to system clipboard and remove trailing symbols after '}'",

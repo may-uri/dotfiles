@@ -25,6 +25,8 @@
   "mini.bufremove": { "branch": "main", "commit": "931a3bb514147d9e812767275c4beba6b779b1d3" },
   "mkdir.nvim": { "branch": "main", "commit": "c55d1dee4f099528a1853b28bb28caa802eba217" },
   "neorg": { "branch": "main", "commit": "0ccc3bba3f67f6f8740b86a50aa5e1428327a741" },
+  "noice.nvim": { "branch": "main", "commit": "d29b26c329558ee4bb2e7f3cc25078929ef89b2f" },
+  "nui.nvim": { "branch": "main", "commit": "cbd2668414331c10039278f558630ed19b93e69b" },
   "null-ls.nvim": { "branch": "main", "commit": "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7" },
   "numb.nvim": { "branch": "master", "commit": "3f7d4a74bd456e747a1278ea1672b26116e0824d" },
   "nvim-autopairs": { "branch": "master", "commit": "c6139ca0d5ad7af129ea6c89cb4c56093f2c034a" },
@@ -41,7 +43,6 @@
   "promise-async": { "branch": "main", "commit": "93540c168c5ed2b030ec3e6c40ab8bbb85e36355" },
   "sniprun": { "branch": "master", "commit": "0079f9c4675a6825f84e108bbff866f67dd8762f" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
-  "telescope.nvim": { "branch": "master", "commit": "f336f8cfab38a82f9f00df380d28f0c2a572f862" },
   "todo-comments.nvim": { "branch": "main", "commit": "833d8dd8b07eeda37a09e99460f72a02616935cb" },
   "toggleterm.nvim": { "branch": "main", "commit": "193786e0371e3286d3bc9aa0079da1cd41beaa62" },
   "transparent.nvim": { "branch": "main", "commit": "fd35a46f4b7c1b244249266bdcb2da3814f01724" },
@@ -52,5 +53,6 @@
   "vim-visual-multi": { "branch": "master", "commit": "fe1ec7e430013b83c8c2dee85ae496251b71e253" },
   "vim-wakatime": { "branch": "master", "commit": "285c2e4e48fb0c63ced233c00fb10a2edb3b6c94" },
   "vim-wordmotion": { "branch": "master", "commit": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1" },
-  "vscode-standardjs-snippets": { "branch": "master", "commit": "76a82d459e2c1c027a4b7aeb63cc9f69616e0a78" }
+  "vscode-standardjs-snippets": { "branch": "master", "commit": "76a82d459e2c1c027a4b7aeb63cc9f69616e0a78" },
+  "yazi.nvim": { "branch": "main", "commit": "c091a30849481e3c6cfda1d143c0093cda7ecd4e" }
 }

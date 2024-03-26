@@ -1,5 +1,3 @@
-local overrides = require("custom.configs.overrides")
-
 ---@type NvPluginSpec[]
 local plugins = {
 	-- Override plugin definition options
@@ -78,6 +76,7 @@ local plugins = {
 			})
 		end,
 	},
+
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
@@ -86,6 +85,7 @@ local plugins = {
 		},
 		-- event = "BufRead",
 		-- event = "VeryLazy",
+		-- cmd = "UfoEnable",
 		event = "UIEnter",
 		-- event = { "BufReadPost", "BufNewFile" },
 		keys = {
@@ -114,20 +114,13 @@ local plugins = {
 		opts = {
 			open_fold_hl_timeout = 0,
 			fold_virt_text_handler = function(text, lnum, endLnum, width)
-				-- local suffix = "⨊"
 				local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
-				-- local totalLines = vim.api.nvim_buf_line_count(0) - 1
-				-- local foldedLines = endLnum - lnum
-				-- local suffix = (" ⤶ %d lines %d%%"):format(foldedLines, foldedLines / totalLines * 100)
 				local lines = ("[%d lines] "):format(endLnum - lnum)
-
 				local cur_width = 0
 				for _, section in ipairs(text) do
 					cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
 				end
-
 				suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
-
 				table.insert(text, { suffix, "Comment" })
 				table.insert(text, { lines, "Todo" })
 				return text
@@ -137,16 +130,13 @@ local plugins = {
 			end,
 			preview = {
 				win_config = {
-					-- border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
 					border = { "", "", "", "", "", "", "", "" },
 					winblend = 0,
-					-- winhighlight = "Normal:LazyNormal",
 					winhighlight = "Normal:Folded",
 				},
 			},
 		},
 	},
-
 	-- interactive search in file by :<linenumber> : useful
 	{
 		"nacro90/numb.nvim",
@@ -173,18 +163,7 @@ local plugins = {
 	-- camelcase, acronyms, uppercase, lowercase, hexcode and other
 	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
 	-- other statusline : works slowly : not really useful
-	{
-		"nvim-lualine/lualine.nvim",
-		-- event = "VimEnter",
-		event = "VeryLazy",
-		enabled = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = {
-				theme = "everforest",
-			},
-		},
-	},
+
 	-- better quickfix window : little used
 	{
 		"folke/trouble.nvim",
@@ -197,6 +176,19 @@ local plugins = {
 				switch_severity = "S",
 			},
 		},
+	},
+	{
+		"SR-Mystar/yazi.nvim",
+		event = "VeryLazy",
+		cmd = "Yazi",
+		opts = {
+			size = {
+				width = 0.9, -- maximally available columns
+				height = 0.8, -- maximally available lines
+			},
+			border = "none",
+		},
+		keys = {},
 	},
 	-- function usage as virtual text : little used
 	{
@@ -267,7 +259,7 @@ local plugins = {
 			require("project_nvim").setup({})
 		end,
 	},
-	-- codeium ai auto-complete : works bad in neovim somehow in vscode its work better in x100
+	-- codeium ai auto-complete : works bad in neovim somehow in vscode its work better in x100 times
 	{
 		"Exafunction/codeium.vim",
 		enabled = false,
@@ -352,12 +344,12 @@ local plugins = {
 		opts = {
 			signs = false,
 			colors = {
-				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-				info = { "DiagnosticInfo", "#2563EB" },
-				hint = { "DiagnosticHint", "#10B981" },
 				default = { "Identifier", "#7C3AED" },
+				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+				hint = { "DiagnosticHint", "#10B981" },
+				info = { "DiagnosticInfo", "#2563EB" },
 				test = { "Identifier", "#FF00FF" },
+				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
 			},
 			highlight = {
 				keyword = "fg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
@@ -460,22 +452,22 @@ local plugins = {
 	-- float terminal in neovim : very useful
 	{
 		"akinsho/toggleterm.nvim",
-		event = "VeryLazy",
 		-- cmd = "ToogleTerm",
 		-- enabled = true,
+		event = "VeryLazy",
 		version = "*",
 		opts = {
-			size = 120,
-			direction = "float", -- "horizontal" | "tab" | "float",
-			close_on_exit = true, -- close the terminal window when the process exits
+			-- 'single' | 'double' | 'shadow' | 'curved' |
+			-- The border key is *almost* the same as 'nvim_open_win'
+			-- not natively supported but implemented in this plugin.
+			-- see :h nvim_open_win for details on borders however
+			-- the 'curved' border is a custom border type
+			border = "curved",
 			-- Change the default shell. Can be a string or a function returning a string
+			close_on_exit = true, -- close the terminal window when the process exits
+			direction = "float", -- "horizontal" | "tab" | "float",
 			float_opts = {
-				-- The border key is *almost* the same as 'nvim_open_win'
-				-- see :h nvim_open_win for details on borders however
-				-- the 'curved' border is a custom border type
-				-- not natively supported but implemented in this plugin.
-				border = "curved",
-				-- 'single' | 'double' | 'shadow' | 'curved' |
+				size = 120,
 			},
 		},
 	},
@@ -493,10 +485,10 @@ local plugins = {
 	-- starter window : some problem with buffer close
 	{
 		"echasnovski/mini.starter",
-		version = "*",
+		-- event = "VimEnter",
 		enabled = false,
 		lazy = false,
-		-- event = "VimEnter",
+		version = "*",
 		config = function()
 			local opts = require("custom.configs.starter")
 			require("mini.starter").setup(opts)
@@ -511,7 +503,12 @@ local plugins = {
 	--  : very useful
 	{ "echasnovski/mini.ai", version = "*", event = "VeryLazy", opts = {} },
 	-- fzf search
-	{ "junegunn/fzf.vim", event = "VeryLazy", dependencies = "junegunn/fzf" },
+	{
+		"junegunn/fzf.vim",
+		lazy = false,
+		-- event = "VeryLazy",
+		dependencies = "junegunn/fzf",
+	},
 
 	-- creates missing directories on saving a file : very useful
 	{
@@ -521,10 +518,10 @@ local plugins = {
 	-- stops inactive LSP clients to free RAM : very useful
 	{
 		"zeioth/garbage-day.nvim",
-		enabled = true,
-		dependencies = "neovim/nvim-lspconfig",
 
 		-- event = "VeryLazy",
+		dependencies = "neovim/nvim-lspconfig",
+		enabled = true,
 		opts = {
 			-- your options here
 		},
@@ -536,7 +533,7 @@ local plugins = {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
-	{ "deathbeam/lspecho.nvim", event = "VeryLazy", opts = {} },
+	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
 
 	{

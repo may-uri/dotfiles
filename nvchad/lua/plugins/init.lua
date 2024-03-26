@@ -248,7 +248,7 @@ local default_plugins = {
 			"nvim-treesitter/nvim-treesitter",
 			"ahmedkhalf/project.nvim",
 		},
-		cmd = "Telescope",
+		cmd = "Telescope themes",
 		init = function()
 			require("core.utils").load_mappings("telescope")
 		end,

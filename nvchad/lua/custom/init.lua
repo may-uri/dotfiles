@@ -72,6 +72,7 @@ vim.cmd([[
 -- Neovide --
 -------------
 if vim.g.neovide then
+	vim.cmd("cd")
 	vim.g.clipboard = {
 		name = "win32yank-wsl",
 		copy = {
@@ -85,7 +86,7 @@ if vim.g.neovide then
 		cache_enabled = 0,
 	}
 
-	-- vim.g.neovide_theme = "auto"
+	vim.g.neovide_theme = "default"
 	vim.g.neovide_padding_left = 10
 	vim.g.neovide_scroll_animation_length = 0.3
 	vim.g.neovide_hide_mouse_when_typing = true
@@ -105,6 +106,15 @@ if vim.g.neovide then
 	vim.g.remember_window_position = true
 
 	vim.o.switchbuf = "newtab"
+	function Trans()
+		vim.cmd("TransparentDisable")
+	end
+	vim.api.nvim_exec(
+		[[
+            autocmd BufEnter * silent lua vim.defer_fn(function() Trans() end, 103)
+        ]],
+		false
+	)
 end
 
 -----------------------
@@ -113,7 +123,7 @@ end
 function EnableAfterDelay()
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
-		-- vim.cmd("silent TSEnable highlight")
+		vim.cmd("silent TSEnable highlight")
 	end
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
@@ -129,13 +139,13 @@ local file_size = vim.fn.getfsize(vim.fn.expand("%"))
 if file_size < 100 * 1024 then
 	vim.api.nvim_exec(
 		[[
-            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 63)
+            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 153)
         ]],
 		false
 	)
 end
 -- zen mode
-vim.cmd("autocmd VimEnter * lua Zen()")
+-- vim.cmd("autocmd VimEnter * lua Zen()")
 
 -- vim.o.path = ".,**"
 vim.keymap.set("v", "p", "P")
@@ -154,7 +164,8 @@ vim.cmd([[
 vim.g.fzf_vim = {
 	preview_window = { "right:50%", "P" },
 }
-vim.g.fzf_layout = { window = { width = vim.o.columns, height = vim.o.lines, border = "none" } }
+-- vim.g.fzf_layout = { window = { width = vim.o.columns, height = vim.o.lines, border = "none" } }
+vim.g.fzf_layout = { window = { width = 1.0, height = 1.0, border = "none" } }
 vim.env.FZF_DEFAULT_COMMAND = "fdfind  .. --type f --exclude .git -i"
 
 -- Set default fzf options
@@ -187,3 +198,14 @@ vim.cmd([[
   command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
 ]])
 vim.api.nvim_set_keymap("n", "<leader>F", ":AllFiles <CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", {
+	expr = true,
+	desc = "Move cursor down (display and real line)",
+})
+vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", {
+	expr = true,
+	desc = "Move cursor up (display and real line)",
+})
+-- remove a.out after leaving *.c file buffer
+vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])

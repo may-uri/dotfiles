@@ -7,7 +7,7 @@ local M = {}
 ---@type Base46HLGroupsList
 M.override = {
 	Comment = {
-		italic = true,
+		italic = false,
 	},
 	-- Visual = { bg = "#231942", fg = "white" },
 	Visual = { bg = "#4c3743" }, -- from everforest colorscheme

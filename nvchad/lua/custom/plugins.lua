@@ -249,7 +249,10 @@ local plugins = {
 	-- some more snippets for javascript with cmp engine : very useful
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
 	-- makes neovim transparent : works bad with tabline bufferline and statusline
-	{ "xiyaowong/transparent.nvim", event = "BufEnter" },
+	{
+		"xiyaowong/transparent.nvim",
+		cmd = "TransparentEnable",
+	},
 	-- telescope project manager : useful
 	{
 		"ahmedkhalf/project.nvim",

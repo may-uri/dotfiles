@@ -1,6 +1,5 @@
 ---@type MappingsTable
 local M = {}
-local u = require("custom.configs.ext_hover")
 -- Use wslview for gx in WSL
 if vim.fn.has("unix") then
 	vim.g.netrw_browsex_viewer = "wslview"
@@ -109,11 +108,6 @@ M.general = {
 		["<leader>T"] = {
 			"<cmd>ToggleTerm<cr>",
 			"toggle terminal",
-			opts = { nowait = true },
-		},
-		["<leader>gk"] = {
-			require("custom.configs.ext_hover").extended_hover,
-			"",
 			opts = { nowait = true },
 		},
 		["<leader>tb"] = {

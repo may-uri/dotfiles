@@ -106,15 +106,16 @@ if vim.g.neovide then
 	vim.g.remember_window_position = true
 
 	vim.o.switchbuf = "newtab"
-	function Trans()
-		vim.cmd("TransparentDisable")
-	end
-	vim.api.nvim_exec(
-		[[
-            autocmd BufEnter * silent lua vim.defer_fn(function() Trans() end, 103)
-        ]],
-		false
-	)
+	-- impletemt somehow function to disable transparency for neovide buffers
+	-- function Trans()
+	-- 	vim.cmd("TransparentDisable")
+	-- end
+	-- vim.api.nvim_exec(
+	-- 	[[
+	--            autocmd BufEnter * silent lua vim.defer_fn(function() Trans() end, 103)
+	--        ]],
+	-- 	false
+	-- )
 end
 
 -----------------------
@@ -209,3 +210,15 @@ vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", {
 })
 -- remove a.out after leaving *.c file buffer
 vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
+
+function Transparency()
+	if not vim.g.neovide then
+		vim.cmd("TransparentEnable")
+	end
+end
+vim.api.nvim_exec(
+	[[
+        autocmd UIEnter * lua Transparency()
+    ]],
+	false
+)
